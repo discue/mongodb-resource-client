@@ -1,0 +1,44 @@
+{
+  "name": "@discue/mongodb-resource-client",
+  "author": "Stefan Pfaffel",
+  "license": "MIT",
+  "version": "0.1.0",
+  "description": "Simple wrapper around mongodb client allowing easier managing of resources",
+  "main": "lib/index",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+    "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 50000 --file test/global-mocha-setup.js",
+    "lint": "eslint -c .eslintrc.json lib",
+    "release": "standard-version && git push --follow-tags origin && npm publish",
+    "release-minor": "standard-version --release-as minor && git push --follow-tags origin && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/discue/mongodb-resource-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/discue/mongodb-resource-client/issues"
+  },
+  "homepage": "https://github.com/discue/mongodb-resource-client#readme",
+  "keywords": [
+    "discue",
+    "storage",
+    "mongodb"
+  ],
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "eslint": "^8.41.0",
+    "mocha": "^10.2.0",
+    "mongodb-memory-server": "^8.12.2",
+    "nodemon": "^2.0.22",
+    "standard-version": "^9.5.0"
+  },
+  "optionalDependencies": {
+    "mongodb": "^5.5.0"
+  }
+}
