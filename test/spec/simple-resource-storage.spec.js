@@ -24,18 +24,21 @@ describe('SimpleResourceStorage', () => {
     })
 
     beforeEach(() => {
-        insertedDocumentId = randomInt(999999)
+        insertedDocumentId = uuid()
         const collection = mongoDbClient.db('default').collection('_subscriptions')
         collection.insertOne({
-            _id: insertedDocumentId,
+            id: insertedDocumentId,
             hello: 'world'
         })
         collection.insertOne({
-            _id: randomInt(11111),
+            id: randomInt(11111),
             hello: 'world2'
         })
     })
 
+    afterEach(() => {
+        const collection = mongoDbClient.db('default').collection('_subscriptions')
+        return collection.drop()
     })
 
     after(() => {

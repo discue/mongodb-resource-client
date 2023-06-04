@@ -28,18 +28,18 @@ describe('OnToManyResourceStorage', () => {
         listenerIds = [randomInt(999999), randomInt(999999)]
         const listenersCollection = mongoDbClient.db('default').collection('listeners')
         await listenersCollection.insertOne({
-            _id: listenerIds.at(0),
+            id: listenerIds.at(0),
             name: 'first'
         })
         await listenersCollection.insertOne({
-            _id: listenerIds.at(1),
+            id: listenerIds.at(1),
             name: 'second'
         })
 
         resourceId = randomInt(999999)
         const queuesCollection = mongoDbClient.db('default').collection('queues')
         await queuesCollection.insertOne({
-            _id: resourceId,
+            id: resourceId,
             listeners: [
                 listenerIds.at(0),
                 listenerIds.at(1)
@@ -152,7 +152,7 @@ describe('OnToManyResourceStorage', () => {
             await storage.delete([resourceId, listenerIds.at(1)])
             const queuesCollection = mongoDbClient.db('default').collection('queues')
             const { listeners } = await queuesCollection.findOne({
-                _id: resourceId,
+                id: resourceId,
             })
             expect(listeners).to.have.length(1)
             expect(listeners).to.deep.equal(listenerIds.slice(0, 1))

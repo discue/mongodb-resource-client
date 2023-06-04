@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomUUID: uuid, randomInt } = require('crypto')
 
 
-describe('SimpleResourceStorage', () => {
+describe('SimpleResourceStorageWithConfiguredClient', () => {
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -24,7 +24,7 @@ describe('SimpleResourceStorage', () => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('_subscriptions')
         return collection.insertOne({
-            _id: insertedDocumentId,
+            id: insertedDocumentId,
             hello: 'world'
         })
     })

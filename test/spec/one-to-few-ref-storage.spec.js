@@ -27,7 +27,7 @@ describe('OneToFewRefStorage', () => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('api_clients')
         await collection.insertOne({
-            _id: randomInt(10000),
+            id: randomInt(10000),
             queues: [
                 123,
                 456,
@@ -35,7 +35,7 @@ describe('OneToFewRefStorage', () => {
             ]
         })
         await collection.insertOne({
-            _id: insertedDocumentId,
+            id: insertedDocumentId,
             queues: [
                 123,
                 456,

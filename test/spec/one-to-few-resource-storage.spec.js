@@ -27,19 +27,19 @@ describe('NestedSimpleResourceStorage', () => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('api_clients')
         await collection.insertOne({
-            _id: randomInt(10000),
+            id: randomInt(10000),
             queues: [
-                { _id: 123, name: '11' },
-                { _id: 456, name: '21' },
-                { _id: 999, name: '31' }
+                { id: 123, name: '11' },
+                { id: 456, name: '21' },
+                { id: 999, name: '31' }
             ]
         })
         await collection.insertOne({
-            _id: insertedDocumentId,
+            id: insertedDocumentId,
             queues: [
-                { _id: 123, name: '1' },
-                { _id: 456, name: '2' },
-                { _id: 999, name: '3' }
+                { id: 123, name: '1' },
+                { id: 456, name: '2' },
+                { id: 999, name: '3' }
             ]
         })
     })
