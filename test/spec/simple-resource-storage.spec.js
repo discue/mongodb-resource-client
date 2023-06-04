@@ -26,10 +26,16 @@ describe('SimpleResourceStorage', () => {
     beforeEach(() => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('_subscriptions')
-        return collection.insertOne({
+        collection.insertOne({
             _id: insertedDocumentId,
             hello: 'world'
         })
+        collection.insertOne({
+            _id: randomInt(11111),
+            hello: 'world2'
+        })
+    })
+
     })
 
     after(() => {
@@ -48,6 +54,13 @@ describe('SimpleResourceStorage', () => {
         it('returns false if a document does not exists', async () => {
             const exists = await storage.exists([99])
             expect(exists).to.be.false
+        })
+    })
+
+    describe('.getAll', () => {
+        it('returns all documents', async () => {
+            const docs = await storage.getAll()
+            expect(docs).to.have.length(2)
         })
     })
 
