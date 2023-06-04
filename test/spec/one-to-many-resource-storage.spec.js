@@ -111,7 +111,7 @@ describe('OnToManyResourceStorage', () => {
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')
         })
-        it('creates a new document', async () => {
+        it('returns the new documentId', async () => {
             const newId = randomInt(55555)
             const storedId = await storage.create([resourceId, newId], { my: 'ghost' })
             expect(storedId).to.equal(newId)
