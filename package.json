@@ -14,8 +14,11 @@
   "scripts": {
     "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 50000 --file test/global-mocha-setup.js",
     "lint": "eslint -c .eslintrc.json lib",
-    "release": "bash -c release.sh && standard-version && git push --follow-tags origin && npm publish",
-    "release-minor": "bash -c ./release.sh && standard-version --release-as minor && git push --follow-tags origin && npm publish"
+    "push-incl-tags": "git push --follow-tags origin main",
+    "publish-npm": "npm publish --access public",
+    "update-docs": "bash -c ./release.sh",
+    "release": "npm run update-docs && standard-version && npm run push-incl-tags && npm run publish-npm",
+    "release-minor": "npm run update-docs && standard-version --release-as minor && npm run push-incl-tags && npm run publish-npm"
   },
   "repository": {
     "type": "git",
