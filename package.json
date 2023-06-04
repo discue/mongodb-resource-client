@@ -40,6 +40,6 @@
     "standard-version": "^9.5.0"
   },
   "optionalDependencies": {
-    "mongodb": "^5.5.0"
+    "mongodb": "^5.6.0"
   }
 }
