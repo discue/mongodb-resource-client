@@ -21,10 +21,6 @@ describe('SimpleResourceStorage', () => {
     })
 
     beforeEach(() => {
-        return mongoDbClient.connect()
-    })
-
-    beforeEach(() => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('_subscriptions')
         return collection.insertOne({
