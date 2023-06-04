@@ -28,7 +28,7 @@ Similar to @link OneToFewResourceStorage, but allows only managing of
 references. Meaning: Instead of embedding objects in the target array
 this class only stores references to other objects.
 
-**Universities collection**
+<strong>Universities collection</strong>
 
 ```json
 {
@@ -43,7 +43,7 @@ this class only stores references to other objects.
 
 ## exists
 
-Check if a reference does exist in the host object
+Returns true if a resource with given ids exists.
 
 ### Parameters
 
@@ -53,7 +53,7 @@ Returns **[boolean][3]**&#x20;
 
 ## getAll
 
-Get all references
+Returns all references.
 
 ### Parameters
 
@@ -63,7 +63,7 @@ Returns **[Array][2]<[Object][4]>**&#x20;
 
 ## create
 
-Add a reference
+Add a reference to a collection by ids.
 
 ### Parameters
 

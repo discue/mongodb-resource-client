@@ -29,7 +29,7 @@ students of each school. As the child documents will be embedded, it is easy
 to retrieve them (only one query), but harder to get all students across e.g.
 a country in various schools.
 
-\*\* Universities collection \*\*
+<strong>Universities collection</strong>
 
 ```json
 {
@@ -49,7 +49,7 @@ a country in various schools.
 
 ## get
 
-Get a resource by ids
+Returns a resource by ids.
 
 ### Parameters
 
@@ -59,7 +59,7 @@ Returns **[Promise][3]<[Object][4]>**&#x20;
 
 ## getAll
 
-Get all resources
+Returns all resources.
 
 ### Parameters
 
@@ -69,7 +69,7 @@ Returns **[Promise][3]<[Array][2]<[Object][4]>>**&#x20;
 
 ## create
 
-Add a resource to a collection by ids
+Add a resource to a collection by ids.
 
 ### Parameters
 
@@ -80,7 +80,7 @@ Returns **ObjectId**&#x20;
 
 ## update
 
-Update a resource by ids
+Updates a resource by ids
 
 ### Parameters
 
@@ -91,7 +91,7 @@ Returns **void**&#x20;
 
 ## delete
 
-Delete a resource by ids
+Deletes a resource by ids
 
 ### Parameters
 

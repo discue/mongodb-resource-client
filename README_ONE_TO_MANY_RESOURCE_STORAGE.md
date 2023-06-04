@@ -8,6 +8,7 @@
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
+*   `enableTwoWayReferences` **[string][1]** true if documents should also store references to their parents e.g. student have references to their schools
 
 ### Examples
 
@@ -17,6 +18,7 @@ const oneToManyResourceStorage = new OneToManyResourceStorage({
   url: 'mongodb://127.0.0.1:27017',
   collectionName: 'api_clients',
   resourceName: 'listeners'
+  enableTwoWayReferences: true
 })
 ```
 
@@ -27,7 +29,11 @@ entities in separate collections and using references to establish an relationsh
 between both. This way students can be queried independently of an university,
 while all studies of a university can still be looked up via the stored reference.
 
-\*\* Students collection Collection \*\*
+The references between both collections are kept up-to-date. Deleting a document,
+causes the reference to be deleted in the other entity. Adding a document
+causes a reference to be updated, too.
+
+<strong>Students collection</strong>
 
 ```json
 {
@@ -40,7 +46,7 @@ while all studies of a university can still be looked up via the stored referenc
 }
 ```
 
-\*\* Universities Collection \*\*
+<strong>Universities collection</strong>
 
 ```json
 {
@@ -55,7 +61,7 @@ while all studies of a university can still be looked up via the stored referenc
 
 ## exists
 
-Verify a resource exists
+Returns true if a resource with given ids exists.
 
 ### Parameters
 
@@ -65,7 +71,7 @@ Returns **[boolean][3]**&#x20;
 
 ## get
 
-Get a resource by ids
+Returns a resource by ids.
 
 ### Parameters
 
@@ -75,7 +81,7 @@ Returns **[Object][4]**&#x20;
 
 ## getAll
 
-Get all resources
+Returns all resources.
 
 ### Parameters
 
@@ -85,7 +91,7 @@ Returns **[Array][2]<[Object][4]>**&#x20;
 
 ## create
 
-Add a resource to a collection by ids
+Add a resource to a collection by ids.
 
 ### Parameters
 
@@ -94,7 +100,7 @@ Add a resource to a collection by ids
 
 ## update
 
-Update a resource by ids
+Updates a resource by ids
 
 ### Parameters
 
@@ -103,7 +109,7 @@ Update a resource by ids
 
 ## delete
 
-Delete a resource by ids
+Deletes a resource by ids
 
 ### Parameters
 

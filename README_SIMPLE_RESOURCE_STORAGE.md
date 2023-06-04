@@ -2,6 +2,8 @@
 
 ## ConstructorOptions
 
+Options for class constructor
+
 ### Properties
 
 *   `url` **[String][1]** url to mongo instance
@@ -20,4 +22,75 @@ const oneToManyResourceStorage = new OneToManyResourceStorage({
 
 ## SimpleResourceStorage
 
+Simple resource class with crud operation methods to create, update, delete, and
+get stored entities and documents.
+
+## get
+
+Returns a resource by ids.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+
+Returns **[Object][3]**&#x20;
+
+## getAll
+
+Returns all resources.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+
+Returns **[Array][2]<[Object][3]>**&#x20;
+
+## exists
+
+Returns true if a resource with given ids exists.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
+
+Returns **[boolean][4]**&#x20;
+
+## create
+
+Adds a resource to a collection by ids.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[Object][3]** the resource to be stored
+
+## update
+
+Updates a resource by ids.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[Object][3]** values that should be updated
+
+## delete
+
+Deletes a resource by ids.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+
+## close
+
+Closes the datbase client.
+
+Returns **void**&#x20;
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
