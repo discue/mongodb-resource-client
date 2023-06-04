@@ -5,7 +5,7 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners' })
+const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
 
 describe('OnToManyResourceStorage', () => {
 
@@ -115,6 +115,13 @@ describe('OnToManyResourceStorage', () => {
             const newId = randomInt(55555)
             const storedId = await storage.create([resourceId, newId], { my: 'ghost' })
             expect(storedId).to.equal(newId)
+        })
+        it('also adds a reference to entity if requested', async () => {
+            const newId = randomInt(55555)
+            await storage.create([resourceId, newId], { my: 'ghost' })
+
+            const doc = await storage.get([resourceId, newId])
+            expect(doc.queues_ref).to.equal(resourceId)
         })
     })
 
