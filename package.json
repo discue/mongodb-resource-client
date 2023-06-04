@@ -9,7 +9,8 @@
     "lib"
   ],
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/index.js",
+    "./datatypes": "./lib/types.js",
   },
   "scripts": {
     "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 50000 --file test/global-mocha-setup.js",
