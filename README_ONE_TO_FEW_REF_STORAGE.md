@@ -16,7 +16,7 @@ Options for class constructor
 ```javascript
 const { OneToFewRefstorage } = require('./@discue/mongodb-resource-client')
 const onetoFewRefStorage = new OneToFewRefStorage({
-  url: 'mongodb://localhost:27017',
+  url: 'mongodb://127.0.0.1:27017',
   collectionName: 'api_clients',
   resourceName: 'queues'
 })

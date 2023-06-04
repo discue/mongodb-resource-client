@@ -14,7 +14,7 @@
 ```javascript
 const { OneToManyResourceStorage } = require('./@discue/mongodb-resource-client')
 const oneToManyResourceStorage = new OneToManyResourceStorage({
-  url: 'mongodb://localhost:27017',
+  url: 'mongodb://127.0.0.1:27017',
   collectionName: 'api_clients',
   resourceName: 'listeners'
 })

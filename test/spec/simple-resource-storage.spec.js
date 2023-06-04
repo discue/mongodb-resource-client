@@ -5,7 +5,7 @@ const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid, randomInt } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://localhost:27017', collectionName: '_subscriptions' })
+const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions' })
 
 describe('SimpleResourceStorage', () => {
 
@@ -16,7 +16,7 @@ describe('SimpleResourceStorage', () => {
     let insertedDocumentId
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://localhost:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
     })
 
     beforeEach(() => {

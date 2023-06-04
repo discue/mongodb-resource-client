@@ -5,7 +5,7 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://localhost:27017', collectionName: 'queues', resourceName: 'listeners' })
+const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners' })
 
 describe('OnToManyResourceStorage', () => {
 
@@ -17,7 +17,7 @@ describe('OnToManyResourceStorage', () => {
     let resourceId
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://localhost:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
     })
 
     beforeEach(() => {
