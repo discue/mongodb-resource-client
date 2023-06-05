@@ -28,7 +28,7 @@ describe('SimpleResourceStorageWithConfiguredClient', () => {
             hello: 'world'
         })
 
-        return new Promise((resolve) => setTimeout(resolve, 250))
+        return new Promise((resolve) => setTimeout(resolve, 100))
     })
 
     after(() => {
