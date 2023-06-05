@@ -61,7 +61,6 @@ describe('OnToManyResourceStorage', () => {
 
     describe('.exists', () => {
         it('returns true if a document exists', async () => {
-            console.log(storage._collectionName)
             const exists = await storage.exists([resourceId, listenerIds.at(0)])
             expect(exists).to.be.true
         })
