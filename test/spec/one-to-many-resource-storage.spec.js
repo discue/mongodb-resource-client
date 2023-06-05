@@ -94,12 +94,17 @@ describe('OnToManyResourceStorage', () => {
     describe('.getAll', () => {
         it('returns an existing document', async () => {
             const docs = await storage.getAll([resourceId])
-            console.log({ docs })
             expect(docs).to.have.length(2)
 
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
+            })
+        })
+        it('does not return _id field', async () => {
+            const docs = await storage.getAll([resourceId])
+            docs.forEach((doc) => {
+                expect(doc._id).to.be.undefined
             })
         })
     })
