@@ -10,7 +10,8 @@
   ],
   "exports": {
     ".": "./lib/index.js",
-    "./datatypes": "./lib/types.js",
+    "./aggregations": "./lib/aggregations.js",
+    "./datatypes": "./lib/types.js"
   },
   "scripts": {
     "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 50000 --file test/global-mocha-setup.js",
