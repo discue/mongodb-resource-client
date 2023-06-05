@@ -42,6 +42,8 @@ describe('OneToFewRefStorage', () => {
                 999
             ].reverse()
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     after(() => {

@@ -42,6 +42,8 @@ describe('NestedSimpleResourceStorage', () => {
                 { id: 999, name: '3' }
             ]
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     beforeEach(async () => {

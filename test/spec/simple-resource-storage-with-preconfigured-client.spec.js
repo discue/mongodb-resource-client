@@ -20,13 +20,15 @@ describe('SimpleResourceStorageWithConfiguredClient', () => {
         storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions' })
     })
 
-    beforeEach(() => {
+    beforeEach(async () => {
         insertedDocumentId = randomInt(999999)
         const collection = mongoDbClient.db('default').collection('_subscriptions')
-        return collection.insertOne({
+        await collection.insertOne({
             id: insertedDocumentId,
             hello: 'world'
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     after(() => {

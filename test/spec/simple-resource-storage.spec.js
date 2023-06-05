@@ -34,6 +34,8 @@ describe('SimpleResourceStorage', () => {
             id: randomInt(11111),
             hello: 'world2'
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     afterEach(() => {

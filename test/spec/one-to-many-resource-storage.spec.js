@@ -45,6 +45,8 @@ describe('OnToManyResourceStorage', () => {
                 listenerIds.at(1)
             ]
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     after(() => {

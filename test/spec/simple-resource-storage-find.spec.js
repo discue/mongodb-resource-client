@@ -45,6 +45,8 @@ describe('SimpleResourceStorage', () => {
             age: 42,
             name: 'Ksenia'
         })
+
+        return new Promise((resolve) => setTimeout(resolve, 250))
     })
 
     afterEach(() => {
