@@ -91,7 +91,12 @@ describe('NestedSimpleResourceStorage', () => {
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
-                expect(docs._id).to.be.undefined
+            })
+        })
+        it('does not return _id field', async () => {
+            const docs = await storage.getAll([insertedDocumentId])
+            docs.forEach((doc) => {
+                expect(doc._id).to.be.undefined
             })
         })
     })
