@@ -66,6 +66,12 @@ describe('SimpleResourceStorage', () => {
             expect(docs).to.have.length(2)
             expect(docs._id).to.be.undefined
         })
+        it('does not return _id field', async () => {
+            const docs = await storage.getAll()
+            docs.forEach((doc) => {
+                expect(doc._id).to.be.undefined
+            })
+        })
     })
 
     describe('.get', () => {
