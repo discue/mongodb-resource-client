@@ -28,10 +28,12 @@ describe('OnToManyResourceStorage', () => {
         listenerIds = [randomInt(999999), randomInt(999999)]
         const listenersCollection = mongoDbClient.db('default').collection('listeners')
         await listenersCollection.insertOne({
+            _meta_data: {},
             id: listenerIds.at(0),
             name: 'first'
         })
         await listenersCollection.insertOne({
+            _meta_data: {},
             id: listenerIds.at(1),
             name: 'second'
         })
@@ -78,6 +80,14 @@ describe('OnToManyResourceStorage', () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc._id).to.be.undefined
         })
+        it('does not return _meta_data by default', async () => {
+            const doc = await storage.get([resourceId, listenerIds.at(0)])
+            expect(doc._meta_data).to.be.undefined
+        })
+        it('returns _meta_data', async () => {
+            const doc = await storage.get([resourceId, listenerIds.at(0)], true)
+            expect(doc._meta_data).not.to.be.undefined
+        })
         it('returns another document', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(1)])
             expect(doc.name).to.equal('second')
@@ -101,6 +111,22 @@ describe('OnToManyResourceStorage', () => {
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
+            })
+        })
+        it('does not return _meta_data by default', async () => {
+            const docs = await storage.getAll([resourceId])
+            expect(docs).to.have.length(2)
+
+            docs.forEach(doc => {
+                expect(doc._meta_data).to.be.undefined
+            })
+        })
+        it('returns meta data', async () => {
+            const docs = await storage.getAll([resourceId], true)
+            expect(docs).to.have.length(2)
+
+            docs.forEach(doc => {
+                expect(doc._meta_data).not.to.be.undefined
             })
         })
         it('does not return _id field', async () => {

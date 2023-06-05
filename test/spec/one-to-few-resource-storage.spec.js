@@ -7,7 +7,7 @@ const { randomInt } = require('crypto')
 
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues' })
 
-describe('NestedSimpleResourceStorage', () => {
+describe('OneToFewResourceStorage', () => {
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -29,17 +29,17 @@ describe('NestedSimpleResourceStorage', () => {
         await collection.insertOne({
             id: randomInt(10000),
             queues: [
-                { id: 123, name: '11' },
-                { id: 456, name: '21' },
-                { id: 999, name: '31' }
+                { id: 123, _meta_data: {}, name: '11' },
+                { id: 456, _meta_data: {}, name: '21' },
+                { id: 999, _meta_data: {}, name: '31' }
             ]
         })
         await collection.insertOne({
             id: insertedDocumentId,
             queues: [
-                { id: 123, name: '1' },
-                { id: 456, name: '2' },
-                { id: 999, name: '3' }
+                { id: 123, _meta_data: {}, name: '1' },
+                { id: 456, _meta_data: {}, name: '2' },
+                { id: 999, _meta_data: {}, name: '3' }
             ]
         })
 
@@ -51,17 +51,17 @@ describe('NestedSimpleResourceStorage', () => {
         await collection.insertOne({
             id: randomInt(10000),
             tasks: [
-                { id: 123, name: '11' },
-                { id: 456, name: '21' },
-                { id: 999, name: '31' }
+                { id: 123, _meta_data: {}, name: '11' },
+                { id: 456, _meta_data: {}, name: '21' },
+                { id: 999, _meta_data: {}, name: '31' }
             ]
         })
         await collection.insertOne({
             id: insertedDocumentId,
             tasks: [
-                { id: 123, name: '1' },
-                { id: 456, name: '2' },
-                { id: 999, name: '3' }
+                { id: 123, _meta_data: {}, name: '1' },
+                { id: 456, _meta_data: {}, name: '2' },
+                { id: 999, _meta_data: {}, name: '3' }
             ]
         })
     })
@@ -94,6 +94,15 @@ describe('NestedSimpleResourceStorage', () => {
             const doc = await storage.get([insertedDocumentId, 999])
             expect(doc._id).to.be.undefined
         })
+        it('does not return _meta_data by default', async () => {
+            const doc = await storage.get([insertedDocumentId, 999])
+            expect(doc._meta_data).to.be.undefined
+        })
+        it('returns _meta_data', async () => {
+            const doc = await storage.get([insertedDocumentId, 999], true)
+            console.log({ doc })
+            expect(doc._meta_data).not.to.be.undefined
+        })
         it('returns null if document does not exists', async () => {
             const doc = await storage.get([insertedDocumentId, 111])
             expect(doc).to.be.null
@@ -113,6 +122,26 @@ describe('NestedSimpleResourceStorage', () => {
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
+            })
+        })
+        it('does not return _meta_data by default', async () => {
+            const docs = await storage.getAll([insertedDocumentId])
+            expect(docs).to.have.length(3)
+
+            docs.forEach(doc => {
+                expect(doc.name).not.to.be.undefined
+                expect(doc.name).not.to.be.null
+                expect(doc._meta_data).to.be.undefined
+            })
+        })
+        it('returns _meta_data', async () => {
+            const docs = await storage.getAll([insertedDocumentId], true)
+            expect(docs).to.have.length(3)
+
+            docs.forEach(doc => {
+                expect(doc.name).not.to.be.undefined
+                expect(doc.name).not.to.be.null
+                expect(doc._meta_data).not.to.be.undefined
             })
         })
         it('does not return _id field', async () => {

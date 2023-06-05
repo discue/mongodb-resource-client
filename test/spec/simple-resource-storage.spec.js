@@ -27,10 +27,12 @@ describe('SimpleResourceStorage', () => {
         insertedDocumentId = uuid()
         const collection = mongoDbClient.db('default').collection('_subscriptions')
         collection.insertOne({
+            _meta_data: {},
             id: insertedDocumentId,
             hello: 'world'
         })
         collection.insertOne({
+            _meta_data: {},
             id: randomInt(11111),
             hello: 'world2'
         })
@@ -80,6 +82,16 @@ describe('SimpleResourceStorage', () => {
         it('returns an existing document', async () => {
             const doc = await storage.get([insertedDocumentId])
             expect(doc.hello).to.equal('world')
+        })
+        it('does not return _meta_data by default', async () => {
+            const doc = await storage.get([insertedDocumentId])
+            expect(doc.hello).to.equal('world')
+            expect(doc._meta_data).to.be.undefined
+        })
+        it('returns _meta_data', async () => {
+            const doc = await storage.get([insertedDocumentId], true)
+            expect(doc.hello).to.equal('world')
+            expect(doc._meta_data).not.to.be.undefined
         })
         it('does not return mongodb _id field', async () => {
             const doc = await storage.get([insertedDocumentId])
