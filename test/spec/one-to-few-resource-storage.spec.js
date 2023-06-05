@@ -1,6 +1,6 @@
 'use strict'
 
-const { MongoClient } = require('mongodb')
+const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-few-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt } = require('crypto')
@@ -29,17 +29,47 @@ describe('OneToFewResourceStorage', () => {
         await collection.insertOne({
             id: randomInt(10000),
             queues: [
-                { id: 123, _meta_data: {}, name: '11' },
-                { id: 456, _meta_data: {}, name: '21' },
-                { id: 999, _meta_data: {}, name: '31' }
+                {
+                    id: 123, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '11'
+                },
+                {
+                    id: 456, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '21'
+                },
+                {
+                    id: 999, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '31'
+                }
             ]
         })
         await collection.insertOne({
             id: insertedDocumentId,
             queues: [
-                { id: 123, _meta_data: {}, name: '1' },
-                { id: 456, _meta_data: {}, name: '2' },
-                { id: 999, _meta_data: {}, name: '3' }
+                {
+                    id: 123, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '1'
+                },
+                {
+                    id: 456, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '2'
+                },
+                {
+                    id: 999, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '3'
+                }
             ]
         })
 
@@ -51,17 +81,47 @@ describe('OneToFewResourceStorage', () => {
         await collection.insertOne({
             id: randomInt(10000),
             tasks: [
-                { id: 123, _meta_data: {}, name: '11' },
-                { id: 456, _meta_data: {}, name: '21' },
-                { id: 999, _meta_data: {}, name: '31' }
+                {
+                    id: 123, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '11'
+                },
+                {
+                    id: 456, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '21'
+                },
+                {
+                    id: 999, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '31'
+                }
             ]
         })
         await collection.insertOne({
             id: insertedDocumentId,
             tasks: [
-                { id: 123, _meta_data: {}, name: '1' },
-                { id: 456, _meta_data: {}, name: '2' },
-                { id: 999, _meta_data: {}, name: '3' }
+                {
+                    id: 123, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '1'
+                },
+                {
+                    id: 456, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '2'
+                },
+                {
+                    id: 999, _meta_data: {
+                        created_at: Timestamp.fromNumber(Date.now())
+                    },
+                    name: '3'
+                }
             ]
         })
     })
@@ -100,7 +160,6 @@ describe('OneToFewResourceStorage', () => {
         })
         it('returns _meta_data', async () => {
             const doc = await storage.get([insertedDocumentId, 999], true)
-            console.log({ doc })
             expect(doc._meta_data).not.to.be.undefined
         })
         it('returns null if document does not exists', async () => {
@@ -175,6 +234,11 @@ describe('OneToFewResourceStorage', () => {
             await storage.update([insertedDocumentId, 999], { 'queues.name': 'peter' })
             const doc = await storage.get([insertedDocumentId, 999])
             expect(doc.name).to.equal('peter')
+        })
+        it('sets a new updated_at timestamp', async () => {
+            await storage.update([insertedDocumentId, 999], { 'queues.name': 'peter' })
+            const doc = await storage.get([insertedDocumentId, 999], true)
+            expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {
             return new Promise((resolve, reject) => {

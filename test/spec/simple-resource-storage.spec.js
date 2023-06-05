@@ -1,6 +1,6 @@
 'use strict'
 
-const { MongoClient } = require('mongodb')
+const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid, randomInt } = require('crypto')
@@ -27,12 +27,16 @@ describe('SimpleResourceStorage', () => {
         insertedDocumentId = uuid()
         const collection = mongoDbClient.db('default').collection('_subscriptions')
         collection.insertOne({
-            _meta_data: {},
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
             id: insertedDocumentId,
             hello: 'world'
         })
         collection.insertOne({
-            _meta_data: {},
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
             id: randomInt(11111),
             hello: 'world2'
         })
@@ -95,7 +99,6 @@ describe('SimpleResourceStorage', () => {
         })
         it('does not return mongodb _id field', async () => {
             const doc = await storage.get([insertedDocumentId])
-            console.log('id', doc._id)
             expect(doc._id).to.be.undefined
         })
         it('does not throw if doc does not exists', async () => {
@@ -125,10 +128,21 @@ describe('SimpleResourceStorage', () => {
             const doc = await storage.get(insertedDocumentId)
             expect(doc.hello).to.equal('peter')
         })
+        it('sets a new updated_at timestamp', async () => {
+            await storage.update(insertedDocumentId, { hello: 'peter' })
+            await new Promise((resolve) => setTimeout(resolve, 500))
+            const doc = await storage.get(insertedDocumentId, true)
+            expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
+        })
         it('allows atomic operator to be set', async () => {
             await storage.update(insertedDocumentId, { $set: { hello: 'peter' } })
             const doc = await storage.get(insertedDocumentId)
             expect(doc.hello).to.equal('peter')
+        })
+        it('sets a new updated_at timestamp when atomic operator was set', async () => {
+            await storage.update(insertedDocumentId, { $set: { hello: 'peter' } })
+            const doc = await storage.get(insertedDocumentId, true)
+            expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {
             return new Promise((resolve, reject) => {

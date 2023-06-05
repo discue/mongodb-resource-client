@@ -1,6 +1,6 @@
 'use strict'
 
-const { MongoClient } = require('mongodb')
+const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt } = require('crypto')
@@ -28,12 +28,16 @@ describe('OnToManyResourceStorage', () => {
         listenerIds = [randomInt(999999), randomInt(999999)]
         const listenersCollection = mongoDbClient.db('default').collection('listeners')
         await listenersCollection.insertOne({
-            _meta_data: {},
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
             id: listenerIds.at(0),
             name: 'first'
         })
         await listenersCollection.insertOne({
-            _meta_data: {},
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
             id: listenerIds.at(1),
             name: 'second'
         })
@@ -166,6 +170,11 @@ describe('OnToManyResourceStorage', () => {
             await storage.update([resourceId, listenerIds.at(1)], { 'name': 'peter' })
             const doc = await storage.get([resourceId, listenerIds.at(1)])
             expect(doc.name).to.equal('peter')
+        })
+        it('sets a new updated_at timestamp', async () => {
+            await storage.update([resourceId, listenerIds.at(1)], { 'name': 'peter' })
+            const doc = await storage.get([resourceId, listenerIds.at(1)], true)
+            expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {
             return new Promise((resolve, reject) => {
