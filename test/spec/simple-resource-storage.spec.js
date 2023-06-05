@@ -64,6 +64,7 @@ describe('SimpleResourceStorage', () => {
         it('returns all documents', async () => {
             const docs = await storage.getAll()
             expect(docs).to.have.length(2)
+            expect(docs._id).to.be.undefined
         })
     })
 
@@ -71,6 +72,11 @@ describe('SimpleResourceStorage', () => {
         it('returns an existing document', async () => {
             const doc = await storage.get([insertedDocumentId])
             expect(doc.hello).to.equal('world')
+        })
+        it('does not return mongodb _id field', async () => {
+            const doc = await storage.get([insertedDocumentId])
+            console.log('id', doc._id)
+            expect(doc._id).to.be.undefined
         })
         it('does not throw if doc does not exists', async () => {
             return new Promise((resolve, reject) => {

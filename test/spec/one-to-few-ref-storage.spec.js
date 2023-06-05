@@ -68,6 +68,7 @@ describe('OneToFewRefStorage', () => {
             const docs = await storage.getAll([insertedDocumentId])
             expect(docs).to.have.length(3)
             expect(docs).to.deep.equal([999, 456, 123])
+            expect(docs._id).to.be.undefined
         })
     })
 

@@ -68,6 +68,10 @@ describe('NestedSimpleResourceStorage', () => {
             const doc = await storage.get([insertedDocumentId, 999])
             expect(doc.name).to.equal('3')
         })
+        it('does not return mongodb _id field', async () => {
+            const doc = await storage.get([insertedDocumentId, 999])
+            expect(doc._id).to.be.undefined
+        })
         it('returns null if document does not exists', async () => {
             const doc = await storage.get([insertedDocumentId, 111])
             expect(doc).to.be.null
@@ -87,6 +91,7 @@ describe('NestedSimpleResourceStorage', () => {
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
+                expect(docs._id).to.be.undefined
             })
         })
     })

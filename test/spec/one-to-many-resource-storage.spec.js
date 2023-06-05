@@ -72,6 +72,10 @@ describe('OnToManyResourceStorage', () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
         })
+        it('does not return _id field', async () => {
+            const doc = await storage.get([resourceId, listenerIds.at(0)])
+            expect(doc._id).to.be.undefined
+        })
         it('returns another document', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(1)])
             expect(doc.name).to.equal('second')
