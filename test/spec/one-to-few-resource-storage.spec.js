@@ -44,6 +44,26 @@ describe('NestedSimpleResourceStorage', () => {
         })
     })
 
+    beforeEach(async () => {
+        const collection = mongoDbClient.db('default').collection('unrelated_collection')
+        await collection.insertOne({
+            id: randomInt(10000),
+            tasks: [
+                { id: 123, name: '11' },
+                { id: 456, name: '21' },
+                { id: 999, name: '31' }
+            ]
+        })
+        await collection.insertOne({
+            id: insertedDocumentId,
+            tasks: [
+                { id: 123, name: '1' },
+                { id: 456, name: '2' },
+                { id: 999, name: '3' }
+            ]
+        })
+    })
+
     after(() => {
         return mongoDbClient.close()
     })
