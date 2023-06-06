@@ -58,7 +58,7 @@ describe('SimpleResourceStorage', () => {
     })
 
     describe('.exists', () => {
-        it('returns true if a document exists', async () => {
+        it('returns{withMetadata: true} if a document exists', async () => {
             const exists = await storage.exists([insertedDocumentId])
             expect(exists).to.be.true
         })
@@ -93,7 +93,7 @@ describe('SimpleResourceStorage', () => {
             expect(doc._meta_data).to.be.undefined
         })
         it('returns _meta_data', async () => {
-            const doc = await storage.get([insertedDocumentId], true)
+            const doc = await storage.get([insertedDocumentId], { withMetadata: true })
             expect(doc.hello).to.equal('world')
             expect(doc._meta_data).not.to.be.undefined
         })
@@ -131,7 +131,7 @@ describe('SimpleResourceStorage', () => {
         it('sets a new updated_at timestamp', async () => {
             await storage.update(insertedDocumentId, { hello: 'peter' })
             await new Promise((resolve) => setTimeout(resolve, 500))
-            const doc = await storage.get(insertedDocumentId, true)
+            const doc = await storage.get(insertedDocumentId, { withMetadata: true })
             expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('allows atomic operator to be set', async () => {
@@ -141,7 +141,7 @@ describe('SimpleResourceStorage', () => {
         })
         it('sets a new updated_at timestamp when atomic operator was set', async () => {
             await storage.update(insertedDocumentId, { $set: { hello: 'peter' } })
-            const doc = await storage.get(insertedDocumentId, true)
+            const doc = await storage.get(insertedDocumentId, { withMetadata: true })
             expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {

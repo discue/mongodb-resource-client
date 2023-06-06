@@ -159,7 +159,7 @@ describe('OneToFewResourceStorage', () => {
             expect(doc._meta_data).to.be.undefined
         })
         it('returns _meta_data', async () => {
-            const doc = await storage.get([insertedDocumentId, 999], true)
+            const doc = await storage.get([insertedDocumentId, 999], { withMetadata: true })
             expect(doc._meta_data).not.to.be.undefined
         })
         it('returns null if document does not exists', async () => {
@@ -194,7 +194,7 @@ describe('OneToFewResourceStorage', () => {
             })
         })
         it('returns _meta_data', async () => {
-            const docs = await storage.getAll([insertedDocumentId], true)
+            const docs = await storage.getAll([insertedDocumentId], { withMetadata: true })
             expect(docs).to.have.length(3)
 
             docs.forEach(doc => {
@@ -237,7 +237,7 @@ describe('OneToFewResourceStorage', () => {
         })
         it('sets a new updated_at timestamp', async () => {
             await storage.update([insertedDocumentId, 999], { 'queues.name': 'peter' })
-            const doc = await storage.get([insertedDocumentId, 999], true)
+            const doc = await storage.get([insertedDocumentId, 999], { withMetadata: true })
             expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {

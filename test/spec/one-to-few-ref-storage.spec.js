@@ -72,6 +72,10 @@ describe('OneToFewRefStorage', () => {
             expect(docs).to.deep.equal([999, 456, 123])
             expect(docs._id).to.be.undefined
         })
+        it('returns null if document does not exist', async () => {
+            const docs = await storage.getAll([123])
+            expect(docs).to.have.length(0)
+        })
     })
 
     describe('.create', () => {

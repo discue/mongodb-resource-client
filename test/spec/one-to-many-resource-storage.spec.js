@@ -114,7 +114,7 @@ describe('OnToManyResourceStorage', () => {
             expect(doc._meta_data).to.be.undefined
         })
         it('returns _meta_data', async () => {
-            const doc = await storage.get([resourceId, listenerIds.at(0)], true)
+            const doc = await storage.get([resourceId, listenerIds.at(0)], { withMetadata: true })
             expect(doc._meta_data).not.to.be.undefined
         })
         it('returns another document', async () => {
@@ -151,7 +151,7 @@ describe('OnToManyResourceStorage', () => {
             })
         })
         it('returns meta data', async () => {
-            const docs = await storage.getAll([resourceId], true)
+            const docs = await storage.getAll([resourceId], { withMetadata: true })
             expect(docs).to.have.length(2)
 
             docs.forEach(doc => {
@@ -199,7 +199,7 @@ describe('OnToManyResourceStorage', () => {
         })
         it('sets a new updated_at timestamp', async () => {
             await storage.update([resourceId, listenerIds.at(1)], { 'name': 'peter' })
-            const doc = await storage.get([resourceId, listenerIds.at(1)], true)
+            const doc = await storage.get([resourceId, listenerIds.at(1)], { withMetadata: true })
             expect(doc._meta_data.updated_at.toInt()).to.be.greaterThan(doc._meta_data.created_at.toInt())
         })
         it('throws if document does not exist', async () => {
