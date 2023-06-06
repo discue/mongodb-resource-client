@@ -29,9 +29,9 @@ describe('OneToFewRefStorage', () => {
         await collection.insertOne({
             id: randomInt(10000),
             queues: [
-                123,
-                456,
-                999
+                1234,
+                4567,
+                9999
             ]
         })
         await collection.insertOne({
@@ -83,6 +83,22 @@ describe('OneToFewRefStorage', () => {
             expect(docs).to.have.length(4)
 
             expect(docs).to.deep.equal([999, 456, 123, newId])
+        })
+        it('returns the document id', async () => {
+            const newId = randomInt(55555)
+            const storedId = await storage.create([insertedDocumentId], newId)
+            expect(storedId).to.equal(newId)
+        })
+    })
+
+    describe('.findReferences', () => {
+        it('finds documents with references', async () => {
+            const docs = await storage.findReferences([insertedDocumentId], [123])
+            expect(docs).to.have.length(1)
+        })
+        it('returns an empty set if target does not contain ref', async () => {
+            const docs = await storage.findReferences([insertedDocumentId], [1234])
+            expect(docs).to.have.length(0)
         })
         it('returns the document id', async () => {
             const newId = randomInt(55555)

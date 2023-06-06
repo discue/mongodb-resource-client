@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt } = require('crypto')
+const { randomInt, randomUUID: uuid } = require('crypto')
 
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
 
@@ -15,6 +15,7 @@ describe('OnToManyResourceStorage', () => {
     let mongoDbClient
     let listenerIds
     let resourceId
+    let unrelatedResourceId
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
@@ -25,7 +26,7 @@ describe('OnToManyResourceStorage', () => {
     })
 
     beforeEach(async () => {
-        listenerIds = [randomInt(999999), randomInt(999999)]
+        listenerIds = [uuid(), uuid(), uuid()]
         const listenersCollection = mongoDbClient.db('default').collection('listeners')
         await listenersCollection.insertOne({
             _meta_data: {
@@ -41,14 +42,27 @@ describe('OnToManyResourceStorage', () => {
             id: listenerIds.at(1),
             name: 'second'
         })
+        await listenersCollection.insertOne({
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
+            id: listenerIds.at(2),
+            name: 'third'
+        })
 
-        resourceId = randomInt(999999)
         const queuesCollection = mongoDbClient.db('default').collection('queues')
         await queuesCollection.insertOne({
-            id: resourceId,
+            id: resourceId = uuid(),
             listeners: [
                 listenerIds.at(0),
                 listenerIds.at(1)
+            ]
+        })
+
+        await queuesCollection.insertOne({
+            id: unrelatedResourceId = uuid(),
+            listeners: [
+                listenerIds.at(2)
             ]
         })
 
@@ -68,6 +82,14 @@ describe('OnToManyResourceStorage', () => {
             const exists = await storage.exists([resourceId, listenerIds.at(0)])
             expect(exists).to.be.true
         })
+        it('returns true only if document is being referenced', async () => {
+            const exists = await storage.exists([resourceId, listenerIds.at(2)])
+            expect(exists).to.be.false
+        })
+        it('returns false if host has reference', async () => {
+            const exists = await storage.exists([unrelatedResourceId, listenerIds.at(0)])
+            expect(exists).to.be.false
+        })
         it('returns false if a document does not exists', async () => {
             const exists = await storage.exists([resourceId, 111])
             expect(exists).to.be.false
@@ -78,6 +100,10 @@ describe('OnToManyResourceStorage', () => {
         it('returns an existing document', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
+        })
+        it('returns null if an existing document is not referenced by host document', async () => {
+            const doc = await storage.get([unrelatedResourceId, listenerIds.at(0)])
+            expect(doc).to.be.null
         })
         it('does not return _id field', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
