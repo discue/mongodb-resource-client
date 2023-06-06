@@ -1,10 +1,9 @@
 'use strict'
 
-const { MongoClient, Timestamp } = require('mongodb')
 const OneToManyStorage = require('../../lib/one-to-many-resource-storage.js')
 const SimpleStorage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt, randomUUID: uuid } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 const apiClientsStorage = new SimpleStorage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients' })
 const queuesStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
