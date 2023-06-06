@@ -105,6 +105,18 @@ describe('OnToManyResourceStorage', () => {
             const doc = await storage.get([unrelatedResourceId, listenerIds.at(0)])
             expect(doc).to.be.null
         })
+        it('does only return projected fields', async () => {
+            const doc = await storage.get([resourceId, listenerIds.at(0)], { projection: { id: 1 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.undefined
+            expect(doc.name).to.be.undefined
+        })
+        it('ignores explicitly not projected fields', async () => {
+            const doc = await storage.get([resourceId, listenerIds.at(0)], { projection: { name: 0 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.undefined
+            expect(doc.name).to.be.undefined
+        })
         it('does not return _id field', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc._id).to.be.undefined
@@ -140,6 +152,26 @@ describe('OnToManyResourceStorage', () => {
             docs.forEach(doc => {
                 expect(doc.name).not.to.be.undefined
                 expect(doc.name).not.to.be.null
+            })
+        })
+        it('returns only projected fields', async () => {
+            const docs = await storage.getAll([resourceId], { projection: { id: 1 } })
+            expect(docs).to.have.length(2)
+
+            docs.forEach(doc => {
+                expect(doc.id).not.to.be.undefined
+                expect(doc.id).not.to.be.null
+                expect(doc.name).to.be.undefined
+            })
+        })
+        it('ignores explicitly not projected fields', async () => {
+            const docs = await storage.getAll([resourceId], { projection: { name: 0 } })
+            expect(docs).to.have.length(2)
+
+            docs.forEach(doc => {
+                expect(doc.id).not.to.be.undefined
+                expect(doc.id).not.to.be.null
+                expect(doc.name).to.be.undefined
             })
         })
         it('does not return _meta_data by default', async () => {

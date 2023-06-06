@@ -74,6 +74,24 @@ describe('SimpleResourceStorage', () => {
             expect(docs).to.have.length(2)
             expect(docs._id).to.be.undefined
         })
+        it('returns only projected fields', async () => {
+            const docs = await storage.getAll({ projection: { id: 1 } })
+            expect(docs).to.have.length(2)
+            docs.forEach((doc) => {
+                expect(doc.id).not.to.be.undefined
+                expect(doc.id).not.to.be.null
+                expect(doc.hello).to.be.undefined
+            })  
+        })
+        it('ignores explicitly not projected fields', async () => {
+            const docs = await storage.getAll({ projection: { hello: 0 } })
+            expect(docs).to.have.length(2)
+            docs.forEach((doc) => {
+                expect(doc.id).not.to.be.undefined
+                expect(doc.id).not.to.be.null
+                expect(doc.hello).to.be.undefined
+            })  
+        })
         it('does not return _id field', async () => {
             const docs = await storage.getAll()
             docs.forEach((doc) => {
@@ -85,7 +103,21 @@ describe('SimpleResourceStorage', () => {
     describe('.get', () => {
         it('returns an existing document', async () => {
             const doc = await storage.get([insertedDocumentId])
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.null
             expect(doc.hello).to.equal('world')
+        })
+        it('returns only projected fields', async () => {
+            const doc = await storage.get([insertedDocumentId], { projection: { id: 1 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.null
+            expect(doc.hello).to.be.undefined
+        })
+        it('ignores explicitly not projected fields', async () => {
+            const doc = await storage.get([insertedDocumentId], { projection: { hello: 0 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.null
+            expect(doc.hello).to.be.undefined
         })
         it('does not return _meta_data by default', async () => {
             const doc = await storage.get([insertedDocumentId])
