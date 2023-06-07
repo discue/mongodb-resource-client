@@ -11,14 +11,36 @@ const listenersStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27017'
 
 describe('OnToManyResourceStorage Nested', () => {
 
-    let apiClientId
-    let queueId
-    let listenerId
+    let apiClientIds
+    let queueIds
+    let listenerIds
+
+    beforeEach(() => {
+        apiClientIds = []
+        queueIds = []
+        listenerIds = []
+    })
 
     beforeEach(async () => {
-        await apiClientsStorage.create([apiClientId = uuid()], {})
-        await queuesStorage.create([apiClientId, queueId = uuid()], {})
-        await listenersStorage.create([apiClientId, queueId, listenerId = uuid()], {})
+        for (let i = 0, n = 5; i < n; i++) {
+            const id = uuid()
+            apiClientIds.push(id)
+            await apiClientsStorage.create([id], {})
+        }
+
+        for (let i = 0, n = 5; i < n; i++) {
+            const id = uuid()
+            queueIds.push(id)
+            await queuesStorage.create([apiClientIds.at(0), id], {})
+        }
+
+        for (let j = 0, m = 2; j < m; j++) {
+            for (let i = 0, n = 3; i < n; i++) {
+                const id = uuid()
+                listenerIds.push(id)
+                await listenersStorage.create([apiClientIds.at(0), queueIds.at(j), id], {})
+            }
+        }
 
         return new Promise((resolve) => setTimeout(resolve, 100))
     })
@@ -33,20 +55,21 @@ describe('OnToManyResourceStorage Nested', () => {
 
     describe('.create', () => {
         it('links also nested entities correctly', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientId])
-            expect(queues).to.have.length(1)
-            expect(queues).to.deep.equal([queueId])
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            expect(queues).to.have.length(queueIds.length)
 
-            const { listeners } = await queuesStorage.get([apiClientId, queueId])
-            expect(listeners).to.have.length(1)
-            expect(listeners).to.deep.equal([listenerId])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queueIds.at(0)])
+            expect(listeners).to.have.length(listenerIds.length / 2)
+            listenerIds.slice(0, 3).forEach((id) => {
+                expect(listeners).to.contain(id)
+            })
         })
 
         it('allows to traverse the hierarchy', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientId])
-            const { listeners } = await queuesStorage.get([apiClientId, queues.at(0)])
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
 
-            const listener = await listenersStorage.get([apiClientId, queues.at(0), listeners.at(0)])
+            const listener = await listenersStorage.get([apiClientIds.at(0), queues.at(0), listeners.at(0)])
             expect(listener).not.be.be.undefined
             expect(listener).not.be.be.null
         })
@@ -54,15 +77,15 @@ describe('OnToManyResourceStorage Nested', () => {
 
     describe('.get', () => {
         it('verifies last and second to last id reference each other', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientId])
-            const { listeners } = await queuesStorage.get([apiClientId, queues.at(0)])
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
 
             const listener = await listenersStorage.get([123, 123, listeners.at(0)])
             expect(listener).be.be.null
         })
         it('verifies all resource ids are referenced', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientId])
-            const { listeners } = await queuesStorage.get([apiClientId, queues.at(0)])
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
 
             const listener = await listenersStorage.get([123, queues.at(0), listeners.at(0)])
             expect(listener).be.be.null
@@ -75,9 +98,71 @@ describe('OnToManyResourceStorage Nested', () => {
             expect(listener).be.be.null
         })
         it('verifies all resource ids are referenced', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientId])
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
             const listener = await listenersStorage.get([123, queues.at(0)])
             expect(listener).be.be.null
+        })
+    })
+
+    describe('.findReferences', () => {
+        it('looks up references in root collection', async () => {
+            const refs = await listenersStorage.findReferences([apiClientIds.at(0)])
+            expect(refs).to.have.length(listenerIds.length)
+
+            const hasAllRefs = refs.every((ref) => {
+                const hasApiClient = ref.at(0) === apiClientIds.at(0)
+                const hasQueue = ref.at(1) === queueIds.at(0) || ref.at(1) === queueIds.at(1)
+                const hasListener = listenerIds.some((id) => {
+                    return ref.at(2) === id
+                })
+
+                return hasApiClient && hasQueue && hasListener
+            })
+            expect(hasAllRefs).to.be.true
+        })
+        it('finds references in parent collection', async () => {
+            const outlierListenerId = uuid()
+            await listenersStorage.create([apiClientIds.at(0), queueIds.at(2), outlierListenerId], {})
+
+            const refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(2)])
+            expect(refs).to.have.length(1)
+
+            const hasAllRefs = refs.every((ref) => {
+                const hasApiClient = ref.at(0) === apiClientIds.at(0)
+                const hasQueue = ref.at(1) === queueIds.at(2)
+                const hasListener = ref.at(2) === outlierListenerId
+                return hasApiClient && hasQueue && hasListener
+            })
+            expect(hasAllRefs).to.be.true
+        })
+        it('verifies given id is referenced by its parent', async () => {
+            const outlierListenerId = uuid()
+            await listenersStorage.create([apiClientIds.at(0), queueIds.at(2), outlierListenerId], {})
+
+            const refs = await listenersStorage.findReferences([apiClientIds.at(1), queueIds.at(2)])
+            expect(refs).to.have.length(0)
+        })
+        it('returns the target id if it point to an entity', async () => {
+            const refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(0), listenerIds.at(0)])
+            expect(refs).to.have.length(1)
+
+            const hasAllRefs = refs.every((ref) => {
+                const hasApiClient = ref.at(0) === apiClientIds.at(0)
+                const hasQueue = ref.at(1) === queueIds.at(0)
+                const hasListener = ref.at(2) === listenerIds.at(0)
+                return hasApiClient && hasQueue && hasListener
+            })
+            expect(hasAllRefs).to.be.true
+        })
+        it('also resolves references if ids point to an entity', async () => {
+            let refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(0), 123])
+            expect(refs).to.have.length(0)
+
+            refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(1), listenerIds.at(0)])
+            expect(refs).to.have.length(0)
+ 
+            refs = await listenersStorage.findReferences([apiClientIds.at(1), queueIds.at(0), listenerIds.at(0)])
+            expect(refs).to.have.length(0)
         })
     })
 })
