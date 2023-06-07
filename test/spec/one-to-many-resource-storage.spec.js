@@ -154,6 +154,10 @@ describe('OnToManyResourceStorage', () => {
                 expect(doc.name).not.to.be.null
             })
         })
+        it('returns an empty list if no resource was found because of an unknown id', async () => {
+            const docs = await storage.getAll([12])
+            expect(docs).to.have.length(0)
+        })
         it('returns only projected fields', async () => {
             const docs = await storage.getAll([resourceId], { projection: { id: 1 } })
             expect(docs).to.have.length(2)
