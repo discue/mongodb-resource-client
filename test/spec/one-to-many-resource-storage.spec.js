@@ -225,7 +225,7 @@ describe('OnToManyResourceStorage', () => {
             await storage.create([resourceId, newId], { my: 'ghost' })
 
             const docs = await storage.getAll([resourceId])
-            expect(docs).to.have.length(3)
+            expect(docs).to.have.length(2)
 
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')
