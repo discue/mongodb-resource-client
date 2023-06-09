@@ -28,6 +28,7 @@ npm install @discue/mongodb-resource-client
 ```
 
 ## Components
+- [Aggregations](README_AGGREGATIONS.md)
 - [OneToFewRefStorage](README_ONE_TO_FEW_REF_STORAGE.md)
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
