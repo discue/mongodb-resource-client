@@ -162,7 +162,7 @@ describe('OnToManyResourceStorage', () => {
                 expect(doc.$path).to.equal(`/queues/${resourceId}/listeners/${listenerIds.at(index)}`)
             })
         })
-        it.only('hides document path elements if requested', async () => {
+        it('hides document path elements if requested', async () => {
             storage._hiddenResourcePath = '/queues'
             const docs = await storage.getAll([resourceId], { addDocumentPath: true })
             expect(docs).to.have.length(2)
