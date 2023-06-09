@@ -154,6 +154,23 @@ describe('OnToManyResourceStorage', () => {
                 expect(doc.name).not.to.be.null
             })
         })
+        it('returns document path if requested', async () => {
+            const docs = await storage.getAll([resourceId], { addDocumentPath: true })
+            expect(docs).to.have.length(2)
+
+            docs.forEach((doc, index) => {
+                expect(doc.$path).to.equal(`/queues/${resourceId}/listeners/${listenerIds.at(index)}`)
+            })
+        })
+        it.only('hides document path elements if requested', async () => {
+            storage._hiddenResourcePath = '/queues'
+            const docs = await storage.getAll([resourceId], { addDocumentPath: true })
+            expect(docs).to.have.length(2)
+
+            docs.forEach((doc, index) => {
+                expect(doc.$path).to.equal(`/listeners/${listenerIds.at(index)}`)
+            })
+        })
         it('returns an empty list if no resource was found because of an unknown id', async () => {
             const docs = await storage.getAll([12])
             expect(docs).to.have.length(0)
