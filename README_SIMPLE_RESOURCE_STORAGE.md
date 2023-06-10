@@ -6,7 +6,8 @@ Options for class constructor
 
 ### Properties
 
-*   `url` **[String][1]** url to mongo instance
+*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
+*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 
@@ -32,6 +33,7 @@ Returns a resource by ids.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
 
 Returns **[Object][3]**&#x20;
 
@@ -41,7 +43,19 @@ Returns all resources.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
+
+Returns **[Array][2]<[Object][3]>**&#x20;
+
+## find
+
+*   **See**: [README\_AGGREGATIONS.md][4]
+
+Returns all resources that pass the given aggregation stages.
+
+### Parameters
+
+*   `aggregations` **[Array][2]<[Object][3]>** a list of valid aggregation objects (optional, default `[]`)
 
 Returns **[Array][2]<[Object][3]>**&#x20;
 
@@ -53,7 +67,7 @@ Returns true if a resource with given ids exists.
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
 
-Returns **[boolean][4]**&#x20;
+Returns **[boolean][5]**&#x20;
 
 ## create
 
@@ -93,4 +107,6 @@ Returns **void**&#x20;
 
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[4]: README_AGGREGATIONS.md
+
+[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean

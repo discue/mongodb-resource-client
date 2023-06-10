@@ -4,10 +4,13 @@
 
 ### Properties
 
-*   `url` **[String][1]** url to mongo instance
+*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
+*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
+*   `resourcePath` **[string][1]?** slash separated path describing the hierarchy e.g. universities/teachers/subjects/exams.
+*   `hiddenResourcePath` **[string][1]?** slash separated path describing which path elements should not be returned to callers
 *   `enableTwoWayReferences` **[string][1]** true if documents should also store references to their parents e.g. student have references to their schools
 
 ### Examples
@@ -37,11 +40,11 @@ causes a reference to be updated, too.
 
 ```json
 {
-  _id: 1828391,
+  id: 1828391,
   name: 'Miles Morales',
 },
 {
-  _id: 4451515,
+  id: 4451515,
   name: 'Bryan Jenkins',
 }
 ```
@@ -76,18 +79,38 @@ Returns a resource by ids.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
 
 Returns **[Object][4]**&#x20;
 
 ## getAll
 
-Returns all resources.
+Returns resources based on return value of [findReferences][5].
 
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
 
-Returns **[Array][2]<[Object][4]>**&#x20;
+## findReferences
+
+Looks up references of current resource in parent and parent's parent collection based on given resourceIds.
+
+Given `resourcePath=/countries/cities` and `resourceName=companies`
+
+*   if `resourceIds` has value \[1,2,3], then the method returns \[\[1,2,3]]
+*   if `resourceIds` has value \[1,2], then only references of companies in city with `id=2` will returned
+*   if `resourceIds` has value \[1], then references of all companies of all cities of country with `id=1` will be returned
+
+Meaning: The more ids are given, the more narrow the search is. Less ids make the search window more wide
+and will lead to larger number of results.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `verifyParentReference` **[Boolean][3]** true if we should check whether an id is actually referenced by its parent to prevent info leakage (optional, default `true`)
+
+Returns **[Array][2]<[Array][2]<[String][1]>>** an array of resource ids
 
 ## create
 
@@ -122,3 +145,5 @@ Deletes a resource by ids
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+[5]: #findreferences

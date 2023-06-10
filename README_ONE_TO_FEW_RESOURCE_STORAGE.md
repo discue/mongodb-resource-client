@@ -6,7 +6,8 @@ Options for class constructor
 
 ### Properties
 
-*   `url` **[String][1]** url to mongo instance
+*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
+*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
@@ -54,6 +55,7 @@ Returns a resource by ids.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
 
 Returns **[Promise][3]<[Object][4]>**&#x20;
 
@@ -64,6 +66,7 @@ Returns all resources.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
 
 Returns **[Promise][3]<[Array][2]<[Object][4]>>**&#x20;
 
