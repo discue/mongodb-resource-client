@@ -158,8 +158,13 @@ describe('OnToManyResourceStorage', () => {
             const docs = await storage.getAll([resourceId], { addDocumentPath: true })
             expect(docs).to.have.length(2)
 
-            docs.forEach((doc, index) => {
-                expect(doc.$path).to.equal(`/queues/${resourceId}/listeners/${listenerIds.at(index)}`)
+            docs.forEach((doc) => {
+                const { $path: path } = doc
+                const split = path.split('/')
+                expect(split.at(1)).to.equal('queues')
+                expect(split.at(2)).to.equal(resourceId)
+                expect(split.at(3)).to.equal('listeners')
+                expect(listenerIds).to.include(split.at(4))
             })
         })
         it('hides document path elements if requested', async () => {
@@ -167,8 +172,11 @@ describe('OnToManyResourceStorage', () => {
             const docs = await storage.getAll([resourceId], { addDocumentPath: true })
             expect(docs).to.have.length(2)
 
-            docs.forEach((doc, index) => {
-                expect(doc.$path).to.equal(`/listeners/${listenerIds.at(index)}`)
+            docs.forEach((doc) => {
+                const { $path: path } = doc
+                const split = path.split('/')
+                expect(split.at(1)).to.equal('listeners')
+                expect(listenerIds).to.include(split.at(2))
             })
         })
         it('returns an empty list if no resource was found because of an unknown id', async () => {
@@ -217,6 +225,13 @@ describe('OnToManyResourceStorage', () => {
                 expect(doc._id).to.be.undefined
             })
         })
+        it('returns an empty list if collection is empty', async () => {
+            const collection = await storage._getCollection()
+            await collection.drop()
+
+            const docs = await storage.getAll([resourceId])
+            expect(docs).to.be.empty
+        })
     })
 
     describe('.create', () => {
@@ -229,6 +244,13 @@ describe('OnToManyResourceStorage', () => {
 
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')
+        })
+        it('ensures id is unique', async () => {
+            const id = uuid()
+            await storage.create([resourceId, id], { my: 'ghost' })
+            return new Promise((resolve, reject) => {
+                storage.create([resourceId, id], { my: 'ghost' }).then(reject, resolve)
+            })
         })
         it('returns the new documentId', async () => {
             const newId = randomInt(55555)

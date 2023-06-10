@@ -44,9 +44,13 @@ describe('SimpleResourceStorage', () => {
         return new Promise((resolve) => setTimeout(resolve, 100))
     })
 
-    afterEach(() => {
-        const collection = mongoDbClient.db('default').collection('_subscriptions')
-        return collection.drop()
+    afterEach(async () => {
+        try {
+            const collection = mongoDbClient.db('default').collection('_subscriptions')
+            await collection.drop()
+        } catch (e) {
+            //
+        }
     })
 
     after(() => {
@@ -81,7 +85,7 @@ describe('SimpleResourceStorage', () => {
                 expect(doc.id).not.to.be.undefined
                 expect(doc.id).not.to.be.null
                 expect(doc.hello).to.be.undefined
-            })  
+            })
         })
         it('ignores explicitly not projected fields', async () => {
             const docs = await storage.getAll({ projection: { hello: 0 } })
@@ -90,13 +94,20 @@ describe('SimpleResourceStorage', () => {
                 expect(doc.id).not.to.be.undefined
                 expect(doc.id).not.to.be.null
                 expect(doc.hello).to.be.undefined
-            })  
+            })
         })
         it('does not return _id field', async () => {
             const docs = await storage.getAll()
             docs.forEach((doc) => {
                 expect(doc._id).to.be.undefined
             })
+        })
+        it('returns an empty list if collection is empty', async () => {
+            const collection = await storage._getCollection()
+            await collection.drop()
+
+            const docs = await storage.getAll()
+            expect(docs).to.be.empty
         })
     })
 
@@ -146,6 +157,13 @@ describe('SimpleResourceStorage', () => {
             await storage.create(id, { my: 'ghost' })
             const doc = await storage.get(id)
             expect(doc.my).to.equal('ghost')
+        })
+        it('ensures id is unique', async () => {
+            const id = uuid()
+            await storage.create(id, { my: 'ghost' })
+            return new Promise((resolve, reject) => {
+                storage.create(id, { my: 'ghost' }).then(reject, resolve)
+            })
         })
         it('returns the document id', async () => {
             const id = uuid()

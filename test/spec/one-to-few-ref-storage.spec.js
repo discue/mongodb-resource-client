@@ -88,6 +88,16 @@ describe('OneToFewRefStorage', () => {
 
             expect(docs).to.deep.equal([999, 456, 123, newId])
         })
+        it('ensures ids are unique', async () => {
+            const newId = randomInt(55555)
+            await storage.create([insertedDocumentId], newId)
+            await storage.create([insertedDocumentId], newId)
+
+            const docs = await storage.getAll([insertedDocumentId])
+            expect(docs).to.have.length(4)
+
+            expect(docs).to.deep.equal([999, 456, 123, newId])
+        })
         it('returns the document id', async () => {
             const newId = randomInt(55555)
             const storedId = await storage.create([insertedDocumentId], newId)

@@ -241,6 +241,13 @@ describe('OneToFewResourceStorage', () => {
                 expect(doc._id).to.be.undefined
             })
         })
+        it('returns an empty list if collection is empty', async () => {
+            const collection = await storage._getCollection()
+            await collection.drop()
+
+            const docs = await storage.getAll([insertedDocumentId])
+            expect(docs).to.be.empty
+        })
     })
 
     describe('.create', () => {
@@ -253,6 +260,13 @@ describe('OneToFewResourceStorage', () => {
 
             const doc = await storage.get([insertedDocumentId, newId])
             expect(doc.my).to.equal('ghost')
+        })
+        it('ensures id is unique', async () => {
+            const id = randomInt(55555)
+            await storage.create([insertedDocumentId, id], { my: 'ghost' })
+            return new Promise((resolve, reject) => {
+                storage.create([insertedDocumentId, id], { my: 'ghost' }).then(reject, resolve)
+            })
         })
         it('returns the documentId', async () => {
             const newId = randomInt(55555)
