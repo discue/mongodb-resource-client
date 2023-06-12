@@ -14,7 +14,7 @@
     "./datatypes": "./lib/types.js"
   },
   "scripts": {
-    "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 50000 --file test/global-mocha-setup.js",
+    "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 5000 --file test/global-mocha-setup.js",
     "lint": "eslint -c .eslintrc.json lib",
     "push-incl-tags": "git push --follow-tags origin main",
     "publish-npm": "npm publish --access public",
