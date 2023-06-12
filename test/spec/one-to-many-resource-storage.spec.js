@@ -143,6 +143,54 @@ describe('OnToManyResourceStorage', () => {
             })
         })
     })
+   
+    describe('._getUnsafe', () => {
+        it('returns an existing document', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
+            expect(doc.name).to.equal('first')
+        })
+        it('returns the document without checking references', async () => {
+            const doc = await storage._getUnsafe([unrelatedResourceId, listenerIds.at(0)])
+            expect(doc.name).to.equal('first')
+        })
+        it('does only return projected fields', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { projection: { id: 1 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.undefined
+            expect(doc.name).to.be.undefined
+        })
+        it('ignores explicitly not projected fields', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { projection: { name: 0 } })
+            expect(doc.id).not.to.be.undefined
+            expect(doc.id).not.to.be.undefined
+            expect(doc.name).to.be.undefined
+        })
+        it('does not return _id field', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
+            expect(doc._id).to.be.undefined
+        })
+        it('does not return _meta_data by default', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
+            expect(doc._meta_data).to.be.undefined
+        })
+        it('returns _meta_data', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { withMetadata: true })
+            expect(doc._meta_data).not.to.be.undefined
+        })
+        it('returns another document', async () => {
+            const doc = await storage._getUnsafe([resourceId, listenerIds.at(1)])
+            expect(doc.name).to.equal('second')
+        })
+        it('returns null if document does not exists', async () => {
+            const doc = await storage._getUnsafe([resourceId, 111])
+            expect(doc).to.be.null
+        })
+        it('does not throw if doc does not exists', async () => {
+            return new Promise((resolve, reject) => {
+                storage._getUnsafe('abc').then(resolve, reject)
+            })
+        })
+    })
 
     describe('.getAll', () => {
         it('returns an existing document', async () => {
