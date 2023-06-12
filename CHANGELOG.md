@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/discue/mongodb-resource-client/compare/v0.4.0...v0.5.0) (2023-06-12)
+
+
+### Features
+
+* expose usage event prefix as instance property ([8c42d9b](https://github.com/discue/mongodb-resource-client/commit/8c42d9b41ea24a3ed5aa1790c02c1bf2a37fb1be))
+* **one-to-many-resource:** also create update events ([23c03ef](https://github.com/discue/mongodb-resource-client/commit/23c03ef6b86a91365e72ac0db658861f039402db))
+
 ## [0.4.0](https://github.com/discue/mongodb-resource-client/compare/v0.3.0...v0.4.0) (2023-06-12)
 
 
