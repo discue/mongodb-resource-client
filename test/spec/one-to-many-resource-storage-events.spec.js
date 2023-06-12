@@ -76,7 +76,7 @@ describe('OnToManyResourceStorage', () => {
             const newId = randomInt(55555)
 
             return new Promise((resolve, reject) => {
-                eventEmitter.once('listeners.create', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {
                     expect(event.resourceIds).to.deep.equal([newId])
                     expect(event.context).to.equal('create')
                     expect(event.collectionName).to.equal('listeners')
@@ -92,7 +92,7 @@ describe('OnToManyResourceStorage', () => {
     describe('.update', () => {
         it('sends an update event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once('listeners.update', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.update`, (event) => {
                     expect(event.resourceIds).to.deep.equal([listenerIds.at(1)])
                     expect(event.context).to.equal('update')
                     expect(event.collectionName).to.equal('listeners')
@@ -107,7 +107,7 @@ describe('OnToManyResourceStorage', () => {
     describe('.delete', () => {
         it('sends a delete event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once('listeners.delete', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.delete`, (event) => {
                     expect(event.resourceIds).to.deep.equal([listenerIds.at(1)])
                     expect(event.context).to.equal('delete')
                     expect(event.collectionName).to.equal('listeners')

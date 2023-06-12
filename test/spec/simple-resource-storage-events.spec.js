@@ -67,7 +67,7 @@ describe('SimpleResourceStorage', () => {
         it('sends a create event', async () => {
             return new Promise((resolve, reject) => {
                 const id = uuid()
-                eventEmitter.once('_subscriptions.create', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {
                     expect(event.resourceIds).to.equal(id)
                     expect(event.context).to.equal('create')
                     expect(event.collectionName).to.equal('_subscriptions')
@@ -82,7 +82,7 @@ describe('SimpleResourceStorage', () => {
     describe('.updates', () => {
         it('creates an update event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once('_subscriptions.update', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.update`, (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId])
                     expect(event.context).to.equal('update')
                     expect(event.collectionName).to.equal('_subscriptions')
@@ -97,11 +97,12 @@ describe('SimpleResourceStorage', () => {
     describe('.deletes', () => {
         it('creates a delete event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once('_subscriptions.delete', (event) => {
+                eventEmitter.once(`${storage.usageEventPrefix}.delete`, (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId])
                     expect(event.context).to.equal('delete')
                     expect(event.collectionName).to.equal('_subscriptions')
                     expect(event.error).to.be.false
+                    console.log({ event })
                     resolve()
                 })
                 storage.delete([insertedDocumentId]).catch(reject)
