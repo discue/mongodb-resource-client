@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/discue/mongodb-resource-client/compare/v0.5.0...v0.6.0) (2023-06-13)
+
+
+### Features
+
+* pass full resource id path and full resource to event handlers ([e47deef](https://github.com/discue/mongodb-resource-client/commit/e47deef92b25036886a94c33609d3e443a104f5d))
+
+
+### Chores
+
+* remove console.logs ([e6f2d73](https://github.com/discue/mongodb-resource-client/commit/e6f2d7340b175c113dcae49856d22f179f6081d8))
+
 ## [0.5.0](https://github.com/discue/mongodb-resource-client/compare/v0.4.0...v0.5.0) (2023-06-12)
 
 
