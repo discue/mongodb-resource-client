@@ -116,7 +116,6 @@ describe('OnToManyResourceStorage Nested', () => {
                     return ref === id
                 })
 
-                console.log({ hasApiClient, hasQueue, hasListener })
                 return hasApiClient && hasQueue && hasListener
             })
             expect(hasAllRefs).to.be.true
