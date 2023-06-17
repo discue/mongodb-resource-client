@@ -72,7 +72,8 @@ describe('SimpleResourceStorage', () => {
                     expect(event.context).to.equal('create')
                     expect(event.collectionName).to.equal('_subscriptions')
                     expect(event.error).to.be.false
-                    expect(event.resource.my).to.equal('ghost')
+                    expect(event.before).to.be.undefined
+                    expect(event.after.my).to.equal('ghost')
                     resolve()
                 })
                 storage.create(id, { my: 'ghost' }).catch(reject)
@@ -84,11 +85,13 @@ describe('SimpleResourceStorage', () => {
         it('creates an update event', async () => {
             return new Promise((resolve, reject) => {
                 eventEmitter.once(`${storage.usageEventPrefix}.update`, async (event) => {
+                    console.log(event.before, event.after)
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId])
                     expect(event.context).to.equal('update')
                     expect(event.collectionName).to.equal('_subscriptions')
                     expect(event.error).to.be.false
-                    expect(event.resource.hello).to.equal('peter')
+                    expect(event.before.hello).to.equal('world')
+                    expect(event.after.hello).to.equal('peter')
                     resolve()
                 })
                 storage.update([insertedDocumentId], { hello: 'peter' }).catch(reject)
@@ -106,7 +109,8 @@ describe('SimpleResourceStorage', () => {
                     expect(event.context).to.equal('delete')
                     expect(event.collectionName).to.equal('_subscriptions')
                     expect(event.error).to.be.false
-                    expect(event.resource).to.deep.equal(resource)
+                    expect(event.before).to.deep.equal(resource)
+                    expect(event.after).to.be.undefined
                     resolve()
                 })
                 storage.delete([insertedDocumentId]).catch(reject)

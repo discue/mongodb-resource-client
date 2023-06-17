@@ -16,6 +16,7 @@ describe('OneToFewResourceStorage', () => {
      */
     let mongoDbClient
     let insertedDocumentId
+    let testDocOfChoice
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
@@ -66,7 +67,7 @@ describe('OneToFewResourceStorage', () => {
                     },
                     name: '2'
                 },
-                {
+                testDocOfChoice = {
                     id: 999, _meta_data: {
                         created_at: Timestamp.fromNumber(Date.now())
                     },
@@ -146,6 +147,8 @@ describe('OneToFewResourceStorage', () => {
                     expect(event.context).to.equal('create')
                     expect(event.collectionName).to.equal('queues')
                     expect(event.error).to.be.false
+                    expect(event.before).to.be.undefined
+                    expect(event.after).to.deep.equal({ my: 'ghost' })
                     resolve()
                 })
                 storage.create([insertedDocumentId, newId], { my: 'ghost' }).catch(reject)
@@ -161,6 +164,10 @@ describe('OneToFewResourceStorage', () => {
                     expect(event.context).to.equal('update')
                     expect(event.collectionName).to.equal('queues')
                     expect(event.error).to.be.false
+                    expect(event.before.id).to.equal(testDocOfChoice.id)
+                    expect(event.before.name).to.equal(testDocOfChoice.name)
+                    expect(event.after.id).to.equal(testDocOfChoice.id)
+                    expect(event.after.name).to.equal('peter')
                     resolve()
                 })
 
@@ -177,6 +184,9 @@ describe('OneToFewResourceStorage', () => {
                     expect(event.context).to.equal('delete')
                     expect(event.collectionName).to.equal('queues')
                     expect(event.error).to.be.false
+                    expect(event.before.id).to.equal(testDocOfChoice.id)
+                    expect(event.before.name).to.equal(testDocOfChoice.name)
+                    expect(event.after).to.be.undefined
                     resolve()
                 })
 

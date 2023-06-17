@@ -81,7 +81,8 @@ describe('OnToManyResourceStorage', () => {
                     expect(event.context).to.equal('create')
                     expect(event.collectionName).to.equal('listeners')
                     expect(event.error).to.be.false
-                    expect(event.resource.my).to.equal('ghost')
+                    expect(event.before).to.be.undefined
+                    expect(event.after.my).to.equal('ghost')
                     resolve()
                 })
 
@@ -98,7 +99,8 @@ describe('OnToManyResourceStorage', () => {
                     expect(event.context).to.equal('update')
                     expect(event.collectionName).to.equal('listeners')
                     expect(event.error).to.be.false
-                    expect(event.resource.name).to.equal('peter')
+                    expect(event.before.name).to.equal('second')
+                    expect(event.after.name).to.equal('peter')
                     resolve()
                 })
                 storage.update([resourceId, listenerIds.at(1)], { 'name': 'peter' }).catch(reject)
@@ -116,7 +118,8 @@ describe('OnToManyResourceStorage', () => {
                     expect(event.context).to.equal('delete')
                     expect(event.collectionName).to.equal('listeners')
                     expect(event.error).to.be.false
-                    expect(event.resource).to.deep.equal(resource)
+                    expect(event.before).to.deep.equal(resource)
+                    expect(event.resource).to.be.undefined
                     resolve()
                 })
                 storage.delete([resourceId, listenerIds.at(1)]).catch(reject)
