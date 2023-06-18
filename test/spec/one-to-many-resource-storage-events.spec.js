@@ -60,7 +60,7 @@ describe('OnToManyResourceStorage Events', () => {
             ]
         })
 
-        return new Promise((resolve) => setTimeout(resolve, 100))
+        return new Promise((resolve) => setTimeout(resolve, 50))
     })
 
     after(() => {
