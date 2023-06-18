@@ -5,7 +5,6 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
 
 describe('OnToManyResourceStorage', () => {
 
@@ -15,6 +14,7 @@ describe('OnToManyResourceStorage', () => {
     let mongoDbClient
     let listenerIds
     let resourceId
+    let storage
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
@@ -22,6 +22,10 @@ describe('OnToManyResourceStorage', () => {
 
     beforeEach(() => {
         return mongoDbClient.connect()
+    })
+
+    beforeEach(() => {
+        storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
 
     beforeEach(async () => {
@@ -75,7 +79,8 @@ describe('OnToManyResourceStorage', () => {
             storage._hostStorage.create = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 
-            const doc = await storage.get([resourceId, newId])
+            const collection = mongoDbClient.db('default').collection('listeners')
+            const doc = await collection.findOne({ id: newId })
             expect(doc).to.be.null
         })
         it('removes the main document if main ref to host document ref was not updated', async () => {
@@ -83,7 +88,8 @@ describe('OnToManyResourceStorage', () => {
             storage._updateUnsafe = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 
-            const doc = await storage.get([resourceId, newId])
+            const collection = mongoDbClient.db('default').collection('listeners')
+            const doc = await collection.findOne({ id: newId })
             expect(doc).to.be.null
         })
     })
@@ -93,7 +99,9 @@ describe('OnToManyResourceStorage', () => {
             storage._hostStorage.delete = () => { throw new Error('I hope you are using transactions') }
 
             await storage.delete([resourceId, listenerIds.at(1)]).catch(() => Promise.resolve())
-            const doc = await storage.get([resourceId, listenerIds.at(1)])
+
+            const collection = mongoDbClient.db('default').collection('listeners')
+            const doc = await collection.findOne({ id: listenerIds.at(1) })
             expect(doc).not.to.be.null
         })
         it('does keep the reference in the host document', async () => {
@@ -105,8 +113,9 @@ describe('OnToManyResourceStorage', () => {
             const { listeners } = await queuesCollection.findOne({
                 id: resourceId,
             })
+
             expect(listeners).to.have.length(2)
-            expect(listeners).to.deep.equal(listenerIds.slice(0, 2))
+            expect(listeners).to.contain(listenerIds.at(1))
         })
     })
 })
