@@ -31,7 +31,7 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 - [SimpleResourceStoage](README_SIMPLE_RESOURCE_STORAGE.md)
 
 ## Transactions
-The module supports transaction for atomic updates of multiple collections. However, as only [MongoDB](https://mongodb.com/) replica sets support transactions, transactions need to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS=true`.
+The module supports transactions for atomic updates of multiple collections. However, as only MongoDB replica sets support transactions, transaction support needs to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS=true`.
 
 ## Installation
 ```bash
