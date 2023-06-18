@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/discue/mongodb-resource-client/compare/v0.6.0...v0.7.0) (2023-06-18)
+
+
+### Features
+
+* in events pass state of before and after operation ([fc29347](https://github.com/discue/mongodb-resource-client/commit/fc2934793e746c65f28d3ecf5fabeae9daf58e71))
+* make transactions optional ([93266ce](https://github.com/discue/mongodb-resource-client/commit/93266ce2110cf806f4f81e62495f7604668f5439))
+* **one-to-few-ref-storage:** support transactions in create and delete ([c19558b](https://github.com/discue/mongodb-resource-client/commit/c19558b814d28d1d8422dd9cec6e683aafc70984))
+* **one-to-many-resource:** reorder order of deletions ([aeeaa33](https://github.com/discue/mongodb-resource-client/commit/aeeaa33e7b59c6327441266e5793ac66a07d3d07))
+* **one-to-many-storage:** support create and delete with transactions ([3a54ca7](https://github.com/discue/mongodb-resource-client/commit/3a54ca74b89a6d5bce0a5e5295dc942f9eac2e96))
+* **simple-resource:** abort transaction on error ([d477b5c](https://github.com/discue/mongodb-resource-client/commit/d477b5cb3ab72cd6445e7924607de3aa9cf4b01f))
+* **simple-resource:** wrap update and delete in transactions ([e106aa2](https://github.com/discue/mongodb-resource-client/commit/e106aa2e18156ba7d1347dcb90e63841e8c6cdbc))
+
+
+### Bug Fixes
+
+* **simple-resource:** before aborting transaction check it is active ([6d6275a](https://github.com/discue/mongodb-resource-client/commit/6d6275ab89473101f90bb5955eca397d504becf6))
+
+
+### Refactorings
+
+* move create implementation one level up ([eaa3142](https://github.com/discue/mongodb-resource-client/commit/eaa3142a7b99d736571d665a06ba3e37edcab8e6))
+
+
+### Chores
+
+* do net send context in events ([b11f587](https://github.com/discue/mongodb-resource-client/commit/b11f587d09dbdb2183b25dd9f30a745c89a82f6e))
+* **docs:** also create docs for event emitter ([0b845c3](https://github.com/discue/mongodb-resource-client/commit/0b845c3cfd41e88affb1ba8336886784bfd58d12))
+* **docs:** generate all readmes again ([0ba4914](https://github.com/discue/mongodb-resource-client/commit/0ba4914e59587ab5b7ba0705bc09785f74e81cf7))
+* **docs:** link to event emitter docs ([18507b9](https://github.com/discue/mongodb-resource-client/commit/18507b9820bc051430cc35e528b0985ac029ab29))
+* **docs:** set headline in event emitter docs ([182d932](https://github.com/discue/mongodb-resource-client/commit/182d93211610a56e5d13f44a981cd9f12f05e645))
+* **docs:** update readme ([c05b009](https://github.com/discue/mongodb-resource-client/commit/c05b00932fad7a48a1f02f9e4fdcbd273440efe0))
+* **docs:** update readme ([644ea72](https://github.com/discue/mongodb-resource-client/commit/644ea72ccd2431c7e1b8a00287f0a378b39efac3))
+* **one-to-many-resource:** allow for easier testing by not calling super class directly ([10c370d](https://github.com/discue/mongodb-resource-client/commit/10c370d7e7ecba7eda1030afadb2e393c99c928a))
+* **simple-resource:** optionally use session also in create function ([7b0d730](https://github.com/discue/mongodb-resource-client/commit/7b0d7305fbc20711bbf3d7ee018d345cc618f66d))
+* update readme ([5ecc466](https://github.com/discue/mongodb-resource-client/commit/5ecc4666dd486509568a3ccc9bb018d911ce6fff))
+* use db from connection string by default ([b588062](https://github.com/discue/mongodb-resource-client/commit/b588062402d07e599ffe712781496718d3216560))
+
 ## [0.6.0](https://github.com/discue/mongodb-resource-client/compare/v0.5.0...v0.6.0) (2023-06-13)
 
 
