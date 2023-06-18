@@ -20,12 +20,7 @@
 </div>
 
 # mongodb-resource-client
-Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for easier management of resources.
-
-## Installation
-```bash
-npm install @discue/mongodb-resource-client
-```
+Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for easier management of resources and documents.
 
 ## Components
 - [Aggregations](README_AGGREGATIONS.md)
@@ -33,6 +28,14 @@ npm install @discue/mongodb-resource-client
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
 - [SimpleResourceStoage](README_SIMPLE_RESOURCE_STORAGE.md)
+
+## Transactions
+The module supports transaction for atomic updates of multiple collections. However, as only [MongoDB](https://mongodb.com/) replica sets support transactions, transactions need to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS=true`.
+
+## Installation
+```bash
+npm install @discue/mongodb-resource-client
+```
 
 ## Run tests
 
