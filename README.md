@@ -20,7 +20,7 @@
 </div>
 
 # mongodb-resource-client
-Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for easier management of resources and documents.
+Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for easier management of resources and documents. All storage modules are based on the best practices described in the article [6 Rules of Thumb for MongoDB Schema Design](https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design) from the official [MongoDB blog](https://www.mongodb.com/blog).
 
 ## Components
 - [Aggregations](README_AGGREGATIONS.md)
