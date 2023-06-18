@@ -84,7 +84,6 @@ describe('SimpleResourceStorage', () => {
         it('creates an update event', async () => {
             return new Promise((resolve, reject) => {
                 eventEmitter.once(`${storage.usageEventPrefix}.update`, async (event) => {
-                    console.log(event.before, event.after)
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId])
                     expect(event.collectionName).to.equal('_subscriptions')
                     expect(event.error).to.be.false
