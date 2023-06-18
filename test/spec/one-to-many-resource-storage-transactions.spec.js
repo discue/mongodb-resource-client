@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 
 
-describe('OnToManyResourceStorage', () => {
+describe('OnToManyResourceStorage Transactions', () => {
 
     /**
      * @type {import('mongodb').MongoClient}

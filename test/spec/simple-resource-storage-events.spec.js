@@ -9,7 +9,7 @@ const EventEmitter = require('node:events').EventEmitter
 const eventEmitter = new EventEmitter()
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', eventEmitter })
 
-describe('SimpleResourceStorage', () => {
+describe('SimpleResourceStorage Events', () => {
 
     /**
      * @type {import('mongodb').MongoClient}

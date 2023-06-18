@@ -9,7 +9,7 @@ const EventEmitter = require('events')
 const eventEmitter = new EventEmitter()
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
 
-describe('OneToFewResourceStorage', () => {
+describe('OneToFewResourceStorage Events', () => {
 
     /**
      * @type {import('mongodb').MongoClient}

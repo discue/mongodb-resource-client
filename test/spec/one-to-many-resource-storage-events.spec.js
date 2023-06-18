@@ -9,7 +9,7 @@ const EventEmitter = require('events')
 const eventEmitter = new EventEmitter()
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
 
-describe('OnToManyResourceStorage', () => {
+describe('OnToManyResourceStorage Events', () => {
 
     /**
      * @type {import('mongodb').MongoClient}

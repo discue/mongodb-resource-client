@@ -8,7 +8,7 @@ const { EQUALS, EQUALS_ANY_OF, SORT_BY_DESC, LESS_THAN, LESS_THAN_OR_EQUAL, GREA
 
 const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'users' })
 
-describe('SimpleResourceStorage', () => {
+describe('SimpleResourceStorage Find', () => {
 
     /**
      * @type {import('mongodb').MongoClient}
