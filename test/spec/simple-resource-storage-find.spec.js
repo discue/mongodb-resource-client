@@ -24,7 +24,7 @@ describe('SimpleResourceStorage', () => {
     })
 
     beforeEach(() => {
-        const collection = mongoDbClient.db('default').collection('users')
+        const collection = mongoDbClient.db().collection('users')
         collection.insertOne({
             id: uuid(),
             age: 22,
@@ -51,7 +51,7 @@ describe('SimpleResourceStorage', () => {
 
     afterEach(() => {
         return mongoDbClient
-            .db('default')
+            .db()
             .collection('users')
             .drop()
     })

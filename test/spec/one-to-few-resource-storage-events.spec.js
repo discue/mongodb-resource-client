@@ -28,7 +28,7 @@ describe('OneToFewResourceStorage', () => {
 
     beforeEach(async () => {
         insertedDocumentId = randomInt(999999)
-        const collection = mongoDbClient.db('default').collection('api_clients')
+        const collection = mongoDbClient.db().collection('api_clients')
         await collection.insertOne({
             id: randomInt(10000),
             queues: [
@@ -80,7 +80,7 @@ describe('OneToFewResourceStorage', () => {
     })
 
     beforeEach(async () => {
-        const collection = mongoDbClient.db('default').collection('unrelated_collection')
+        const collection = mongoDbClient.db().collection('unrelated_collection')
         await collection.insertOne({
             id: randomInt(10000),
             tasks: [

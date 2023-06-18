@@ -27,7 +27,7 @@ describe('OnToManyResourceStorage', () => {
 
     beforeEach(async () => {
         listenerIds = [uuid(), uuid(), uuid()]
-        const listenersCollection = mongoDbClient.db('default').collection('listeners')
+        const listenersCollection = mongoDbClient.db().collection('listeners')
         await listenersCollection.insertOne({
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
@@ -50,7 +50,7 @@ describe('OnToManyResourceStorage', () => {
             name: 'third'
         })
 
-        const queuesCollection = mongoDbClient.db('default').collection('queues')
+        const queuesCollection = mongoDbClient.db().collection('queues')
         await queuesCollection.insertOne({
             id: resourceId = uuid(),
             listeners: [
@@ -344,7 +344,7 @@ describe('OnToManyResourceStorage', () => {
         it('also deletes the document reference', async () => {
             // await new Promise((resolve) => setTimeout(resolve, 30_000))
             await storage.delete([resourceId, listenerIds.at(1)])
-            const queuesCollection = mongoDbClient.db('default').collection('queues')
+            const queuesCollection = mongoDbClient.db().collection('queues')
             const { listeners } = await queuesCollection.findOne({
                 id: resourceId,
             })

@@ -22,7 +22,7 @@ describe('SimpleResourceStorageWithConfiguredClient', () => {
 
     beforeEach(async () => {
         insertedDocumentId = randomInt(999999)
-        const collection = mongoDbClient.db('default').collection('_subscriptions')
+        const collection = mongoDbClient.db().collection('_subscriptions')
         await collection.insertOne({
             id: insertedDocumentId,
             hello: 'world'

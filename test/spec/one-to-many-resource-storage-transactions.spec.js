@@ -30,7 +30,7 @@ describe('OnToManyResourceStorage', () => {
 
     beforeEach(async () => {
         listenerIds = [uuid(), uuid(), uuid()]
-        const listenersCollection = mongoDbClient.db('default').collection('listeners')
+        const listenersCollection = mongoDbClient.db().collection('listeners')
         await listenersCollection.insertOne({
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
@@ -53,7 +53,7 @@ describe('OnToManyResourceStorage', () => {
             name: 'third'
         })
 
-        const queuesCollection = mongoDbClient.db('default').collection('queues')
+        const queuesCollection = mongoDbClient.db().collection('queues')
         await queuesCollection.insertOne({
             id: resourceId = uuid(),
             listeners: [
@@ -79,7 +79,7 @@ describe('OnToManyResourceStorage', () => {
             storage._hostStorage.create = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 
-            const collection = mongoDbClient.db('default').collection('listeners')
+            const collection = mongoDbClient.db().collection('listeners')
             const doc = await collection.findOne({ id: newId })
             expect(doc).to.be.null
         })
@@ -88,7 +88,7 @@ describe('OnToManyResourceStorage', () => {
             storage._updateUnsafe = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 
-            const collection = mongoDbClient.db('default').collection('listeners')
+            const collection = mongoDbClient.db().collection('listeners')
             const doc = await collection.findOne({ id: newId })
             expect(doc).to.be.null
         })
@@ -100,7 +100,7 @@ describe('OnToManyResourceStorage', () => {
 
             await storage.delete([resourceId, listenerIds.at(1)]).catch(() => Promise.resolve())
 
-            const collection = mongoDbClient.db('default').collection('listeners')
+            const collection = mongoDbClient.db().collection('listeners')
             const doc = await collection.findOne({ id: listenerIds.at(1) })
             expect(doc).not.to.be.null
         })
@@ -109,7 +109,7 @@ describe('OnToManyResourceStorage', () => {
 
             await storage.delete([resourceId, listenerIds.at(1)]).catch(() => Promise.resolve())
 
-            const queuesCollection = mongoDbClient.db('default').collection('queues')
+            const queuesCollection = mongoDbClient.db().collection('queues')
             const { listeners } = await queuesCollection.findOne({
                 id: resourceId,
             })

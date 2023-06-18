@@ -25,7 +25,7 @@ describe('SimpleResourceStorage', () => {
 
     beforeEach(() => {
         insertedDocumentId = uuid()
-        const collection = mongoDbClient.db('default').collection('_subscriptions')
+        const collection = mongoDbClient.db().collection('_subscriptions')
         collection.insertOne({
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
@@ -46,7 +46,7 @@ describe('SimpleResourceStorage', () => {
 
     afterEach(async () => {
         try {
-            const collection = mongoDbClient.db('default').collection('_subscriptions')
+            const collection = mongoDbClient.db().collection('_subscriptions')
             await collection.drop()
         } catch (e) {
             //
