@@ -65,12 +65,12 @@ describe('OnToManyResourceStorage', () => {
         return new Promise((resolve) => setTimeout(resolve, 100))
     })
 
-    after(() => {
-        return mongoDbClient.close()
+    afterEach(() => {
+        return storage.close()
     })
 
     after(() => {
-        return storage.close()
+        return mongoDbClient.close()
     })
 
     describe('.create', () => {
