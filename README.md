@@ -24,6 +24,7 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 
 ## Components
 - [Aggregations](README_AGGREGATIONS.md)
+- [EventEmitter](README_EVENT_EMITTER.md)
 - [OneToFewRefStorage](README_ONE_TO_FEW_REF_STORAGE.md)
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
