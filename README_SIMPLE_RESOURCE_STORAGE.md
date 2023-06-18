@@ -26,16 +26,20 @@ const oneToManyResourceStorage = new OneToManyResourceStorage({
 Simple resource class with crud operation methods to create, update, delete, and
 get stored entities and documents.
 
+## WithSessionCallback
+
+Type: [Function][2]
+
 ## get
 
 Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **GetOptions**&#x20;
 
-Returns **[Object][3]**&#x20;
+Returns **[Object][4]**&#x20;
 
 ## getAll
 
@@ -45,19 +49,19 @@ Returns all resources.
 
 *   `options` **GetOptions**&#x20;
 
-Returns **[Array][2]<[Object][3]>**&#x20;
+Returns **[Array][3]<[Object][4]>**&#x20;
 
 ## find
 
-*   **See**: [README\_AGGREGATIONS.md][4]
+*   **See**: [README\_AGGREGATIONS.md][5]
 
 Returns all resources that pass the given aggregation stages.
 
 ### Parameters
 
-*   `aggregations` **[Array][2]<[Object][3]>** a list of valid aggregation objects (optional, default `[]`)
+*   `aggregations` **[Array][3]<[Object][4]>** a list of valid aggregation objects (optional, default `[]`)
 
-Returns **[Array][2]<[Object][3]>**&#x20;
+Returns **[Array][3]<[Object][4]>**&#x20;
 
 ## exists
 
@@ -65,9 +69,9 @@ Returns true if a resource with given ids exists.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
+*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)**&#x20;
 
-Returns **[boolean][5]**&#x20;
+Returns **[boolean][6]**&#x20;
 
 ## create
 
@@ -75,8 +79,8 @@ Adds a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][3]** the resource to be stored
+*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[Object][4]** the resource to be stored
 
 ## update
 
@@ -84,8 +88,8 @@ Updates a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][3]** values that should be updated
+*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[Object][4]** values that should be updated
 
 ## delete
 
@@ -93,7 +97,7 @@ Deletes a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 ## close
 
@@ -103,10 +107,12 @@ Returns **void**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[4]: README_AGGREGATIONS.md
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[5]: README_AGGREGATIONS.md
+
+[6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
