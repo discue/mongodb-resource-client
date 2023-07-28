@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/discue/mongodb-resource-client/compare/v0.7.0...v0.8.0) (2023-07-28)
+
+
+### Features
+
+* implement history and auditing extension ([05be481](https://github.com/discue/mongodb-resource-client/commit/05be4816412b96fdde2c495fcdeff9ac7c755bb2))
+
+
+### Chores
+
+* also generate docs for history extension ([fc363f4](https://github.com/discue/mongodb-resource-client/commit/fc363f42a76806160f641db54e0ab70b2796b601))
+* **deps-dev:** bump eslint from 8.42.0 to 8.44.0 ([37cc991](https://github.com/discue/mongodb-resource-client/commit/37cc9910daae55c577f1d2e911c5b4da50a67de3))
+* **deps-dev:** bump mongodb-memory-server from 8.12.2 to 8.13.0 ([9d2a7f0](https://github.com/discue/mongodb-resource-client/commit/9d2a7f0759985c15af7f5e4f62b18fe7e049f037))
+* **deps:** update dependencies ([9e2ef11](https://github.com/discue/mongodb-resource-client/commit/9e2ef1113b8ae8ca92c046916c9c9757ef9b4289))
+* **docs:** fix typo ([e86a7b1](https://github.com/discue/mongodb-resource-client/commit/e86a7b1f8f9c97a455cdf2646b749473add1ba2f))
+* **docs:** set only one headline in event emitter docs ([804d03b](https://github.com/discue/mongodb-resource-client/commit/804d03b84511e9e5f08fd9b9fc4227557ab1e34b))
+* **docs:** update readme ([1653c4b](https://github.com/discue/mongodb-resource-client/commit/1653c4bc0d07dc039f089be806c96e739ac8b82e))
+* **docs:** update readme ([d0f8dde](https://github.com/discue/mongodb-resource-client/commit/d0f8ddefb2ebce1bb5858e09eda2b504c213f91c))
+* **simple-resource:** update js doc ([6a3b221](https://github.com/discue/mongodb-resource-client/commit/6a3b22172eedfba79f083d6bdd6f1ded8c4b6767))
+* update docs ([df34b9b](https://github.com/discue/mongodb-resource-client/commit/df34b9b619faf7cc411825df9f65a7b6faacc664))
+* update jsdoc examples ([d111cc0](https://github.com/discue/mongodb-resource-client/commit/d111cc042f50270631e39626cfa291e16f66081d))
+
 ## [0.7.0](https://github.com/discue/mongodb-resource-client/compare/v0.6.0...v0.7.0) (2023-06-18)
 
 
