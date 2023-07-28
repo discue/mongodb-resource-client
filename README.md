@@ -28,7 +28,35 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 - [OneToFewRefStorage](README_ONE_TO_FEW_REF_STORAGE.md)
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
+- [StorageHistory](README_STORAGE_HISTORY.md)
 - [SimpleResourceStoage](README_SIMPLE_RESOURCE_STORAGE.md)
+
+## History / Auditing
+The module provides support for history / auditing tables to keep track of changes made to documents. The `ResourceStorageHistory` component can be used as an extension
+of a storage instance e.g. `SimpleResourceStorage`. An instance of `ResourceStorageHistory` can listen to storage events of another storage instance and populate a `${resourceName}_history` collection with timestamp, change type, and the full resource state.
+
+```javascript
+const { EventEmiter } = require('events')
+const { OneToFewResourceStorage, ResourceStorageHistory } = require('@discue/mongodb-resource-client')
+
+const eventEmitter = new EventEmitter()
+const collectionName = 'api_clients'
+const url = 'mongodb://127.0.0.1:27017'
+
+const oneToFewResourceStorage = new OneToFewResourceStorage({
+  url,
+  collectionName,
+  eventEmitter
+})
+
+const history = new ResourceStorageHistory({
+  url,
+  collectionName,
+  usageEventPrefix: oneToFewResourceStorage.usageEventPrefix
+  eventEmitter
+})
+history.listenForStorageEvents()
+```
 
 ## Transactions
 The module supports transactions for atomic updates of multiple collections. However, as only MongoDB replica sets support transactions, transaction support needs to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS` with value `true`.
