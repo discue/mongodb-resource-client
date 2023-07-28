@@ -16,7 +16,7 @@
 ### Examples
 
 ```javascript
-const { OneToManyResourceStorage } = require('./@discue/mongodb-resource-client')
+const { OneToManyResourceStorage } = require('@discue/mongodb-resource-client')
 const oneToManyResourceStorage = new OneToManyResourceStorage({
   url: 'mongodb://127.0.0.1:27017',
   collectionName: 'api_clients',

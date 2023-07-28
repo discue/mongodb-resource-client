@@ -15,7 +15,7 @@ Options for class constructor
 ### Examples
 
 ```javascript
-const { OneToFewResourceStorage } = require('./@discue/mongodb-resource-client')
+const { OneToFewResourceStorage } = require('@discue/mongodb-resource-client')
 const oneToFewResourceStorage = new OneToFewResourceStorage({
   url: 'mongodb://127.0.0.1:27017',
   collectionName: 'api_clients',
