@@ -29,7 +29,7 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
 - [StorageHistory](README_STORAGE_HISTORY.md)
-- [SimpleResourceStoage](README_SIMPLE_RESOURCE_STORAGE.md)
+- [SimpleResourceStorage](README_SIMPLE_RESOURCE_STORAGE.md)
 
 ## History / Auditing
 The module provides support for history / auditing tables to keep track of changes made to documents. The `ResourceStorageHistory` component can be used as an extension
