@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/discue/mongodb-resource-client/compare/v0.9.0...v0.10.0) (2023-08-12)
+
+
+### Features
+
+* allow setting db name via env var ([e5047ca](https://github.com/discue/mongodb-resource-client/commit/e5047ca35310834d61b7c8497c45295d52653499))
+
 ## [0.9.0](https://github.com/discue/mongodb-resource-client/compare/v0.8.0...v0.9.0) (2023-08-12)
 
 
