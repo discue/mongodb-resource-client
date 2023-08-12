@@ -1,3 +1,4 @@
+*.d.ts
 test-results
 *.env.local
 
