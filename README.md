@@ -61,6 +61,10 @@ history.listenForStorageEvents()
 ## Transactions
 The module supports transactions for atomic updates of multiple collections. However, as only MongoDB replica sets support transactions, transaction support needs to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS` with value `true`.
 
+
+## Database name
+The database name can be configured via environment variable: `MONGODB_RESOURCE_CLIENT_DB_NAME`
+
 ## Installation
 ```bash
 npm install @discue/mongodb-resource-client
