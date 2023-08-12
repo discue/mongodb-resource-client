@@ -13,14 +13,30 @@
     "./aggregations": "./lib/aggregations.js",
     "./datatypes": "./lib/types.js"
   },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "lib/index.d.ts"
+      ],
+      "aggregations": [
+        "lib/aggregations.d.ts"
+      ],
+      "datatypes": [
+        "lib/datatypes.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "test": "mocha test/spec/**/*.spec.js --check-leaks  --timeout 5000 --file test/global-mocha-setup.js",
     "lint": "eslint -c .eslintrc.json lib",
     "push-incl-tags": "git push --follow-tags origin main",
     "publish-npm": "npm publish --access public",
     "update-docs": "bash -c ./release.sh",
-    "release": "npm run update-docs && standard-version && npm run push-incl-tags && npm run publish-npm",
-    "release-minor": "npm run update-docs && standard-version --release-as minor && npm run push-incl-tags && npm run publish-npm"
+    "remove-types": "find lib -name \"*.d.ts\" -type f -delete",
+    "create-types": "npx tsc lib/index.js --declaration --emitDeclarationOnly --allowJs && npx tsc lib/types.js --declaration --emitDeclarationOnly --allowJs",
+    "release-generic": "npm run push-incl-tags && npm run create-types && npm run publish-npm && npm run remove-types",
+    "release": "npm run update-docs && standard-version && npm run release-generic",
+    "release-minor": "npm run update-docs && standard-version --release-as minor && npm run release-generic"
   },
   "repository": {
     "type": "git",
@@ -42,9 +58,13 @@
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.13.0",
     "nodemon": "^3.0.1",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "typescript": "^5.1.6"
   },
   "optionalDependencies": {
     "mongodb": "^5.7.0"
+  },
+  "dependencies": {
+    "@types/node": "^20.4.10"
   }
 }
