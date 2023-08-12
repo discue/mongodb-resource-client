@@ -31,7 +31,7 @@ this class only stores references to other objects.
 
 <strong>Universities collection</strong>
 
-```json
+```js
 {
   name: 'University Munich',
   students: [1828391, 9440201, 29930302]

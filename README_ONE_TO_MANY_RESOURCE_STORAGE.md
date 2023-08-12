@@ -38,7 +38,7 @@ causes a reference to be updated, too.
 
 <strong>Students collection</strong>
 
-```json
+```js
 {
   id: 1828391,
   name: 'Miles Morales',
@@ -51,7 +51,7 @@ causes a reference to be updated, too.
 
 <strong>Universities collection</strong>
 
-```json
+```js
 {
   name: 'University Munich',
   students: [1828391]

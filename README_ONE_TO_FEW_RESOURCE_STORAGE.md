@@ -32,7 +32,7 @@ a country in various schools.
 
 <strong>Universities collection</strong>
 
-```json
+```js
 {
   name: 'University Munich',
   students: [
