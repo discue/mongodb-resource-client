@@ -15,9 +15,6 @@
   },
   "typesVersions": {
     "*": {
-      ".": [
-        "lib/index.d.ts"
-      ],
       "aggregations": [
         "lib/aggregations.d.ts"
       ],
