@@ -2,8 +2,6 @@
 
 ## ConstructorOptions
 
-Options for class constructor
-
 ### Properties
 
 *   `url` **[String][1]?** url to mongo instance. Can be null if client is set
