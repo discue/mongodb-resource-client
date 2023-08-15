@@ -111,7 +111,7 @@ describe('Locks', () => {
             const ids = [uuid()]
             locks.doWhileLocked(ids, () => {
                 throw new Error('NOO.')
-            }).then(() => { done('Should throw.') }, (e) => {
+            }).then(() => { done('Should throw.') }, () => {
                 locks.lock(ids)
                 done()
             })

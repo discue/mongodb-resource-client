@@ -18,12 +18,12 @@ module.exports = class Runner {
             if (logOutput) {
                 this._process.stdout.on('data', (data) => {
                     process.stdout.write(`${binary} | ${data.toString()}`)
-                });
+                })
             }
 
             this._process.stderr.on('data', (data) => {
                 process.stderr.write(`${binary} | ${data.toString()}`)
-            });
+            })
 
             process.on('SIGHUP', () => {
                 this.stop()
@@ -52,7 +52,7 @@ module.exports = class Runner {
     _stopUnix() {
         return new Promise((resolve) => {
             if (!this._process.killed) {
-                const kill = spawn('kill', [this._process.pid]);
+                const kill = spawn('kill', [this._process.pid])
                 kill.on('exit', resolve)
             }
         })
@@ -61,7 +61,7 @@ module.exports = class Runner {
     _stopWin() {
         return new Promise((resolve) => {
             if (!this._process.killed) {
-                const kill = spawn("taskkill", ["/pid", this._process.pid, '/f', '/t']);
+                const kill = spawn("taskkill", ["/pid", this._process.pid, '/f', '/t'])
                 kill.on('exit', resolve)
             }
         })
