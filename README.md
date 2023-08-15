@@ -29,6 +29,7 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 - [OneToFewResourceStorage](README_ONE_TO_FEW_RESOURCE_STORAGE.md)
 - [OneToManyResourceStorage](README_ONE_TO_MANY_RESOURCE_STORAGE.md)
 - [StorageHistory](README_STORAGE_HISTORY.md)
+- [ResourceLock](README_STORAGE_LOCK.md)
 - [SimpleResourceStorage](README_SIMPLE_RESOURCE_STORAGE.md)
 
 ## History / Auditing
@@ -61,6 +62,8 @@ history.listenForStorageEvents()
 ## Transactions
 The module supports transactions for atomic updates of multiple collections. However, as only MongoDB replica sets support transactions, transaction support needs to be explicitly enabled via setting the environment variable `DSQ_MONGOD_ENABLE_TRANSACTIONS` with value `true`.
 
+## Locks
+The module supports creating locks. Meaning: A way to synchronize application functionality e.g. for rate limiting. Check out the [ResourceLock](README_STORAGE_LOCK.md) documentation to find out more.
 
 ## Database name
 The database name can be configured via environment variable: `DSQ_MONGOD_RESOURCE_CLIENT_DB_NAME`

@@ -7,3 +7,4 @@ npx documentation build lib/simple-resource-storage.js --external mongodb --mark
 npx documentation build lib/aggregations.js --external mongodb --markdown-toc false --format md --shallow --output README_AGGREGATIONS.md
 npx documentation build lib/event-emitter-docs.js --external mongodb --markdown-toc false --format md --shallow --output README_EVENT_EMITTER.md
 npx documentation build lib/history.js --external mongodb --markdown-toc false --format md --shallow --output README_STORAGE_HISTORY.md
+npx documentation build lib/locks.js --external mongodb --markdown-toc false --format md --shallow --output README_STORAGE_LOCK.md
