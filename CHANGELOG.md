@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/discue/mongodb-resource-client/compare/v0.10.0...v0.11.0) (2023-08-15)
+
+
+### Features
+
+* **locks:** add lock module to allow locking of documents ([40ac672](https://github.com/discue/mongodb-resource-client/commit/40ac672e768e9673f770371e68db1110cf4fef3d))
+
+
+### Refactorings
+
+* instantiate modules only in describe function ([0beaee8](https://github.com/discue/mongodb-resource-client/commit/0beaee8534453edb70669bf70ab0172fcd8f72f9))
+
+
+### Chores
+
+* **deps:** declare node types as dev dep ([67f2610](https://github.com/discue/mongodb-resource-client/commit/67f2610f19c3993d2523958d797f76e0a53aa628))
+* do not log to console ([a0a73d2](https://github.com/discue/mongodb-resource-client/commit/a0a73d2a44c31f800931db133ae82bcffd26ccf0))
+* **docs:** update readme ([de95093](https://github.com/discue/mongodb-resource-client/commit/de950933ace4efefe7651d1ad0bc95716fdb0171))
+* **pkg:** update types definition ([52e1ee3](https://github.com/discue/mongodb-resource-client/commit/52e1ee358e100e3632ac11bcb254e5eeabdfabf7))
+* update env var for database name ([8a80153](https://github.com/discue/mongodb-resource-client/commit/8a8015376ea95219e303a5fe6b65ae4b0a8274b3))
+
 ## [0.10.0](https://github.com/discue/mongodb-resource-client/compare/v0.9.0...v0.10.0) (2023-08-12)
 
 
