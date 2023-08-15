@@ -63,7 +63,7 @@ The module supports transactions for atomic updates of multiple collections. How
 
 
 ## Database name
-The database name can be configured via environment variable: `MONGODB_RESOURCE_CLIENT_DB_NAME`
+The database name can be configured via environment variable: `DSQ_MONGOD_RESOURCE_CLIENT_DB_NAME`
 
 ## Installation
 ```bash
