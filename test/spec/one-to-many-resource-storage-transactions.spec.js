@@ -5,7 +5,6 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 
-
 describe('OnToManyResourceStorage Transactions', () => {
 
     /**

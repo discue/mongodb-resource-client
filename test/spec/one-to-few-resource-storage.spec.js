@@ -5,9 +5,8 @@ const Storage = require('../../lib/one-to-few-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues' })
-
 describe('OneToFewResourceStorage', () => {
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues' })
 
     /**
      * @type {import('mongodb').MongoClient}

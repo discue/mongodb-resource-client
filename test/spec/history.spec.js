@@ -7,13 +7,12 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const { EventEmitter } = require('events')
 
-const eventEmitter = new EventEmitter()
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', eventEmitter })
-const history = new History({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-history.listenForStorageEvents()
-
 describe('History', () => {
-
+    const eventEmitter = new EventEmitter()
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', eventEmitter })
+    const history = new History({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+    history.listenForStorageEvents()
+    
     /**
      * @type {import('mongodb').MongoClient}
      */

@@ -6,11 +6,10 @@ const expect = require('chai').expect
 const { randomInt } = require('crypto')
 const EventEmitter = require('events')
 
-const eventEmitter = new EventEmitter()
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
-
 describe('OneToFewResourceStorage Events', () => {
-
+    const eventEmitter = new EventEmitter()
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
+    
     /**
      * @type {import('mongodb').MongoClient}
      */

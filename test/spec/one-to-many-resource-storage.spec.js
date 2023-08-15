@@ -5,9 +5,8 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
-
 describe('OnToManyResourceStorage', () => {
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
 
     /**
      * @type {import('mongodb').MongoClient}

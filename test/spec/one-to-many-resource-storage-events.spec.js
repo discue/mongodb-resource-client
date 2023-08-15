@@ -6,11 +6,10 @@ const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 const EventEmitter = require('events')
 
-const eventEmitter = new EventEmitter()
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
-
 describe('OnToManyResourceStorage Events', () => {
-
+    const eventEmitter = new EventEmitter()
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
+    
     /**
      * @type {import('mongodb').MongoClient}
      */

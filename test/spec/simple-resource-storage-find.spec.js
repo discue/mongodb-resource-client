@@ -6,9 +6,8 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const { EQUALS, EQUALS_ANY_OF, SORT_BY_DESC, LESS_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL, LIMIT, SORT_BY_ASC, COUNT } = require('../../lib/aggregations.js')
 
-const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'users' })
-
 describe('SimpleResourceStorage Find', () => {
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'users' })
 
     /**
      * @type {import('mongodb').MongoClient}

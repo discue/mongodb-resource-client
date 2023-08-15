@@ -5,7 +5,6 @@ const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid, randomInt } = require('crypto')
 
-
 describe('SimpleResourceStorage WithConfiguredClient', () => {
 
     /**
