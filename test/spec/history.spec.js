@@ -12,7 +12,7 @@ const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 
 const history = new History({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
 history.listenForStorageEvents()
 
-describe('SimpleResourceStorage', () => {
+describe('History', () => {
 
     /**
      * @type {import('mongodb').MongoClient}
