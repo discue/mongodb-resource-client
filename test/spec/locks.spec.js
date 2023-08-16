@@ -70,6 +70,13 @@ describe('Locks', () => {
             })
             expect(callbackExecuted).to.be.true
         })
+        it('returns the return value of the callback', async () => {
+            const ids = [uuid()]
+            const result = await locks.doWhileLocked(ids, () => {
+                return ids
+            })
+            expect(result).to.deep.equal(ids)
+        })
         it('lets another caller wait until lock was released', async () => {
             const ids = [uuid()]
             const start = Date.now()
