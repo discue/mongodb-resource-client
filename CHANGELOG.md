@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/discue/mongodb-resource-client/compare/v0.11.0...v0.12.0) (2023-08-16)
+
+
+### Features
+
+* **locks:** return callback's return value ([ef4cde9](https://github.com/discue/mongodb-resource-client/commit/ef4cde9f8bb0bbf557d3ad04af9656fe66759436))
+
 ## [0.11.0](https://github.com/discue/mongodb-resource-client/compare/v0.10.0...v0.11.0) (2023-08-15)
 
 
