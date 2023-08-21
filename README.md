@@ -66,7 +66,7 @@ The module supports transactions for atomic updates of multiple collections. How
 The module supports creating locks. Meaning: A way to synchronize application functionality e.g. for rate limiting. Check out the [ResourceLock](README_STORAGE_LOCK.md) documentation to find out more.
 
 ## Database name
-The database name can be configured via environment variable: `DSQ_MONGOD_RESOURCE_CLIENT_DB_NAME`
+The database name can be configured via environment variable: `DSQ_MONGODB_RESOURCE_CLIENT_DB_NAME`
 
 ## Installation
 ```bash
