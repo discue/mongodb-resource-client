@@ -60,6 +60,6 @@
     "@types/node": "^20.5.7"
   },
   "optionalDependencies": {
-    "mongodb": "^5.7.0"
+    "mongodb": "^6.0.0"
   }
 }
