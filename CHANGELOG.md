@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://github.com/discue/mongodb-resource-client/compare/v0.12.1...v0.13.0) (2023-09-01)
+
+
+### Features
+
+* use mongodb driver v6 ([fcef2ab](https://github.com/discue/mongodb-resource-client/commit/fcef2ab2fda2d77a822ee3a0d68c91ebcf136e85))
+
+
+### Chores
+
+* **deps-dev:** bump @types/node from 20.4.10 to 20.5.7 ([4a16098](https://github.com/discue/mongodb-resource-client/commit/4a160986ffdda3248ff3af439d22581c80e64576))
+* **deps-dev:** bump chai from 4.3.7 to 4.3.8 ([68849ee](https://github.com/discue/mongodb-resource-client/commit/68849ee7512e7c6be9efeda5ef84d1fa43f1c4c9))
+* **deps-dev:** bump eslint from 8.46.0 to 8.48.0 ([eb9f721](https://github.com/discue/mongodb-resource-client/commit/eb9f7214a2b69f81c3209f01e4bc2fb45371897c))
+* **deps-dev:** bump mongodb-memory-server from 8.13.0 to 8.15.1 ([b1cb31d](https://github.com/discue/mongodb-resource-client/commit/b1cb31d379bbeb46530cf405fedbdabb84c7ffb4))
+* **deps-dev:** bump typescript from 5.1.6 to 5.2.2 ([01a3edc](https://github.com/discue/mongodb-resource-client/commit/01a3edcf510796d03769821c1f6716bf5ddf4ac5))
+
 ### [0.12.1](https://github.com/discue/mongodb-resource-client/compare/v0.12.0...v0.12.1) (2023-08-21)
 
 
