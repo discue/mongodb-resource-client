@@ -9,15 +9,12 @@ before(async function () {
             port: 27021
         }],
         replSet: {
-            ip: '::,0.0.0.0',
             count: 1
         },
         binary: {
             version: '6.0.0'
         }
     })
-
-    console.log('repl uri', mongod.getUri())
 })
 
 after(function () {
