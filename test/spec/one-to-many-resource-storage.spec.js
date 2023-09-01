@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomInt, randomUUID: uuid } = require('crypto')
 
 describe('OnToManyResourceStorage', () => {
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -17,7 +17,7 @@ describe('OnToManyResourceStorage', () => {
     let unrelatedResourceId
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
     })
 
     beforeEach(() => {

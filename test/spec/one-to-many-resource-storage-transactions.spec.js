@@ -16,7 +16,7 @@ describe('OnToManyResourceStorage Transactions', () => {
     let storage
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
     })
 
     beforeEach(() => {
@@ -24,7 +24,7 @@ describe('OnToManyResourceStorage Transactions', () => {
     })
 
     beforeEach(() => {
-        storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
+        storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
 
     beforeEach(async () => {

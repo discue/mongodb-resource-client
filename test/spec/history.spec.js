@@ -9,8 +9,8 @@ const { EventEmitter } = require('events')
 
 describe('History', () => {
     const eventEmitter = new EventEmitter()
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', eventEmitter })
-    const history = new History({ url: 'mongodb://127.0.0.1:27017', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', eventEmitter })
+    const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
     history.listenForStorageEvents()
     
     /**
@@ -19,7 +19,7 @@ describe('History', () => {
     let mongoDbClient
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
     })
 
     beforeEach(() => {

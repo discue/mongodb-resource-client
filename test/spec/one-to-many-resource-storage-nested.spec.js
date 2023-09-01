@@ -6,9 +6,9 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 
 describe('OnToManyResourceStorage Nested', () => {
-    const apiClientsStorage = new SimpleStorage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients' })
-    const queuesStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
-    const listenersStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
+    const apiClientsStorage = new SimpleStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients' })
+    const queuesStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
+    const listenersStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
     
     let apiClientIds
     let queueIds

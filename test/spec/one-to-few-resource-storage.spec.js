@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomInt } = require('crypto')
 
 describe('OneToFewResourceStorage', () => {
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'api_clients', resourceName: 'queues' })
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourceName: 'queues' })
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -15,7 +15,7 @@ describe('OneToFewResourceStorage', () => {
     let insertedDocumentId
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
     })
 
     beforeEach(() => {

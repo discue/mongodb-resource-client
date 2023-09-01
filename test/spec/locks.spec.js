@@ -12,7 +12,7 @@ describe('Locks', () => {
     let locks
 
     before(() => {
-        locks = new Locks({ url: 'mongodb://127.0.0.1:27017' })
+        locks = new Locks({ url: 'mongodb://127.0.0.1:27021' })
     })
 
     after(() => {

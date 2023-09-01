@@ -7,7 +7,7 @@ const { randomUUID: uuid } = require('crypto')
 const { EQUALS, EQUALS_ANY_OF, SORT_BY_DESC, LESS_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL, LIMIT, SORT_BY_ASC, COUNT } = require('../../lib/aggregations.js')
 
 describe('SimpleResourceStorage Find', () => {
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27017', collectionName: 'users' })
+    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'users' })
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -15,7 +15,7 @@ describe('SimpleResourceStorage Find', () => {
     let mongoDbClient
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27017')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
     })
 
     beforeEach(() => {
