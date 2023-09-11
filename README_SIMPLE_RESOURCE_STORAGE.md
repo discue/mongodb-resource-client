@@ -100,7 +100,7 @@ Deletes a resource by ids.
 
 ## close
 
-Closes the datbase client.
+Closes the database client
 
 Returns **void**&#x20;
 

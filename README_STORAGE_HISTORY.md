@@ -49,7 +49,7 @@ populate the history table.
 
 ## close
 
-Closes the datbase client.
+Closes the database client
 
 Returns **void**&#x20;
 
