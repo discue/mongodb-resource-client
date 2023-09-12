@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.14.0](https://github.com/discue/mongodb-resource-client/compare/v0.13.0...v0.14.0) (2023-09-12)
+
+
+### Features
+
+* make sure all cursors are closed after reading ([d94cd2f](https://github.com/discue/mongodb-resource-client/commit/d94cd2fb1519e497098fc386e2c1bdd6e9e677a1))
+
+
+### Chores
+
+* **deps:** install chai types ([ea399cd](https://github.com/discue/mongodb-resource-client/commit/ea399cd2481400059bd48662c7f394cd96335e56))
+* fix type in comment ([498712c](https://github.com/discue/mongodb-resource-client/commit/498712c4b50a645d25877fbd315d61d84f07fda0))
+* **one-to-few-resource:** limit get results to 1 always ([62bd803](https://github.com/discue/mongodb-resource-client/commit/62bd803c6c5d1ed4f8ffaa45a4edf18a9af5862a))
+
 ## [0.13.0](https://github.com/discue/mongodb-resource-client/compare/v0.12.1...v0.13.0) (2023-09-01)
 
 
