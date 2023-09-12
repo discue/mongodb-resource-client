@@ -49,6 +49,8 @@
     "mongodb"
   ],
   "devDependencies": {
+    "@types/chai": "^4.3.6",
+    "@types/node": "^20.5.7",
     "chai": "^4.3.8",
     "documentation": "^14.0.2",
     "eslint": "^8.48.0",
@@ -56,8 +58,7 @@
     "mongodb-memory-server": "^8.15.1",
     "nodemon": "^3.0.1",
     "standard-version": "^9.5.0",
-    "typescript": "^5.2.2",
-    "@types/node": "^20.5.7"
+    "typescript": "^5.2.2"
   },
   "optionalDependencies": {
     "mongodb": "^6.0.0"
