@@ -12,7 +12,7 @@ before(async function () {
             count: 1
         },
         binary: {
-            version: '6.0.0'
+            version: process.env.MONGODB_VERSION ?? '6.0.0'
         }
     })
 })
