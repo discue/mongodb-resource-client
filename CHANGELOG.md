@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://github.com/discue/mongodb-resource-client/compare/v0.15.0...v0.16.0) (2023-09-18)
+
+
+### Features
+
+* **simple-resource:** if no client was given close custom one on SIGTERM ([009db39](https://github.com/discue/mongodb-resource-client/commit/009db39916659ad99579aece88fcf53cf6e12e2b))
+
+
+### Bug Fixes
+
+* **locks:** ttl index must use a date field ([7795c63](https://github.com/discue/mongodb-resource-client/commit/7795c637c79c8019c50f8d5a36023065258225b1))
+
+
+### Chores
+
+* **locks:** add underscore to collection name ([0d153e6](https://github.com/discue/mongodb-resource-client/commit/0d153e6a72d9d8694cc34b56fa40952b1f4b4fc0))
+
 ## [0.15.0](https://github.com/discue/mongodb-resource-client/compare/v0.14.0...v0.15.0) (2023-09-12)
 
 
