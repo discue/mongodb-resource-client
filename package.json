@@ -50,10 +50,10 @@
   ],
   "devDependencies": {
     "@types/chai": "^4.3.6",
-    "@types/node": "^20.5.7",
+    "@types/node": "^20.6.2",
     "chai": "^4.3.8",
     "documentation": "^14.0.2",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "mocha": "^10.2.0",
     "mongodb-memory-server": "^8.15.1",
     "nodemon": "^3.0.1",
@@ -61,7 +61,7 @@
     "typescript": "^5.2.2"
   },
   "optionalDependencies": {
-    "mongodb": "^6.0.0",
+    "mongodb": "^6.1.0",
     "@discue/open-telemetry-tracing": "^0.2.0"
   }
 }
