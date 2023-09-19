@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.18.0](https://github.com/discue/mongodb-resource-client/compare/v0.17.0...v0.18.0) (2023-09-19)
+
+
+### Features
+
+* add package prefix to all span names ([a342827](https://github.com/discue/mongodb-resource-client/commit/a3428273057b68b34fd488663c6af2ac3f6a6d10))
+
+
+### Chores
+
+* update tracing dependency to prevent build failures ([5b6618b](https://github.com/discue/mongodb-resource-client/commit/5b6618b20ae044fe4a64d5e29be33803c74d9fa8))
+
 ## [0.17.0](https://github.com/discue/mongodb-resource-client/compare/v0.16.0...v0.17.0) (2023-09-19)
 
 
