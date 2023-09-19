@@ -35,7 +35,7 @@ exists, the method will throw.
 
 ### Parameters
 
-*   `ids` **[Array][3]<[string][1]>** the resource ids
+*   `resourceIds` **[Array][3]<[string][1]>** the resource ids
 
 ## unlock
 
@@ -45,7 +45,7 @@ removed, the method will throw.
 
 ### Parameters
 
-*   `ids` **[Array][3]<[string][1]>** the resource ids
+*   `resourceIds` **[Array][3]<[string][1]>** the resource ids
 
 ## doWhileLocked
 
@@ -55,7 +55,7 @@ have passed.
 
 ### Parameters
 
-*   `ids` **[Array][3]<[string][1]>** the resource ids
+*   `resourceIds` **[Array][3]<[string][1]>** the resource ids
 *   `callback` **[Function][4]** callback to execute with lock
 *   `options` **[Object][5]**  (optional, default `{}`)
 
