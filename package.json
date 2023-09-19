@@ -61,6 +61,7 @@
     "typescript": "^5.2.2"
   },
   "optionalDependencies": {
-    "mongodb": "^6.0.0"
+    "mongodb": "^6.0.0",
+    "@discue/open-telemetry-tracing": "^0.2.0"
   }
 }
