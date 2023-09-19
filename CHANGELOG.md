@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.17.0](https://github.com/discue/mongodb-resource-client/compare/v0.16.0...v0.17.0) (2023-09-19)
+
+
+### Features
+
+* add tracing support with open telemetry ([8c72cb0](https://github.com/discue/mongodb-resource-client/commit/8c72cb0c480e2498000c069ea3b6f7c70426ec7c))
+
+
+### Chores
+
+* **docs:** update readme ([c68dea3](https://github.com/discue/mongodb-resource-client/commit/c68dea37806606b71a5b381b8747830905c57402))
+* update dependencies ([d428df5](https://github.com/discue/mongodb-resource-client/commit/d428df5fc561b9509ee74cec0a7b60be49c5afa4))
+
 ## [0.16.0](https://github.com/discue/mongodb-resource-client/compare/v0.15.0...v0.16.0) (2023-09-18)
 
 
