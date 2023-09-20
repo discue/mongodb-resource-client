@@ -3,7 +3,7 @@
 const { MongoClient } = require('mongodb')
 const Storage = require('../../lib/one-to-few-ref-storage.js')
 const expect = require('chai').expect
-const { randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 
 describe('OneToFewRefStorage', () => {
@@ -24,10 +24,10 @@ describe('OneToFewRefStorage', () => {
     })
 
     beforeEach(async () => {
-        insertedDocumentId = randomInt(999999)
+        insertedDocumentId = uuid()
         const collection = mongoDbClient.db().collection('api_clients')
         await collection.insertOne({
-            id: randomInt(10000),
+            id: uuid(),
             queues: [
                 1234,
                 4567,
@@ -80,7 +80,7 @@ describe('OneToFewRefStorage', () => {
 
     describe('.create', () => {
         it('adds a new ref', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             await storage.create([insertedDocumentId], newId)
 
             const docs = await storage.getAll([insertedDocumentId])
@@ -89,7 +89,7 @@ describe('OneToFewRefStorage', () => {
             expect(docs).to.deep.equal([999, 456, 123, newId])
         })
         it('ensures ids are unique', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             await storage.create([insertedDocumentId], newId)
             await storage.create([insertedDocumentId], newId)
 
@@ -99,7 +99,7 @@ describe('OneToFewRefStorage', () => {
             expect(docs).to.deep.equal([999, 456, 123, newId])
         })
         it('returns the document id', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             const storedId = await storage.create([insertedDocumentId], newId)
             expect(storedId).to.equal(newId)
         })
@@ -115,7 +115,7 @@ describe('OneToFewRefStorage', () => {
             expect(docs).to.have.length(0)
         })
         it('returns the document id', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             const storedId = await storage.create([insertedDocumentId], newId)
             expect(storedId).to.equal(newId)
         })

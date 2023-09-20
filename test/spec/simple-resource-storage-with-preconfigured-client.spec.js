@@ -3,7 +3,7 @@
 const { MongoClient } = require('mongodb')
 const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
-const { randomUUID: uuid, randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 describe('SimpleResourceStorage WithConfiguredClient', () => {
 
@@ -20,7 +20,7 @@ describe('SimpleResourceStorage WithConfiguredClient', () => {
     })
 
     beforeEach(async () => {
-        insertedDocumentId = randomInt(999999)
+        insertedDocumentId = uuid()
         const collection = mongoDbClient.db().collection('_subscriptions')
         await collection.insertOne({
             id: insertedDocumentId,

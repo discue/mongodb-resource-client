@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt, randomUUID: uuid } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 describe('OnToManyResourceStorage', () => {
     const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
@@ -58,12 +58,12 @@ describe('OnToManyResourceStorage', () => {
             ]
         })
 
-        await queuesCollection.insertOne({
-            id: unrelatedResourceId = uuid(),
-            listeners: [
-                listenerIds.at(2)
-            ]
-        })
+        // await queuesCollection.insertOne({
+        //     id: unrelatedResourceId = uuid(),
+        //     listeners: [
+        //         listenerIds.at(2)
+        //     ]
+        // })
 
         return new Promise((resolve) => setTimeout(resolve, 50))
     })
@@ -142,7 +142,7 @@ describe('OnToManyResourceStorage', () => {
             })
         })
     })
-   
+
     describe('._getUnsafe', () => {
         it('returns an existing document', async () => {
             const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
@@ -283,11 +283,11 @@ describe('OnToManyResourceStorage', () => {
 
     describe('.create', () => {
         it('creates a new document', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             await storage.create([resourceId, newId], { my: 'ghost' })
 
             const docs = await storage.getAll([resourceId])
-            expect(docs).to.have.length(2)
+            expect(docs).to.have.length(3)
 
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')
@@ -300,12 +300,12 @@ describe('OnToManyResourceStorage', () => {
             })
         })
         it('returns the new documentId', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             const storedId = await storage.create([resourceId, newId], { my: 'ghost' })
             expect(storedId).to.equal(newId)
         })
         it('also adds a reference to entity if requested', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             await storage.create([resourceId, newId], { my: 'ghost' })
 
             const doc = await storage.get([resourceId, newId])

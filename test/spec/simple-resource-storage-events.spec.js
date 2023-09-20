@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
-const { randomUUID: uuid, randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 const EventEmitter = require('node:events').EventEmitter
 
 describe('SimpleResourceStorage Events', () => {
@@ -38,7 +38,7 @@ describe('SimpleResourceStorage Events', () => {
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
             },
-            id: randomInt(11111),
+            id: uuid(),
             hello: 'world2'
         })
 

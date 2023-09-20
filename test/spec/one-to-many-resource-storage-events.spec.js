@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt, randomUUID: uuid } = require('crypto')
+const { randomUUID: uuid, randomUUID } = require('crypto')
 const EventEmitter = require('events')
 
 describe('OnToManyResourceStorage Events', () => {
@@ -72,7 +72,7 @@ describe('OnToManyResourceStorage Events', () => {
 
     describe('.create', () => {
         it('creates a new document', async () => {
-            const newId = randomInt(55555)
+            const newId = randomUUID()
 
             return new Promise((resolve, reject) => {
                 eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {

@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
-const { randomUUID: uuid, randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 describe('SimpleResourceStorage', () => {
     const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions' })
@@ -36,7 +36,7 @@ describe('SimpleResourceStorage', () => {
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
             },
-            id: randomInt(11111),
+            id: uuid(),
             hello: 'world2'
         })
 

@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-few-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 const EventEmitter = require('events')
 
 describe('OneToFewResourceStorage Events', () => {
@@ -26,10 +26,10 @@ describe('OneToFewResourceStorage Events', () => {
     })
 
     beforeEach(async () => {
-        insertedDocumentId = randomInt(999999)
+        insertedDocumentId = uuid()
         const collection = mongoDbClient.db().collection('api_clients')
         await collection.insertOne({
-            id: randomInt(10000),
+            id: uuid(),
             queues: [
                 {
                     id: 123, _meta_data: {
@@ -81,7 +81,7 @@ describe('OneToFewResourceStorage Events', () => {
     beforeEach(async () => {
         const collection = mongoDbClient.db().collection('unrelated_collection')
         await collection.insertOne({
-            id: randomInt(10000),
+            id: uuid(),
             tasks: [
                 {
                     id: 123, _meta_data: {
@@ -138,7 +138,7 @@ describe('OneToFewResourceStorage Events', () => {
 
     describe('.create', () => {
         it('creates a create event', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
 
             return new Promise((resolve, reject) => {
                 eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {

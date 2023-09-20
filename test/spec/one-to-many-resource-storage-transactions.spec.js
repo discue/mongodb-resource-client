@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt, randomUUID: uuid } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 describe('OnToManyResourceStorage Transactions', () => {
 
@@ -74,7 +74,7 @@ describe('OnToManyResourceStorage Transactions', () => {
 
     describe('.create', () => {
         it('removes the main document if host document ref was not updated', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             storage._hostStorage.create = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 
@@ -83,7 +83,7 @@ describe('OnToManyResourceStorage Transactions', () => {
             expect(doc).to.be.null
         })
         it('removes the main document if main ref to host document ref was not updated', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             storage._updateUnsafe = () => { throw new Error('I hope you are using transactions') }
             await storage.create([resourceId, newId], { my: 'ghost' }).catch(() => Promise.resolve())
 

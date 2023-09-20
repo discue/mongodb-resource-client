@@ -3,7 +3,7 @@
 const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-few-resource-storage.js')
 const expect = require('chai').expect
-const { randomInt } = require('crypto')
+const { randomUUID: uuid } = require('crypto')
 
 describe('OneToFewResourceStorage', () => {
     const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourceName: 'queues' })
@@ -23,10 +23,10 @@ describe('OneToFewResourceStorage', () => {
     })
 
     beforeEach(async () => {
-        insertedDocumentId = randomInt(999999)
+        insertedDocumentId = uuid()
         const collection = mongoDbClient.db().collection('api_clients')
         await collection.insertOne({
-            id: randomInt(10000),
+            id: uuid(),
             queues: [
                 {
                     id: 123, _meta_data: {
@@ -78,7 +78,7 @@ describe('OneToFewResourceStorage', () => {
     beforeEach(async () => {
         const collection = mongoDbClient.db().collection('unrelated_collection')
         await collection.insertOne({
-            id: randomInt(10000),
+            id: uuid(),
             tasks: [
                 {
                     id: 123, _meta_data: {
@@ -251,7 +251,7 @@ describe('OneToFewResourceStorage', () => {
 
     describe('.create', () => {
         it('creates a new document', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             await storage.create([insertedDocumentId, newId], { my: 'ghost' })
 
             const docs = await storage.getAll([insertedDocumentId])
@@ -261,14 +261,14 @@ describe('OneToFewResourceStorage', () => {
             expect(doc.my).to.equal('ghost')
         })
         it('ensures id is unique', async () => {
-            const id = randomInt(55555)
+            const id = uuid()
             await storage.create([insertedDocumentId, id], { my: 'ghost' })
             return new Promise((resolve, reject) => {
                 storage.create([insertedDocumentId, id], { my: 'ghost' }).then(reject, resolve)
             })
         })
         it('returns the documentId', async () => {
-            const newId = randomInt(55555)
+            const newId = uuid()
             const storedId = await storage.create([insertedDocumentId, newId], { my: 'ghost' })
             expect(storedId).to.equal(newId)
         })
