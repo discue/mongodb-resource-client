@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.19.0](https://github.com/discue/mongodb-resource-client/compare/v0.18.0...v0.19.0) (2023-09-20)
+
+
+### Chores
+
+* update and unify span names ([60a03cc](https://github.com/discue/mongodb-resource-client/commit/60a03cced1d7403c6c4089dfb918e3dfed25e935))
+
 ## [0.18.0](https://github.com/discue/mongodb-resource-client/compare/v0.17.0...v0.18.0) (2023-09-19)
 
 
