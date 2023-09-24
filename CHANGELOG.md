@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0](https://github.com/discue/mongodb-resource-client/compare/v0.19.0...v0.20.0) (2023-09-24)
+
+
+### Features
+
+* **one-to-many-resource:** improve perf by only checking immediate parent's ref ([3cff31e](https://github.com/discue/mongodb-resource-client/commit/3cff31ea3fa6cd735eb851d575ea1685f3d6dede))
+* **simple-resource:** join array if its array with length > 1 ([fe133b3](https://github.com/discue/mongodb-resource-client/commit/fe133b3c82fdb1499f4c5aff6f58197a03644303))
+
+
+### Bug Fixes
+
+* **simple-resource:** error if collection name passed ([58ff833](https://github.com/discue/mongodb-resource-client/commit/58ff8337ff643039e6618c6b7cafdd510df0f2fe))
+
+
+### Refactorings
+
+* **one-to-few-resource:** do not use callbacks for resource events ([01d7ab6](https://github.com/discue/mongodb-resource-client/commit/01d7ab60cbecb05845de6671e3cc2be3ac2b7646))
+
+
+### Chores
+
+* add new aggregations ([d61d175](https://github.com/discue/mongodb-resource-client/commit/d61d175099387d069a54fbcf3f6dec678df53da1))
+* add types ref to package.json ([2c1de16](https://github.com/discue/mongodb-resource-client/commit/2c1de16c9ebbc9dddc485e2aa57af246a3bde84e))
+* **ci:** decrease test timeout ([c6c6c68](https://github.com/discue/mongodb-resource-client/commit/c6c6c68bebbd02ee37c40a9e20c2bb17a268f0b4))
+* **docs:** update readme ([d91fcc8](https://github.com/discue/mongodb-resource-client/commit/d91fcc866d052c3aafc11a12794cc89a3b2abfc8))
+* remove benchmark test from index ([7a825ff](https://github.com/discue/mongodb-resource-client/commit/7a825ffb97046cc8b21106aaffba720c078696f2))
+* **simple-resource:** emit delete event after deletion ([0f04b22](https://github.com/discue/mongodb-resource-client/commit/0f04b2229d55f15ea82bb574008c4e9bf260277c))
+
 ## [0.19.0](https://github.com/discue/mongodb-resource-client/compare/v0.18.0...v0.19.0) (2023-09-20)
 
 
