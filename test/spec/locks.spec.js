@@ -51,11 +51,9 @@ describe('Locks', () => {
         it('throws if a lock does not exist', (done) => {
             const ids = [uuid()]
             locks.unlock(ids).then(() => {
-                return locks.lock(ids)
-            }).then(() => {
                 done('Expected second lock call to throw')
             }, (e) => {
-                expect(e.message).to.contain('does not exist')
+                expect(e.message).to.contain('not able to delete')
                 done()
             })
         })
