@@ -132,6 +132,63 @@ Returns a $count aggregation stage
 
 Returns **[Object][2]** an object containing a MongoDb projection object
 
+## LOOKUP
+
+### Parameters
+
+*   `$0` **[Object][2]**&#x20;
+
+    *   `$0.from` &#x20;
+    *   `$0.as` &#x20;
+    *   `$0.localField` &#x20;
+    *   `$0.foreignField` &#x20;
+    *   `$0.pipeline`   (optional, default `[]`)
+
+### Properties
+
+*   `from` **[String][1]** the collection to lookup from
+*   `as` **[String][1]** name of the merged field
+*   `localField` **[String][1]** local field name
+*   `foreignField` **[String][1]** field name of the `from` collection
+*   `pipeline` **[Array][3]** pipeline for aggregation of the lookup query
+
+## LOOKUP
+
+### Parameters
+
+*   `options` **LookupOptions**&#x20;
+
+    *   `options.from` &#x20;
+    *   `options.as` &#x20;
+    *   `options.localField` &#x20;
+    *   `options.foreignField` &#x20;
+    *   `options.pipeline`   (optional, default `[]`)
+
+Returns **[Object][2]**&#x20;
+
+## ELEMENT\_AT
+
+### Parameters
+
+*   `arrayName` **[String][1]** name of the array
+*   `index` **[Number][4]**&#x20;
+
+Returns **[Object][2]**&#x20;
+
+## AS\_ROOT
+
+### Parameters
+
+*   `fieldName` **[String][1]** the field to return as root
+
+Returns **[Object][2]**&#x20;
+
+## EXISTS
+
+### Parameters
+
+*   `fieldName` **[String][1]** the field to check for existence
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object

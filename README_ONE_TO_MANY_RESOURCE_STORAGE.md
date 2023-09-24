@@ -92,26 +92,6 @@ Returns resources based on return value of [findReferences][5].
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **GetOptions**&#x20;
 
-## findReferences
-
-Looks up references of current resource in parent and parent's parent collection based on given resourceIds.
-
-Given `resourcePath=/countries/cities` and `resourceName=companies`
-
-*   if `resourceIds` has value \[1,2,3], then the method returns \[\[1,2,3]]
-*   if `resourceIds` has value \[1,2], then only references of companies in city with `id=2` will returned
-*   if `resourceIds` has value \[1], then references of all companies of all cities of country with `id=1` will be returned
-
-Meaning: The more ids are given, the more narrow the search is. Less ids make the search window more wide
-and will lead to larger number of results.
-
-### Parameters
-
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `verifyParentReference` **[Boolean][3]** true if we should check whether an id is actually referenced by its parent to prevent info leakage (optional, default `true`)
-
-Returns **[Array][2]<[Array][2]<[String][1]>>** an array of resource ids
-
 ## create
 
 Add a resource to a collection by ids.
@@ -146,4 +126,4 @@ Deletes a resource by ids
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[5]: #findreferences
+[5]: findReferences
