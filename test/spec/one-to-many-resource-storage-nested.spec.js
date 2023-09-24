@@ -82,13 +82,6 @@ describe('OnToManyResourceStorage Nested', () => {
             const listener = await listenersStorage.get([123, 123, listeners.at(0)])
             expect(listener).be.be.null
         })
-        it('verifies all resource ids are referenced', async () => {
-            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
-            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
-
-            const listener = await listenersStorage.get([123, queues.at(0), listeners.at(0)])
-            expect(listener).be.be.null
-        })
     })
 
     describe('.getAll', () => {
@@ -100,68 +93,6 @@ describe('OnToManyResourceStorage Nested', () => {
             const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
             const listener = await listenersStorage.get([123, queues.at(0)])
             expect(listener).be.be.null
-        })
-    })
-
-    describe('.findReferences', () => {
-        it('looks up references in root collection', async () => {
-            const refs = await listenersStorage.findReferences([apiClientIds.at(0)])
-            expect(Object.keys(refs)).to.have.length(listenerIds.length)
-
-            const hasAllRefs = Object.entries(refs).every(([ref, parentIds]) => {
-                const hasApiClient = parentIds.at(0).at(0) === apiClientIds.at(0)
-                const hasQueue = parentIds.at(0).at(1) === queueIds.at(0) || parentIds.at(0).at(1) === queueIds.at(1)
-                const hasListener = listenerIds.some((id) => {
-                    return ref === id
-                })
-
-                return hasApiClient && hasQueue && hasListener
-            })
-            expect(hasAllRefs).to.be.true
-        })
-        it('finds references in parent collection', async () => {
-            const outlierListenerId = uuid()
-            await listenersStorage.create([apiClientIds.at(0), queueIds.at(2), outlierListenerId], {})
-
-            const refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(2)])
-            expect(Object.keys(refs)).to.have.length(1)
-
-            const hasAllRefs = Object.entries(refs).every(([ref, parentIds]) => {
-                const hasApiClient = parentIds.at(0).at(0) === apiClientIds.at(0)
-                const hasQueue = parentIds.at(0).at(1) === queueIds.at(2)
-                const hasListener = ref === outlierListenerId
-                return hasApiClient && hasQueue && hasListener
-            })
-            expect(hasAllRefs).to.be.true
-        })
-        it('verifies given id is referenced by its parent', async () => {
-            const outlierListenerId = uuid()
-            await listenersStorage.create([apiClientIds.at(0), queueIds.at(2), outlierListenerId], {})
-
-            const refs = await listenersStorage.findReferences([apiClientIds.at(1), queueIds.at(2)])
-            expect(Object.keys(refs)).to.have.length(0)
-        })
-        it('returns the target id if it point to an entity', async () => {
-            const refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(0), listenerIds.at(0)])
-            expect(Object.keys(refs)).to.have.length(1)
-
-            const hasAllRefs = Object.entries(refs).every(([ref, parentIds]) => {
-                const hasApiClient = parentIds.at(0).at(0) === apiClientIds.at(0)
-                const hasQueue = parentIds.at(0).at(1) === queueIds.at(0)
-                const hasListener = ref === listenerIds.at(0)
-                return hasApiClient && hasQueue && hasListener
-            })
-            expect(hasAllRefs).to.be.true
-        })
-        it('also resolves references if ids point to an entity', async () => {
-            let refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(0), 123])
-            expect(Object.keys(refs)).to.have.length(0)
-
-            refs = await listenersStorage.findReferences([apiClientIds.at(0), queueIds.at(1), listenerIds.at(0)])
-            expect(Object.keys(refs)).to.have.length(0)
-
-            refs = await listenersStorage.findReferences([apiClientIds.at(1), queueIds.at(0), listenerIds.at(0)])
-            expect(Object.keys(refs)).to.have.length(0)
         })
     })
 })

@@ -97,6 +97,7 @@ describe('OnToManyResourceStorage', () => {
 
     describe('.get', () => {
         it('returns an existing document', async () => {
+            console.log('queueId', resourceId)
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
         })
@@ -148,9 +149,9 @@ describe('OnToManyResourceStorage', () => {
             const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
         })
-        it('returns the document without checking references', async () => {
+        it('does not return the document without checking references', async () => {
             const doc = await storage._getUnsafe([unrelatedResourceId, listenerIds.at(0)])
-            expect(doc.name).to.equal('first')
+            expect(doc).to.equal(null)
         })
         it('does only return projected fields', async () => {
             const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { projection: { id: 1 } })
