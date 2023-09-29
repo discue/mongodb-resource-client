@@ -97,7 +97,6 @@ describe('OnToManyResourceStorage', () => {
 
     describe('.get', () => {
         it('returns an existing document', async () => {
-            console.log('queueId', resourceId)
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
         })
