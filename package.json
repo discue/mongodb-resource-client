@@ -51,6 +51,7 @@
   ],
   "devDependencies": {
     "@types/chai": "^4.3.6",
+    "@types/mocha": "^10.0.2",
     "@types/node": "^20.8.0",
     "chai": "^4.3.10",
     "documentation": "^14.0.2",
@@ -62,7 +63,7 @@
     "typescript": "^5.2.2"
   },
   "optionalDependencies": {
-    "mongodb": "^6.1.0",
-    "@discue/open-telemetry-tracing": "^0.4.0"
+    "@discue/open-telemetry-tracing": "^0.4.0",
+    "mongodb": "^6.1.0"
   }
 }
