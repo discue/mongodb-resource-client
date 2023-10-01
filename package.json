@@ -63,6 +63,6 @@
   },
   "optionalDependencies": {
     "mongodb": "^6.1.0",
-    "@discue/open-telemetry-tracing": "^0.3.0"
+    "@discue/open-telemetry-tracing": "^0.4.0"
   }
 }
