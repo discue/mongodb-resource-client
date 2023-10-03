@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.21.0](https://github.com/discue/mongodb-resource-client/compare/v0.20.0...v0.21.0) (2023-10-03)
+
+
+### Features
+
+* **one-to-many-resource:** use lookup for resource path checks ([9ff49cf](https://github.com/discue/mongodb-resource-client/commit/9ff49cfba1e18630949fc3f16231979fb7800a8c))
+* **simple-resource:** for create only check resource exists in target collection ([2d101dc](https://github.com/discue/mongodb-resource-client/commit/2d101dce93fc834e12c9727428889e070a95bbf5))
+
+
+### Refactorings
+
+* **one-to-many-resource:** add more logic to mongodb lookup queries ([8f56d54](https://github.com/discue/mongodb-resource-client/commit/8f56d5452a582afd43181c6a3657728f824957da))
+
+
+### Chores
+
+* add env var for sharing mongoclient ([11c8789](https://github.com/discue/mongodb-resource-client/commit/11c8789ce9ea9c44a642a7bf80873fbcc5ce284b))
+* **deps-dev:** bump @types/node from 20.6.2 to 20.8.0 ([b7746d3](https://github.com/discue/mongodb-resource-client/commit/b7746d389e59f631986efe0946c4076448a4422e))
+* **deps-dev:** bump chai from 4.3.8 to 4.3.10 ([0b4f7e3](https://github.com/discue/mongodb-resource-client/commit/0b4f7e3fefc14f725cee8b638d46463753bbde34))
+* **deps-dev:** bump eslint from 8.49.0 to 8.50.0 ([964188c](https://github.com/discue/mongodb-resource-client/commit/964188c402d3a64cdb9f93cb821499a520879d51))
+* **deps:** add mocha types ([fd19d88](https://github.com/discue/mongodb-resource-client/commit/fd19d8878a130a5cee7beba0c6be83425ea8cfee))
+* **deps:** bump @discue/open-telemetry-tracing from 0.3.0 to 0.4.0 ([6b17c70](https://github.com/discue/mongodb-resource-client/commit/6b17c70231bd99befdb03340d20360ee597ef4fd))
+* **deps:** bump actions/checkout from 3 to 4 ([01835e3](https://github.com/discue/mongodb-resource-client/commit/01835e393e374d62765742ec4ca0a18000b7b402))
+* **docs:** update readme ([87e55c5](https://github.com/discue/mongodb-resource-client/commit/87e55c59ef7ebf2d60ba5d114602dfebca52d156))
+* **simple-resource:** remove log statement ([5aad971](https://github.com/discue/mongodb-resource-client/commit/5aad9710a179b3825d2ae1b6bd2c47fa1801163c))
+
 ## [0.20.0](https://github.com/discue/mongodb-resource-client/compare/v0.19.0...v0.20.0) (2023-09-24)
 
 
