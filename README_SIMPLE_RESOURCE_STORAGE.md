@@ -40,6 +40,17 @@ Returns a resource by ids.
 
 Returns **[Object][5]**&#x20;
 
+## get
+
+Returns a resource by ids.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **GetOptions**&#x20;
+
+Returns **[Object][5]**&#x20;
+
 ## getAll
 
 Returns all resources.
@@ -61,6 +72,16 @@ Returns all resources that pass the given aggregation stages.
 *   `aggregations` **[Array][4]<[Object][5]>** a list of valid aggregation objects (optional, default `[]`)
 
 Returns **[Array][4]<[Object][5]>**&#x20;
+
+## exists
+
+Returns true if a resource with given ids exists.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)**&#x20;
+
+Returns **[boolean][7]**&#x20;
 
 ## exists
 
