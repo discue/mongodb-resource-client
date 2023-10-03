@@ -82,6 +82,7 @@ describe('OnToManyResourceStorage', () => {
             expect(exists).to.be.true
         })
         it('returns true only if document is being referenced', async () => {
+            console.log('search', listenerIds.at(2))
             const exists = await storage.exists([resourceId, listenerIds.at(2)])
             expect(exists).to.be.false
         })
@@ -138,55 +139,7 @@ describe('OnToManyResourceStorage', () => {
         })
         it('does not throw if doc does not exists', async () => {
             return new Promise((resolve, reject) => {
-                storage.get('abc').then(resolve, reject)
-            })
-        })
-    })
-
-    describe('._getUnsafe', () => {
-        it('returns an existing document', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
-            expect(doc.name).to.equal('first')
-        })
-        it('does not return the document without checking references', async () => {
-            const doc = await storage._getUnsafe([unrelatedResourceId, listenerIds.at(0)])
-            expect(doc).to.equal(null)
-        })
-        it('does only return projected fields', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { projection: { id: 1 } })
-            expect(doc.id).not.to.be.undefined
-            expect(doc.id).not.to.be.undefined
-            expect(doc.name).to.be.undefined
-        })
-        it('ignores explicitly not projected fields', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { projection: { name: 0 } })
-            expect(doc.id).not.to.be.undefined
-            expect(doc.id).not.to.be.undefined
-            expect(doc.name).to.be.undefined
-        })
-        it('does not return _id field', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
-            expect(doc._id).to.be.undefined
-        })
-        it('does not return _meta_data by default', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)])
-            expect(doc._meta_data).to.be.undefined
-        })
-        it('returns _meta_data', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(0)], { withMetadata: true })
-            expect(doc._meta_data).not.to.be.undefined
-        })
-        it('returns another document', async () => {
-            const doc = await storage._getUnsafe([resourceId, listenerIds.at(1)])
-            expect(doc.name).to.equal('second')
-        })
-        it('returns null if document does not exists', async () => {
-            const doc = await storage._getUnsafe([resourceId, 111])
-            expect(doc).to.be.null
-        })
-        it('does not throw if doc does not exists', async () => {
-            return new Promise((resolve, reject) => {
-                storage._getUnsafe('abc').then(resolve, reject)
+                storage.get(['abc', '123']).then(resolve, reject)
             })
         })
     })
@@ -291,6 +244,15 @@ describe('OnToManyResourceStorage', () => {
 
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')
+        })
+        it('does not create a new document if parent does not exist', async () => {
+            const newId = uuid()
+            try {
+                await storage.create(['123', newId], { my: 'ghost' })
+                throw new Error('Must throw because parent must exist')
+            } catch (e) {
+                expect(e.message).to.contain('not able to insert')
+            }
         })
         it('ensures id is unique', async () => {
             const id = uuid()

@@ -9,7 +9,7 @@ describe('OnToManyResourceStorage Nested', () => {
     const apiClientsStorage = new SimpleStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients' })
     const queuesStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
     const listenersStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
-    
+
     let apiClientIds
     let queueIds
     let listenerIds
@@ -67,7 +67,6 @@ describe('OnToManyResourceStorage Nested', () => {
         it('allows to traverse the hierarchy', async () => {
             const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
             const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
-
             const listener = await listenersStorage.get([apiClientIds.at(0), queues.at(0), listeners.at(0)])
             expect(listener).not.be.be.undefined
             expect(listener).not.be.be.null
@@ -75,6 +74,14 @@ describe('OnToManyResourceStorage Nested', () => {
     })
 
     describe('.get', () => {
+        it('returns docs from nested resources', async () => {
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
+
+            const listener = await listenersStorage.get([apiClientIds.at(0), queues.at(0), listeners.at(0)])
+            expect(listener).not.be.be.null
+            expect(listener).not.be.be.undefined
+        })
         it('verifies last and second to last id reference each other', async () => {
             const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
             const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
@@ -82,17 +89,24 @@ describe('OnToManyResourceStorage Nested', () => {
             const listener = await listenersStorage.get([123, 123, listeners.at(0)])
             expect(listener).be.be.null
         })
+        it('verifies all resource ids are referenced', async () => {
+            const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
+            const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
+
+            const listener = await listenersStorage.get([123, queues.at(0), listeners.at(0)])
+            expect(listener).be.be.null
+        })
     })
 
     describe('.getAll', () => {
         it('verifies last and second to last id reference each other', async () => {
-            const listener = await listenersStorage.get([123, 123])
-            expect(listener).be.be.null
+            const listeners = await listenersStorage.getAll([123, 123])
+            expect(listeners).to.be.empty
         })
         it('verifies all resource ids are referenced', async () => {
             const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
-            const listener = await listenersStorage.get([123, queues.at(0)])
-            expect(listener).be.be.null
+            const listeners = await listenersStorage.getAll([123, queues.at(0)])
+            expect(listeners).to.be.empty
         })
     })
 })
