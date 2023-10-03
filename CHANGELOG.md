@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.21.1](https://github.com/discue/mongodb-resource-client/compare/v0.21.0...v0.21.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* **one-to-many-resource:** fix response contains unwanted properties ([588f230](https://github.com/discue/mongodb-resource-client/commit/588f2307a77ef357da06a6a11e59f65f9e02e33b))
+
 ## [0.21.0](https://github.com/discue/mongodb-resource-client/compare/v0.20.0...v0.21.0) (2023-10-03)
 
 
