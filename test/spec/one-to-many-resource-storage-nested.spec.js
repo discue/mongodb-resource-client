@@ -108,5 +108,13 @@ describe('OnToManyResourceStorage Nested', () => {
             const listeners = await listenersStorage.getAll([123, queues.at(0)])
             expect(listeners).to.be.empty
         })
+        it('requires a minimum length of resource ids', async () => {
+            try {
+                await listenersStorage.getAll([apiClientIds.at(0)])
+                throw new Error('Needs to throw because not enough resource ids passed')
+            } catch (e) {
+                expect(e.message).to.contain('path dont match')
+            }
+        })
     })
 })
