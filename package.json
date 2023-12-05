@@ -50,20 +50,20 @@
     "mongodb"
   ],
   "devDependencies": {
-    "@types/chai": "^4.3.9",
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^20.8.10",
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.3",
     "chai": "^4.3.10",
     "documentation": "^14.0.2",
-    "eslint": "^8.52.0",
+    "eslint": "^8.55.0",
     "mocha": "^10.2.0",
-    "mongodb-memory-server": "^9.0.1",
-    "nodemon": "^3.0.1",
+    "mongodb-memory-server": "^9.1.1",
+    "nodemon": "^3.0.2",
     "standard-version": "^9.5.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "optionalDependencies": {
-    "@discue/open-telemetry-tracing": "^0.4.0",
-    "mongodb": "^6.2.0"
+    "@discue/open-telemetry-tracing": "^0.6.0",
+    "mongodb": "^6.3.0"
   }
 }
