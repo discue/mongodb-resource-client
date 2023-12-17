@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.22.0](https://github.com/discue/mongodb-resource-client/compare/v0.21.1...v0.22.0) (2023-12-17)
+
+
+### Features
+
+* allow enabling eventing at runtime ([c3e0f13](https://github.com/discue/mongodb-resource-client/commit/c3e0f137a373c244a0eee03a85dc1d57e4bbddd4))
+
+
+### Chores
+
+* add optional deps as dev deps ([1493526](https://github.com/discue/mongodb-resource-client/commit/14935269bc926e4c7436c1ff1b9a1d0e70ed21ce))
+* **deps-dev:** bump @types/chai from 4.3.6 to 4.3.9 ([699ec7f](https://github.com/discue/mongodb-resource-client/commit/699ec7fef128485aec9ddf660bdee52469ee4ae4))
+* **deps-dev:** bump @types/node from 20.8.0 to 20.8.10 ([7a9bec7](https://github.com/discue/mongodb-resource-client/commit/7a9bec75f64c1625d1780a040d4b98f958beb869))
+* **deps-dev:** bump eslint from 8.50.0 to 8.52.0 ([1a44981](https://github.com/discue/mongodb-resource-client/commit/1a449813e72adf10de1e62c43510b6751d4df5f4))
+* **deps-dev:** bump mongodb-memory-server from 8.15.1 to 9.0.1 ([47995df](https://github.com/discue/mongodb-resource-client/commit/47995df613321499dae2b4162bb8f6df652c8f71))
+* **deps:** bump actions/setup-node from 3 to 4 ([20ef031](https://github.com/discue/mongodb-resource-client/commit/20ef031c32b1b99d55df59c2e0436982117f03f3))
+* **deps:** bump mongodb from 6.1.0 to 6.2.0 ([d0d86f6](https://github.com/discue/mongodb-resource-client/commit/d0d86f6ec91341cfe57b75d0ecf21246cbb755b6))
+* **deps:** update dependencies ([ea2ea8b](https://github.com/discue/mongodb-resource-client/commit/ea2ea8b07a84eb42f9b062957bb09cfdd2d41aba))
+* **deps:** update dependencies ([1ecf677](https://github.com/discue/mongodb-resource-client/commit/1ecf6770faaa25f5c2f9b3f82078b2058418de88))
+* **docs:** update readme ([828e647](https://github.com/discue/mongodb-resource-client/commit/828e647e944def582cc3b89512e5e7507fce2632))
+* **one-to-many-resource:** require minimum resource ids length ([a2f607b](https://github.com/discue/mongodb-resource-client/commit/a2f607b471beb059d22aaf033e6b1e714eda00e1))
+* **one-to-many-resource:** update condition in getAll ([0a6ae07](https://github.com/discue/mongodb-resource-client/commit/0a6ae07ac74a98413b1b27e7fafbd083fdb9a03e))
+* **types:** declare private methods) ([797a70a](https://github.com/discue/mongodb-resource-client/commit/797a70ae241a1899790c63fa117e86108187a1ee))
+
 ### [0.21.1](https://github.com/discue/mongodb-resource-client/compare/v0.21.0...v0.21.1) (2023-10-03)
 
 
