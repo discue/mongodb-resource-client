@@ -2,7 +2,7 @@
   "name": "@discue/mongodb-resource-client",
   "author": "Stefan Pfaffel",
   "license": "MIT",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "description": "Simple wrapper around mongodb client allowing easier managing of resources",
   "main": "lib/index",
   "files": [

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.23.0](https://github.com/discue/mongodb-resource-client/compare/v0.22.0...v0.23.0) (2023-12-17)
+
+
+### Features
+
+* **history:** do not add prefix to collection name ([5ac0245](https://github.com/discue/mongodb-resource-client/commit/5ac02453b9f376bd3c969142644d66844ee69a2c))
+
 ## [0.22.0](https://github.com/discue/mongodb-resource-client/compare/v0.21.1...v0.22.0) (2023-12-17)
 
 
