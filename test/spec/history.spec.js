@@ -29,7 +29,7 @@ describe('History', () => {
     describe('configured via constructor', () => {
         const eventEmitter = new EventEmitter()
         const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', eventEmitter })
-        const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+        const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
         history.listenForStorageEvents()
 
         after(() => {
@@ -191,7 +191,7 @@ describe('History', () => {
             const eventEmitter = new EventEmitter()
             storage.enableEventing(eventEmitter)
 
-            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions2', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions2_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
             history.listenForStorageEvents()
 
             after(() => {
@@ -349,7 +349,7 @@ describe('History', () => {
             const eventEmitter = new EventEmitter()
             storage.enableEventing(eventEmitter)
 
-            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions3', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions3_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
             history.listenForStorageEvents()
 
             storage.disableEventing()
