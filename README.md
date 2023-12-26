@@ -24,6 +24,19 @@ Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for
 
 **Please read the installation instructions mentioned below.**
 
+## Installation
+This module has built-in support for tracing via Open Telemetry. The necessary dependencies are not declared in the module's `package.json` to allow applications to enable or disable the tracing feature.
+
+### Install with support for tracing
+```bash
+npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing
+```
+
+### Install without tracing features
+```bash
+npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing@npm:@discue/open-telemetry-tracing-noop
+```
+
 ## Component References
 - [Aggregations](README_AGGREGATIONS.md)
 - [EventEmitter](README_EVENT_EMITTER.md)
@@ -73,20 +86,7 @@ The database name can be configured via environment variable: `DSQ_MONGODB_RESOU
 ## Tracing
 This module has built-in support for tracing via Open Telemetry. Under the hood it uses [@discue/open-telemetry-tracing](https://github.com/discue/open-telemetry-tracing/).
 
-Please read the installation instructions mentioned below 
-
-## Installation
-This module has built-in support for tracing via Open Telemetry. The necessary dependencies are not declared in the module's `package.json` to allow applications to enable or disable the tracing feature.
-
-### Install with support for tracing
-```bash
-npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing
-```
-
-### Install without tracing features
-```bash
-npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing@npm:@discue/open-telemetry-tracing-noop
-```
+Please read the installation instructions mentioned above.
 
 ## Run tests
 
