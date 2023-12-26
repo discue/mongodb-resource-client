@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.24.0](https://github.com/discue/mongodb-resource-client/compare/v0.23.0...v0.24.0) (2023-12-26)
+
+
+### Features
+
+* **history:** make possible to use parent collection also for history ([737ec2b](https://github.com/discue/mongodb-resource-client/commit/737ec2b01373301e17b76a78c91063f859882dbd))
+* remove OT dependencies to support noop library ([5dde0b5](https://github.com/discue/mongodb-resource-client/commit/5dde0b5f076db9ef6ad55d1ab2b6ba5c9697c6dc))
+
+
+### Chores
+
+* **docs:** update readme ([d2d62fa](https://github.com/discue/mongodb-resource-client/commit/d2d62facf7e54fc97234a97268c59fb748913500))
+* update readme ([3548f69](https://github.com/discue/mongodb-resource-client/commit/3548f696bfb8f05169dc802af879fb152fa0eae1))
+
 ## [0.23.0](https://github.com/discue/mongodb-resource-client/compare/v0.22.0...v0.23.0) (2023-12-17)
 
 
