@@ -22,7 +22,9 @@
 # mongodb-resource-client
 Light wrapper around [MongoDB](https://mongodb.com/) client library to allow for easier management of resources and documents. All storage modules are based on the best practices described in the article [6 Rules of Thumb for MongoDB Schema Design](https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design) from the official [MongoDB blog](https://www.mongodb.com/blog).
 
-## Components
+**Please read the installation instructions mentioned below.**
+
+## Component References
 - [Aggregations](README_AGGREGATIONS.md)
 - [EventEmitter](README_EVENT_EMITTER.md)
 - [OneToFewRefStorage](README_ONE_TO_FEW_REF_STORAGE.md)
@@ -68,9 +70,22 @@ The module supports creating locks. Meaning: A way to synchronize application fu
 ## Database name
 The database name can be configured via environment variable: `DSQ_MONGODB_RESOURCE_CLIENT_DB_NAME`
 
+## Tracing
+This module has built-in support for tracing via Open Telemetry. Under the hood it uses [@discue/open-telemetry-tracing](https://github.com/discue/open-telemetry-tracing/).
+
+Please read the installation instructions mentioned below 
+
 ## Installation
+This module has built-in support for tracing via Open Telemetry. The necessary dependencies are not declared in the module's `package.json` to allow applications to enable or disable the tracing feature.
+
+### Install with support for tracing
 ```bash
-npm install @discue/mongodb-resource-client
+npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing
+```
+
+### Install without tracing features
+```bash
+npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing@npm:@discue/open-telemetry-tracing-noop
 ```
 
 ## Run tests
