@@ -83,6 +83,24 @@ describe('History', () => {
                 const [create] = all.at(0).history
                 expect(create.action).to.equal('create')
             })
+            it('registers events for all resources', async () => {
+                const ids = [uuid(), uuid(), uuid()]
+                await Promise.all(ids.map((id) => {
+                    return storage.create(id, {})
+                }))
+                await new Promise((resolve) => setTimeout(resolve, 200))
+
+                const coll = mongoDbClient.db().collection('_subscriptions')
+                const resources = await Promise.all(ids.map((id) => {
+                    return coll.findOne({ id })
+                }))
+                resources.forEach((resource) => {
+                    expect(resource.history).to.have.length(1)
+
+                    const [create] = resource.history
+                    expect(create.action).to.equal('create')
+                })
+            })
         })
 
         describe('.update', () => {
