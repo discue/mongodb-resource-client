@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.25.0](https://github.com/discue/mongodb-resource-client/compare/v0.24.0...v0.25.0) (2023-12-26)
+
+
+### Chores
+
+* emit close event before closing client ([8c347e4](https://github.com/discue/mongodb-resource-client/commit/8c347e42c10120e39dcd7e2a57c2b4af9a1b6c86))
+* **history:** close storage when host closes ([6724de0](https://github.com/discue/mongodb-resource-client/commit/6724de0119c9022cc80700739660e42a3558bbf2))
+* **simple-resource:** store also event emitter ([7e97f48](https://github.com/discue/mongodb-resource-client/commit/7e97f48f0565eea49b572afad3b3a9aaa7367892))
+
 ## [0.24.0](https://github.com/discue/mongodb-resource-client/compare/v0.23.0...v0.24.0) (2023-12-26)
 
 
