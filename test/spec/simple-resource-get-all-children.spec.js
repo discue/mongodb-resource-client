@@ -1,0 +1,139 @@
+'use strict'
+
+const { MongoClient, Timestamp } = require('mongodb')
+const Storage = require('../../lib/one-to-many-resource-storage.js')
+const SimpleStorage = require('../../lib/simple-resource-storage.js')
+const expect = require('chai').expect
+const { randomUUID: uuid } = require('crypto')
+
+describe('SimpleResourceStorage Get Children', () => {
+    const listeners = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', resourcePath: 'api_clients/queues', enableTwoWayReferences: true })
+    const apiClients = new SimpleStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients' })
+
+    /**
+     * @type {import('mongodb').MongoClient}
+     */
+    let mongoDbClient
+    let listenerIds
+    let firstQueueId
+    let secondQueueId
+    let thirdQueueId
+    let firstClientId
+    let secondClientId
+
+    before(() => {
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+    })
+
+    beforeEach(() => {
+        return mongoDbClient.connect()
+    })
+
+    beforeEach(async () => {
+        listenerIds = [uuid(), uuid(), uuid(), uuid()]
+        const listenersCollection = mongoDbClient.db().collection('listeners')
+        await listenersCollection.insertOne({
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
+            id: listenerIds.at(0),
+            name: 'first'
+        })
+        await listenersCollection.insertOne({
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
+            id: listenerIds.at(1),
+            name: 'second'
+        })
+        await listenersCollection.insertOne({
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
+            id: listenerIds.at(2),
+            name: 'third'
+        })
+        await listenersCollection.insertOne({
+            _meta_data: {
+                created_at: Timestamp.fromNumber(Date.now())
+            },
+            id: listenerIds.at(3),
+            name: 'fourth'
+        })
+
+        const queuesCollection = mongoDbClient.db().collection('queues')
+        await queuesCollection.insertOne({
+            id: firstQueueId = uuid(),
+            listeners: [
+                listenerIds.at(0),
+                listenerIds.at(1)
+            ]
+        })
+        await queuesCollection.insertOne({
+            id: secondQueueId = uuid(),
+            listeners: [
+                listenerIds.at(2)
+            ]
+        })
+        await queuesCollection.insertOne({
+            id: thirdQueueId = uuid(),
+            listeners: [
+                listenerIds.at(3)
+            ]
+        })
+
+        const clientsCollection = mongoDbClient.db().collection('api_clients')
+        await clientsCollection.insertOne({
+            id: firstClientId = uuid(),
+            queues: [
+                firstQueueId,
+                secondQueueId
+            ]
+        })
+        await clientsCollection.insertOne({
+            id: secondClientId = uuid(),
+            queues: [
+                thirdQueueId
+            ]
+        })
+
+        return new Promise((resolve) => setTimeout(resolve, 50))
+    })
+
+    after(() => {
+        return mongoDbClient.close()
+    })
+
+    after(() => {
+        return listeners.close()
+    })
+
+    after(() => {
+        return apiClients.close()
+    })
+
+    describe('.getAllChildren', () => {
+        it('returns all resources known to the parent\'s parent', async () => {
+            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners')
+            expect(storedListeners).to.have.length(3)
+        })
+        it('does not return resources outside of the parent\'s tree', async () => {
+            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
+            const idsOnly = storedListeners.map((listener) => listener.id)
+            expect(idsOnly).not.to.contain(listenerIds.at(3))
+        })
+        it('returns all resources known to the parent\'s parent 2', async () => {
+            const storedListeners = await apiClients.getAllChildren([secondClientId], 'listeners')
+            expect(storedListeners).to.have.length(1)
+            expect(storedListeners.at(0).id).to.equal(listenerIds.at(3))
+        })
+        it('returns all resources known to the parent\'s parent and projects fields', async () => {
+            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
+
+            expect(storedListeners).to.have.length(3)
+            storedListeners.forEach((listener) => {
+                expect(listener.name).to.be.undefined
+            })
+        })
+    })
+})
