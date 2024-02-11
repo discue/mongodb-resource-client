@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.26.0](https://github.com/discue/mongodb-resource-client/compare/v0.25.0...v0.26.0) (2024-02-11)
+
+
+### Features
+
+* **simple-resource:** add getAllChildren method ([984e86e](https://github.com/discue/mongodb-resource-client/commit/984e86e9e764aa7bc21eebf2d7d3d05e9cbbe0d1))
+
+
+### Chores
+
+* **deps-dev:** bump @types/node from 20.10.4 to 20.10.6 ([2da550c](https://github.com/discue/mongodb-resource-client/commit/2da550c240fd71e8f459d39921045bbc5c230188))
+* **deps:** bump actions/stale from 8 to 9 ([f09aaa6](https://github.com/discue/mongodb-resource-client/commit/f09aaa6eadc4fa7d5283afcb3d375d51faa64544))
+* **deps:** run npm audit ([37726b8](https://github.com/discue/mongodb-resource-client/commit/37726b8afd2d0ec1d526609263e9354a7cf4f34b))
+* **deps:** update dependencies ([fd58454](https://github.com/discue/mongodb-resource-client/commit/fd584541f008c10236e8a6d2a1ec3bcd1c5904a4))
+* **docs:** update readme ([d2e7e7c](https://github.com/discue/mongodb-resource-client/commit/d2e7e7c68b05309d5081c6b61408e65662b48709))
+* **simple-resource:** fix typo ([6dfbbae](https://github.com/discue/mongodb-resource-client/commit/6dfbbae7fad864140f18078220d204363dc1db51))
+
 ## [0.25.0](https://github.com/discue/mongodb-resource-client/compare/v0.24.0...v0.25.0) (2023-12-26)
 
 
