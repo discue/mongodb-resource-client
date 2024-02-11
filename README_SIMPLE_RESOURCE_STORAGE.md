@@ -50,6 +50,18 @@ Returns all resources.
 
 Returns **[Array][4]<[Object][5]>**&#x20;
 
+## getAll
+
+Returns all children of a certain type/collection. Imagine this method walking a tree and returning all leaves at a certain level.
+
+Example:
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `childPath` **([String][1] | [Array][4]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
+*   `options` **GetOptions**&#x20;
+
 ## find
 
 *   **See**: [README\_AGGREGATIONS.md][6]
