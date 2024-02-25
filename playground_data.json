@@ -1,0 +1,68 @@
+db={
+  "clients": [
+    {
+      "id": "1",
+      "item": "almonds",
+      "price": 12,
+      "quantity": 2,
+      "queues": [
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "2",
+      "item": "pecans",
+      "price": 20,
+      "quantity": 1
+    }
+  ],
+  "queues": [
+    {
+      "id": "3",
+      "sku": "almonds",
+      "description": "product 1",
+      "instock": 120,
+      "listeners": [
+        "3"
+      ]
+    },
+    {
+      "id": "4",
+      "sku": "bread",
+      "description": "product 2",
+      "instock": 80,
+      "listeners": [
+        "4"
+      ]
+    },
+    {
+      "id": "44",
+      "sku": "bread",
+      "description": "product 2",
+      "instock": 80,
+      "listeners": [
+        "4"
+      ]
+    }
+  ],
+  listeners: [
+    {
+      "id": "3",
+      "sku": "cashews",
+      "description": "product 3",
+      "instock": 60
+    },
+    {
+      "id": "4",
+      "sku": "pecans",
+      "description": "product 4",
+      "instock": 70
+    },
+    {
+      "id": "5",
+      "sku": null,
+      "description": "Incomplete"
+    }
+  ]
+}

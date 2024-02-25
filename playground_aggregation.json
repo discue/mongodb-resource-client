@@ -1,0 +1,110 @@
+db.clients.aggregate([
+  {
+    "$match": {
+      "id": "1"
+    }
+  },
+  {
+    "$project": {
+      "_id": 0,
+      "_meta_data": 0
+    }
+  },
+  {
+    "$lookup": {
+      "from": "queues",
+      "as": "queues",
+      "localField": "queues",
+      "foreignField": "id"
+    }
+  },
+  {
+    "$project": {
+      "queues": "$queues",
+      "listeners": {
+        "$reduce": {
+          "input": "$queues.listeners",
+          "initialValue": [],
+          "in": {
+            "$concatArrays": [
+              "$$value",
+              "$$this"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "$lookup": {
+      "from": "listeners",
+      "pipeline": [
+        {
+          "$project": {
+            "_id": 0,
+            "_meta_data": 0
+          }
+        }
+      ],
+      "as": "resources",
+      "localField": "listeners",
+      "foreignField": "id"
+    }
+  },
+  {
+      $project: {
+      "resources": "$resources",
+      "resource_paths": {
+        "$reduce": {
+          "input": "$queues",
+          "initialValue": {},
+          "in": {
+              $mergeObjects: [
+              "$$value",
+              {
+                  $let: {
+                    vars: {
+                      parent: "$$this.id",
+                      children: "$$this.listeners"
+                  },
+                    in: {
+                      $reduce: {
+                      "input": "$$children",
+                      "initialValue": {},
+                        in: {
+                          $mergeObjects: [
+                          "$$value",
+                          {
+                              $arrayToObject: [
+                              [
+                                {
+                                    k: "$$this",
+                                    v: {
+                                      $concat: [
+                                      "/",
+                                      "queues",
+                                      "/",
+                                      "$$parent",
+                                      "/",
+                                      "listeners",
+                                      "/",
+                                      "$$this"
+                                    ]
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+])
