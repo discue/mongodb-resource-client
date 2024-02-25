@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.28.0](https://github.com/discue/mongodb-resource-client/compare/v0.27.0...v0.28.0) (2024-02-25)
+
+
+### Features
+
+* **simple-resource-storage:** do not hardcode collection names ([c3369c9](https://github.com/discue/mongodb-resource-client/commit/c3369c98e381e60074a67fb3237c001b6b7710d8))
+
+
+### Chores
+
+* do not log errors ([7789b36](https://github.com/discue/mongodb-resource-client/commit/7789b360049bd7441a77d3a6bb0eabc05fc49cfa))
+* **docs:** update readme ([3b3d8a8](https://github.com/discue/mongodb-resource-client/commit/3b3d8a893ac4cb5ecb7626f3ca08cdf6c03a0a58))
+
 ## [0.27.0](https://github.com/discue/mongodb-resource-client/compare/v0.26.0...v0.27.0) (2024-02-25)
 
 
