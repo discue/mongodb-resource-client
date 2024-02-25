@@ -82,7 +82,6 @@ describe('OnToManyResourceStorage', () => {
             expect(exists).to.be.true
         })
         it('returns true only if document is being referenced', async () => {
-            console.log('search', listenerIds.at(2))
             const exists = await storage.exists([resourceId, listenerIds.at(2)])
             expect(exists).to.be.false
         })
