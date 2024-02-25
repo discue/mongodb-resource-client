@@ -54,6 +54,8 @@ Returns **[Array][4]<[Object][5]>**&#x20;
 
 Returns all children of a certain type/collection. Imagine this method walking a tree and returning all leaves at a certain level.
 
+Currently only supports trees with three levels.
+
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
