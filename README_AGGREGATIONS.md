@@ -141,7 +141,7 @@ Returns **[Object][2]** an object containing a MongoDb projection object
     *   `$0.from` &#x20;
     *   `$0.as` &#x20;
     *   `$0.localField` &#x20;
-    *   `$0.foreignField` &#x20;
+    *   `$0.foreignField`   (optional, default `'id'`)
     *   `$0.pipeline`   (optional, default `[]`)
 
 ### Properties
@@ -161,8 +161,113 @@ Returns **[Object][2]** an object containing a MongoDb projection object
     *   `options.from` &#x20;
     *   `options.as` &#x20;
     *   `options.localField` &#x20;
-    *   `options.foreignField` &#x20;
+    *   `options.foreignField`   (optional, default `'id'`)
     *   `options.pipeline`   (optional, default `[]`)
+
+Returns **[Object][2]**&#x20;
+
+## REDUCE
+
+### Parameters
+
+*   `$0` **[Object][2]**&#x20;
+
+    *   `$0.input` &#x20;
+    *   `$0.initialValue`   (optional, default `{}`)
+    *   `$0.inExpression` &#x20;
+
+### Properties
+
+*   `input` **[String][1]** any expression resolving to an array
+*   `initialValue` **any** the initial value used for reduction
+*   `inExpression` **[Object][2]** any expression applied to each element of the array
+
+## REDUCE
+
+### Parameters
+
+*   `options` **ReduceOptions**&#x20;
+
+    *   `options.input` &#x20;
+    *   `options.initialValue`   (optional, default `{}`)
+    *   `options.inExpression` &#x20;
+
+Returns **[Object][2]**&#x20;
+
+## APPEND\_OBJECTS
+
+Returns a $mergeObjects expression that appends the result of the given expressions to $$value
+
+### Parameters
+
+*   `expressions` **...any** a list of expressions that evaluate to an object
+
+Returns **[Object][2]**&#x20;
+
+## LET
+
+### Parameters
+
+*   `$0` **[Object][2]**&#x20;
+
+    *   `$0.vars` &#x20;
+    *   `$0.inExpression` &#x20;
+
+### Properties
+
+*   `vars` **[Object][2]** an object defining additional variables for the expression
+*   `inExpression` **[Object][2]** any expression
+
+## LET
+
+### Parameters
+
+*   `options` **LetOptions**&#x20;
+
+    *   `options.vars` &#x20;
+    *   `options.inExpression` &#x20;
+
+## TO\_OBJECT
+
+### Parameters
+
+*   `$0` **[Object][2]**&#x20;
+
+    *   `$0.key`   (optional, default `"$$this"`)
+    *   `$0.value` &#x20;
+
+### Properties
+
+*   `key` **[String][1]** the object key
+*   `expression` **[Object][2]** any expression
+
+## TO\_OBJECT
+
+### Parameters
+
+*   `options` **ToObjectOptions**&#x20;
+
+    *   `options.key`   (optional, default `"$$this"`)
+    *   `options.value` &#x20;
+
+## CONCAT\_STRINGS
+
+### Parameters
+
+*   `strings` **...any** strings to concat
+
+Returns **[Object][2]**&#x20;
+
+## JOIN\_STRINGS
+
+### Parameters
+
+*   `separator` **[String][1]** separator to be used for joining given strings
+*   `strings` **...any** strings to concat
+
+Returns **[Object][2]**&#x20;
+
+## CONCAT\_ARRAYS
 
 Returns **[Object][2]**&#x20;
 

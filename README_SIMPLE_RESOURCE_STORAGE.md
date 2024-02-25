@@ -54,17 +54,17 @@ Returns **[Array][4]<[Object][5]>**&#x20;
 
 Returns all children of a certain type/collection. Imagine this method walking a tree and returning all leaves at a certain level.
 
-Example:
-
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `childPath` **([String][1] | [Array][4]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
 *   `options` **GetOptions**&#x20;
 
+Returns **[Promise][6]\<ChildrenAndResourcePaths>**&#x20;
+
 ## find
 
-*   **See**: [README\_AGGREGATIONS.md][6]
+*   **See**: [README\_AGGREGATIONS.md][7]
 
 Returns all resources that pass the given aggregation stages.
 
@@ -82,7 +82,7 @@ Returns true if a resource with given ids exists.
 
 *   `resourceIds` **([String][1] | [Array][4]<[String][1]>)**&#x20;
 
-Returns **[boolean][7]**&#x20;
+Returns **[boolean][8]**&#x20;
 
 ## create
 
@@ -126,6 +126,8 @@ Returns **void**&#x20;
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[6]: README_AGGREGATIONS.md
+[6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[7]: README_AGGREGATIONS.md
+
+[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
