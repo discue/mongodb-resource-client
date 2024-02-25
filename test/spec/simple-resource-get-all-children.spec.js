@@ -114,21 +114,31 @@ describe('SimpleResourceStorage Get Children', () => {
 
     describe('.getAllChildren', () => {
         it('returns all resources known to the parent\'s parent', async () => {
-            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners')
+            const { children: storedListeners } = await apiClients.getAllChildren([firstClientId], 'listeners')
             expect(storedListeners).to.have.length(3)
         })
+        it('returns the resource path of all children', async () => {
+            const { resourcePaths } = await apiClients.getAllChildren([firstClientId], 'listeners')
+            expect(Object.keys(resourcePaths)).to.have.length(3)
+        })
+        it('returns resource path', async () => {
+            const { resourcePaths } = await apiClients.getAllChildren([firstClientId], 'listeners')
+            expect(resourcePaths[listenerIds.at(0)]).to.equal(`/queues/${firstQueueId}/listeners/${listenerIds.at(0)}`)
+            expect(resourcePaths[listenerIds.at(1)]).to.equal(`/queues/${firstQueueId}/listeners/${listenerIds.at(1)}`)
+            expect(resourcePaths[listenerIds.at(2)]).to.equal(`/queues/${secondQueueId}/listeners/${listenerIds.at(2)}`)
+        })
         it('does not return resources outside of the parent\'s tree', async () => {
-            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
+            const { children: storedListeners } = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
             const idsOnly = storedListeners.map((listener) => listener.id)
             expect(idsOnly).not.to.contain(listenerIds.at(3))
         })
         it('returns all resources known to the parent\'s parent 2', async () => {
-            const storedListeners = await apiClients.getAllChildren([secondClientId], 'listeners')
+            const { children: storedListeners } = await apiClients.getAllChildren([secondClientId], 'listeners')
             expect(storedListeners).to.have.length(1)
             expect(storedListeners.at(0).id).to.equal(listenerIds.at(3))
         })
         it('returns all resources known to the parent\'s parent and projects fields', async () => {
-            const storedListeners = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
+            const { children: storedListeners } = await apiClients.getAllChildren([firstClientId], 'listeners', { projection: { "name": 0 } })
 
             expect(storedListeners).to.have.length(3)
             storedListeners.forEach((listener) => {
