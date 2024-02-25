@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.27.0](https://github.com/discue/mongodb-resource-client/compare/v0.26.0...v0.27.0) (2024-02-25)
+
+
+### Features
+
+* **simple-resource-storage:** calculate document resource path ([2f27fc7](https://github.com/discue/mongodb-resource-client/commit/2f27fc706384d50b698dba277f90dee226d04a59))
+
+
+### Refactorings
+
+* **lookup-pipeline:** use aggregrations helper fns ([ca959c8](https://github.com/discue/mongodb-resource-client/commit/ca959c8f61d5f615a69b9daee23737412388bc3d))
+
+
+### Chores
+
+* add mongdb playground data ([c84073d](https://github.com/discue/mongodb-resource-client/commit/c84073d68d247d86d62da7f552ac5be8dcd0bc7d))
+* **deps:** update dependencies ([47200e8](https://github.com/discue/mongodb-resource-client/commit/47200e87152946712e69ad619e60727a12bb11c0))
+* **docs:** update readme ([2a35937](https://github.com/discue/mongodb-resource-client/commit/2a3593775ed32813d4dc3d86d19c3ab2be07e245))
+* **package:** update type declaration ([6702a2e](https://github.com/discue/mongodb-resource-client/commit/6702a2e9972dadf6252a8d2b85b86dd8b9610726))
+* **simple-resource:** update span name ([0e895df](https://github.com/discue/mongodb-resource-client/commit/0e895dfa1bda60bbce62c029b2a384bbb9f665ca))
+
 ## [0.26.0](https://github.com/discue/mongodb-resource-client/compare/v0.25.0...v0.26.0) (2024-02-11)
 
 
