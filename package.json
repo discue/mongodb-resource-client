@@ -16,10 +16,13 @@
   },
   "typesVersions": {
     "*": {
-      "aggregations": [
+      ".": [
+        "lib/index.d.ts"
+      ],
+      "./aggregations": [
         "lib/aggregations.d.ts"
       ],
-      "datatypes": [
+      "./datatypes": [
         "lib/datatypes.d.ts"
       ]
     }
