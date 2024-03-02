@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.29.0](https://github.com/discue/mongodb-resource-client/compare/v0.28.0...v0.29.0) (2024-03-02)
+
+
+### Features
+
+* do not fail if index cannot be created ([8341d8f](https://github.com/discue/mongodb-resource-client/commit/8341d8f449b80fea666d3bf38e9f18862ca57947))
+
+
+### Chores
+
+* **deps-dev:** bump @types/node from 20.11.17 to 20.11.24 ([b86a2e0](https://github.com/discue/mongodb-resource-client/commit/b86a2e06b5b3234525d3e22f4db162fafb6f8687))
+* **deps-dev:** bump eslint from 8.56.0 to 8.57.0 ([6cec40c](https://github.com/discue/mongodb-resource-client/commit/6cec40ceadba415a35fbb5ab701ce67640d17903))
+* **deps:** update dependencies ([749b1b5](https://github.com/discue/mongodb-resource-client/commit/749b1b5368914689944e32d8da2c4983509677e8))
+
 ## [0.28.0](https://github.com/discue/mongodb-resource-client/compare/v0.27.0...v0.28.0) (2024-02-25)
 
 
