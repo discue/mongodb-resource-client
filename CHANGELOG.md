@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.30.0](https://github.com/discue/mongodb-resource-client/compare/v0.29.0...v0.30.0) (2024-03-03)
+
+
+### Features
+
+* ensure all cursors get closed ([55b0fd7](https://github.com/discue/mongodb-resource-client/commit/55b0fd7ce32cf41e6de8e4c6d84c21165f446e16))
+
+
+### Chores
+
+* **deps:** update dependencies ([2d45742](https://github.com/discue/mongodb-resource-client/commit/2d457426b49642b9bfe9113d115104ce3185dbfa))
+
 ## [0.29.0](https://github.com/discue/mongodb-resource-client/compare/v0.28.0...v0.29.0) (2024-03-02)
 
 
