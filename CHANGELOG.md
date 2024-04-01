@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.31.0](https://github.com/discue/mongodb-resource-client/compare/v0.30.0...v0.31.0) (2024-04-01)
+
+
+### Features
+
+* **aggregations:** add equals all method ([ceee4ee](https://github.com/discue/mongodb-resource-client/commit/ceee4ee2d6795a597fbcaf126c8350917d1570ba))
+* **aggregations:** add match wildcard function ([7f836b8](https://github.com/discue/mongodb-resource-client/commit/7f836b8951bfcdc7b4b565ee0e3ffd45c82b9294))
+* **lookup:** ensure projection is working for queried children ([4254358](https://github.com/discue/mongodb-resource-client/commit/425435852d4931fb955ee986b66f749ff6e75f5d))
+* **one-to-many-resource:** implement find method ([298720b](https://github.com/discue/mongodb-resource-client/commit/298720b6e741c221ece618c3cea55b3041dda425))
+* **one-to-many-resource:** tighten resource id requirements ([81f901a](https://github.com/discue/mongodb-resource-client/commit/81f901a0b448ac89aadea77a181d4ec49376afe5))
+* **simple-resource:** allow matching of children when querying ([ad9cb57](https://github.com/discue/mongodb-resource-client/commit/ad9cb57778da6f8fed75dd911190255af57f16fb))
+
+
+### Refactorings
+
+* add private methods for span creation ([c70cfd2](https://github.com/discue/mongodb-resource-client/commit/c70cfd2e4b61afc9ba924b3f18fe1c068bdd96d0))
+* **one-to-many-resource:** do not nest aggregation lookups ([f87c6ea](https://github.com/discue/mongodb-resource-client/commit/f87c6eac3d37c01fe33cfe887da5048d40c1d44c))
+
+
+### Chores
+
+* **deps-dev:** bump chai from 4.3.10 to 5.1.0 ([25a4226](https://github.com/discue/mongodb-resource-client/commit/25a42260b3a6aac4c8645e527dc1cf42629d4cd6))
+* **deps-dev:** update dependencies ([6cce2c3](https://github.com/discue/mongodb-resource-client/commit/6cce2c3d530aa547977579255a9e8fa643802b1e))
+* **deps-dev:** use chai 4 ([316ace4](https://github.com/discue/mongodb-resource-client/commit/316ace4ded4e5dfb840c2c2ecff4fafd13a84181))
+* **deps:** update open-telemetry-tracing ([ca0057c](https://github.com/discue/mongodb-resource-client/commit/ca0057c4668be2a0a5fb023ba6519f17c1ab3e84))
+* **docs:** update readme ([9002471](https://github.com/discue/mongodb-resource-client/commit/9002471c81ef73d00590deda538174061d1c8c3e))
+* ignore future chai versions ([e45cd3e](https://github.com/discue/mongodb-resource-client/commit/e45cd3e224e7ebf780975af41485231dc00df872))
+* **lint:** enforce single quotes ([b6cad1b](https://github.com/discue/mongodb-resource-client/commit/b6cad1be0de597ed1a22a281519fc0fd4377129e))
+* **one-to-many-resource:** remove logging ([da2f0e5](https://github.com/discue/mongodb-resource-client/commit/da2f0e57e318a66b6cee01dd59a07d807fe66c9e))
+* **one-to-many-resource:** update method jsdoc name ([e2ad6c3](https://github.com/discue/mongodb-resource-client/commit/e2ad6c39b518adea2fabec65a64ee5c41d9a684c))
+* **pipeline:** remove duplicate projection ([7ea29b9](https://github.com/discue/mongodb-resource-client/commit/7ea29b92fe6ff6e5e12c87d0d2ccd9aa0a82dece))
+* reset dependencies only once during testing ([ea5c1b9](https://github.com/discue/mongodb-resource-client/commit/ea5c1b93fba7eff42d56ff4e688fc05d5fa0aa23))
+
 ## [0.30.0](https://github.com/discue/mongodb-resource-client/compare/v0.29.0...v0.30.0) (2024-03-03)
 
 
