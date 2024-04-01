@@ -7,8 +7,7 @@
         "es2021": true
     },
     "extends": "eslint:recommended",
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
@@ -20,6 +19,13 @@
         "semi": [
             "error",
             "never"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "allowTemplateLiterals": true
+            }
         ]
     }
 }
