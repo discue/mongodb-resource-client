@@ -79,7 +79,6 @@ describe('OnToManyResourceStorage Nested', () => {
         it('returns docs from nested resources', async () => {
             const { queues } = await apiClientsStorage.get([apiClientIds.at(0)])
             const { listeners } = await queuesStorage.get([apiClientIds.at(0), queues.at(0)])
-            console.log({listeners})
             const listener = await listenersStorage.get([apiClientIds.at(0), queues.at(0), listeners.at(0)])
             expect(listener).not.be.be.null
             expect(listener).not.be.be.undefined
