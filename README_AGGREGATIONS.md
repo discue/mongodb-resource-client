@@ -11,6 +11,20 @@ Returns a $match aggregation stage
 
 Returns **[Object][2]** an object containing a MongoDb projection object
 
+## EQUALS\_ALL
+
+Returns a $match aggregation stage for all entries of the object
+
+### Parameters
+
+*   `object` &#x20;
+*   `$1` **[Object][2]**  (optional, default `{}`)
+
+    *   `$1.prefix` &#x20;
+*   `field` **[object][2]** the target field name
+
+Returns **[Object][2]** an object containing a MongoDb projection object
+
 ## EQUALS\_ANY\_OF
 
 Returns a $in aggregation stage
@@ -21,6 +35,12 @@ Returns a $in aggregation stage
 *   `targets` **[Array][3]** the target values
 
 Returns **[Object][2]** an object containing a MongoDb projection object
+
+## EQUALS\_WILDCARD
+
+Matches all documents of a collection
+
+Returns **[Object][2]** an object containing a MongoDb match object
 
 ## LESS\_THAN
 
@@ -233,7 +253,7 @@ Returns **[Object][2]**&#x20;
 
 *   `$0` **[Object][2]**&#x20;
 
-    *   `$0.key`   (optional, default `"$$this"`)
+    *   `$0.key`   (optional, default `'$$this'`)
     *   `$0.value` &#x20;
 
 ### Properties
@@ -247,7 +267,7 @@ Returns **[Object][2]**&#x20;
 
 *   `options` **ToObjectOptions**&#x20;
 
-    *   `options.key`   (optional, default `"$$this"`)
+    *   `options.key`   (optional, default `'$$this'`)
     *   `options.value` &#x20;
 
 ## CONCAT\_STRINGS

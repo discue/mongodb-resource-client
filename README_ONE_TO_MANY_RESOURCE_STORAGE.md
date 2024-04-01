@@ -83,6 +83,17 @@ Returns a resource by ids.
 
 Returns **[Object][4]**&#x20;
 
+## find
+
+Find a resource by via options.match query.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **FindOptions**&#x20;
+
+Returns **[Object][4]**&#x20;
+
 ## getAll
 
 Returns resources based on return value of [findReferences][5].

@@ -60,7 +60,7 @@ Currently only supports trees with three levels.
 
 *   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `childPath` **([String][1] | [Array][4]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
-*   `options` **GetOptions**&#x20;
+*   `options` **GetChildrenOptions?**&#x20;
 
 Returns **[Promise][6]\<ChildrenAndResourcePaths>**&#x20;
 
