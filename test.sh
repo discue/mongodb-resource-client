@@ -26,6 +26,4 @@ if [[ "${?}" == 0 ]]; then
     # test with noop tracing library now
     npm i -D @discue/open-telemetry-tracing@npm:@discue/open-telemetry-tracing-noop
     npm run test
-
-    resetDependencies
 fi
