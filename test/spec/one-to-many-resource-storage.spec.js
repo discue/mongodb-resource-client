@@ -96,6 +96,16 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.get', () => {
+        it('throws if not enough resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.get([resourceId]).then(reject, resolve)
+            })
+        })
+        it('throws if too many resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.get([resourceId, resourceId, resourceId]).then(reject, resolve)
+            })
+        })
         it('returns an existing document', async () => {
             const doc = await storage.get([resourceId, listenerIds.at(0)])
             expect(doc.name).to.equal('first')
@@ -144,6 +154,11 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.getAll', () => {
+        it('throws if too many resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.getAll([resourceId, resourceId]).then(reject, resolve)
+            })
+        })
         it('returns an existing document', async () => {
             const docs = await storage.getAll([resourceId])
             expect(docs).to.have.length(2)
@@ -234,6 +249,16 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.create', () => {
+        it('throws if not enough resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.get([resourceId]).then(reject, resolve)
+            })
+        })
+        it('throws too many resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.get([resourceId, resourceId, resourceId]).then(reject, resolve)
+            })
+        })
         it('creates a new document', async () => {
             const newId = uuid()
             await storage.create([resourceId, newId], { my: 'ghost' })
@@ -275,6 +300,16 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.update', () => {
+        it('throws if not enough resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.update([resourceId]).then(reject, resolve)
+            })
+        })
+        it('throws if too many resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.update([resourceId, resourceId, resourceId]).then(reject, resolve)
+            })
+        })
         it('updates a document', async () => {
             await storage.update([resourceId, listenerIds.at(1)], { 'name': 'peter' })
             const doc = await storage.get([resourceId, listenerIds.at(1)])
@@ -293,6 +328,16 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.delete', () => {
+        it('throws if not enough resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.delete([resourceId]).then(reject, resolve)
+            })
+        })
+        it('throws if too many resource ids are provided', () => {
+            return new Promise((resolve, reject) => {
+                storage.delete([resourceId, resourceId, resourceId]).then(reject, resolve)
+            })
+        })
         it('deletes a document', async () => {
             await storage.delete([resourceId, listenerIds.at(1)])
             const doc = await storage.get([resourceId, listenerIds.at(1)])
