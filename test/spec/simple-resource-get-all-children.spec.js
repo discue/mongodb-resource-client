@@ -136,6 +136,11 @@ describe('SimpleResourceStorage Get Children', () => {
             const idsOnly = storedListeners.map((listener) => listener.id)
             expect(idsOnly).not.to.contain(listenerIds.at(3))
         })
+        it('returns only matching resources', async () => {
+            const { children: storedListeners } = await apiClients.getAllChildren([firstClientId], 'queues/listeners', { match: { "name": 'third' } })
+            expect(storedListeners).to.have.length(1)
+            expect(storedListeners.at(0).name).to.equal('third')
+        })
         it('returns only projected fields', async () => {
             const { children: storedListeners } = await apiClients.getAllChildren([secondClientId], 'queues/listeners', { projection: { name: 1 } })
             expect(storedListeners).to.have.length(1)
