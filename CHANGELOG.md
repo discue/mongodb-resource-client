@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.32.0](https://github.com/discue/mongodb-resource-client/compare/v0.31.0...v0.32.0) (2024-04-07)
+
+
+### Refactorings
+
+* accept only instance of MongoClient in constructors ([2cd799c](https://github.com/discue/mongodb-resource-client/commit/2cd799c1875f8964924d68dcd4bce928d20707c5))
+
+
+### Chores
+
+* **docs:** update readme ([705cfd8](https://github.com/discue/mongodb-resource-client/commit/705cfd8fd2247708073dfccf6d389fde12a5f062))
+* enforce strict mode in all files ([6cf0064](https://github.com/discue/mongodb-resource-client/commit/6cf00647994e13b0c3e11245f978b34a53e0d953))
+
 ## [0.31.0](https://github.com/discue/mongodb-resource-client/compare/v0.30.0...v0.31.0) (2024-04-01)
 
 
