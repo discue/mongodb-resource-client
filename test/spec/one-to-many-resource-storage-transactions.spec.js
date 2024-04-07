@@ -20,11 +20,7 @@ describe('OnToManyResourceStorage Transactions', () => {
     })
 
     beforeEach(() => {
-        return mongoDbClient.connect()
-    })
-
-    beforeEach(() => {
-        storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
+        storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
 
     beforeEach(async () => {
@@ -62,10 +58,6 @@ describe('OnToManyResourceStorage Transactions', () => {
         })
 
         return new Promise((resolve) => setTimeout(resolve, 50))
-    })
-
-    afterEach(() => {
-        return storage.close()
     })
 
     after(() => {

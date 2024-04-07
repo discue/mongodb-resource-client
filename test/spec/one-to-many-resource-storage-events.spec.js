@@ -8,21 +8,18 @@ const EventEmitter = require('events')
 
 describe('OnToManyResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
-    
+
     /**
      * @type {import('mongodb').MongoClient}
      */
     let mongoDbClient
     let listenerIds
     let resourceId
+    let storage
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
     })
 
     beforeEach(async () => {

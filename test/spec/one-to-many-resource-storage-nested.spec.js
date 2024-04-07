@@ -1,23 +1,35 @@
 'use strict'
 
+const { MongoClient } = require('mongodb')
 const OneToManyStorage = require('../../lib/one-to-many-resource-storage.js')
 const SimpleStorage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 
 describe('OnToManyResourceStorage Nested', () => {
-    const apiClientsStorage = new SimpleStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients' })
-    const queuesStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
-    const listenersStorage = new OneToManyStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
+
+    let mongoDbClient
 
     let apiClientIds
     let queueIds
     let listenerIds
 
+    let apiClientsStorage
+    let queuesStorage
+    let listenersStorage
+
+    before(() => {
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+    })
+
     beforeEach(() => {
         apiClientIds = []
         queueIds = []
         listenerIds = []
+
+        apiClientsStorage = new SimpleStorage({ client: mongoDbClient, collectionName: 'api_clients' })
+        queuesStorage = new OneToManyStorage({ client: mongoDbClient, collectionName: 'api_clients', resourcePath: 'api_clients', resourceName: 'queues', enableTwoWayReferences: true })
+        listenersStorage = new OneToManyStorage({ client: mongoDbClient, collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
 
     beforeEach(async () => {
@@ -48,9 +60,7 @@ describe('OnToManyResourceStorage Nested', () => {
 
     after(() => {
         return Promise.all([
-            apiClientsStorage.close(),
-            queuesStorage.close(),
-            listenersStorage.close()
+            apiClientsStorage.close()
         ])
     })
 

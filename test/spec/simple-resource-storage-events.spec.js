@@ -8,20 +8,17 @@ const EventEmitter = require('node:events').EventEmitter
 
 describe('SimpleResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', eventEmitter })
-    
+
     /**
      * @type {import('mongodb').MongoClient}
      */
     let mongoDbClient
     let insertedDocumentId
+    let storage
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter })
     })
 
     beforeEach(() => {
@@ -53,11 +50,7 @@ describe('SimpleResourceStorage Events', () => {
             //
         }
     })
-
-    after(() => {
-        return mongoDbClient.close()
-    })
-
+    
     after(() => {
         return storage.close()
     })

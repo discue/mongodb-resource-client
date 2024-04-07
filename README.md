@@ -52,6 +52,7 @@ The module provides support for history / auditing tables to keep track of chang
 of a storage instance e.g. `SimpleResourceStorage`. An instance of `ResourceStorageHistory` can listen to storage events of another storage instance and populate a `${resourceName}_history` collection with timestamp, change type, and the full resource state.
 
 ```javascript
+const { MongoClient } = require('mongodb')
 const { EventEmiter } = require('events')
 const { OneToFewResourceStorage, ResourceStorageHistory } = require('@discue/mongodb-resource-client')
 
@@ -59,14 +60,18 @@ const eventEmitter = new EventEmitter()
 const collectionName = 'api_clients'
 const url = 'mongodb://127.0.0.1:27017'
 
+const client = new MongoClient(url, {
+  serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
+})
+
 const oneToFewResourceStorage = new OneToFewResourceStorage({
-  url,
+  client,
   collectionName,
   eventEmitter
 })
 
 const history = new ResourceStorageHistory({
-  url,
+  client,
   collectionName,
   usageEventPrefix: oneToFewResourceStorage.usageEventPrefix
   eventEmitter

@@ -8,21 +8,18 @@ const EventEmitter = require('events')
 
 describe('OneToFewResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
-    
+
     /**
      * @type {import('mongodb').MongoClient}
      */
     let mongoDbClient
     let insertedDocumentId
     let testDocOfChoice
+    let storage
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        storage = new Storage({ client: mongoDbClient, collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
     })
 
     beforeEach(async () => {

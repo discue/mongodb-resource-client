@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 
 describe('SimpleResourceStorage', () => {
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions' })
+    let storage
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -16,10 +16,7 @@ describe('SimpleResourceStorage', () => {
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions' })
     })
 
     beforeEach(() => {

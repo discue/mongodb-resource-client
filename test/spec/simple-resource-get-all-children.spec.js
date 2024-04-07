@@ -7,8 +7,6 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 
 describe('SimpleResourceStorage Get Children', () => {
-    const listeners = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'queues', resourceName: 'listeners', resourcePath: 'api_clients/queues', enableTwoWayReferences: true })
-    const apiClients = new SimpleStorage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients' })
 
     /**
      * @type {import('mongodb').MongoClient}
@@ -21,12 +19,15 @@ describe('SimpleResourceStorage Get Children', () => {
     let firstClientId
     let secondClientId
 
+    let listeners
+    let apiClients
+
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
 
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        listeners = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', resourcePath: 'api_clients/queues', enableTwoWayReferences: true })
+        apiClients = new SimpleStorage({ client: mongoDbClient, collectionName: 'api_clients' })
+    
     })
 
     beforeEach(async () => {

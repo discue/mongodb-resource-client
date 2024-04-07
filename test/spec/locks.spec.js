@@ -1,5 +1,6 @@
 'use strict'
 
+const { MongoClient } = require('mongodb')
 const Locks = require('../../lib/locks.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
@@ -12,7 +13,8 @@ describe('Locks', () => {
     let locks
 
     before(() => {
-        locks = new Locks({ url: 'mongodb://127.0.0.1:27021' })
+        const client = new MongoClient('mongodb://127.0.0.1:27021')
+        locks = new Locks({ client })
     })
 
     after(() => {

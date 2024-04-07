@@ -6,20 +6,17 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 
 describe('OneToFewResourceStorage', () => {
-    const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: 'api_clients', resourceName: 'queues' })
 
     /**
      * @type {import('mongodb').MongoClient}
      */
     let mongoDbClient
     let insertedDocumentId
+    let storage
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
+        storage = new Storage({ client: mongoDbClient, collectionName: 'api_clients', resourceName: 'queues' })
     })
 
     beforeEach(async () => {

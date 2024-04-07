@@ -12,15 +12,7 @@ describe('History', () => {
     /**
      * @type {import('mongodb').MongoClient}
      */
-    let mongoDbClient
-
-    before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-    })
-
-    beforeEach(() => {
-        return mongoDbClient.connect()
-    })
+    let mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
 
     after(() => {
         return mongoDbClient.close()
@@ -28,17 +20,9 @@ describe('History', () => {
 
     describe('without dedicated collection', () => {
         const eventEmitter = new EventEmitter()
-        const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', eventEmitter })
-        const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter })
+        const history = new History({ client: mongoDbClient, collectionName: '_subscriptions', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
         history.listenForStorageEvents()
-
-        after(() => {
-            return storage.close()
-        })
-
-        after(() => {
-            return history.close()
-        })
 
         describe('.create', () => {
             it('events are handled and create a history element', async () => {
@@ -154,17 +138,9 @@ describe('History', () => {
 
     describe('configured via constructor', () => {
         const eventEmitter = new EventEmitter()
-        const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions', eventEmitter })
-        const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter })
+        const history = new History({ client: mongoDbClient, collectionName: '_subscriptions_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
         history.listenForStorageEvents()
-
-        after(() => {
-            return storage.close()
-        })
-
-        after(() => {
-            return history.close()
-        })
 
         describe('.create', () => {
             it('events are handled and create a history element', async () => {
@@ -307,22 +283,14 @@ describe('History', () => {
     })
 
     describe('enabled at runtime', () => {
-        const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions' })
-
-        after(() => {
-            return storage.close()
-        })
+        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions' })
 
         before(() => {
             const eventEmitter = new EventEmitter()
             storage.enableEventing(eventEmitter)
 
-            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions2_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+            const history = new History({ client: mongoDbClient, collectionName: '_subscriptions2_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
             history.listenForStorageEvents()
-
-            after(() => {
-                return history.close()
-            })
         })
 
         describe('.create', () => {
@@ -465,24 +433,16 @@ describe('History', () => {
         })
     })
     describe('disabled at runtime', () => {
-        const storage = new Storage({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions' })
-
-        after(() => {
-            return storage.close()
-        })
+        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions' })
 
         before(() => {
             const eventEmitter = new EventEmitter()
             storage.enableEventing(eventEmitter)
 
-            const history = new History({ url: 'mongodb://127.0.0.1:27021', collectionName: '_subscriptions3_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
+            const history = new History({ client: mongoDbClient, collectionName: '_subscriptions3_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
             history.listenForStorageEvents()
 
             storage.disableEventing()
-
-            after(() => {
-                return history.close()
-            })
         })
 
         describe('.create', () => {
