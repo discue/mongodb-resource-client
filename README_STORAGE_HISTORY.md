@@ -6,12 +6,10 @@ Options for class constructor
 
 ### Properties
 
-*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
-*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
+*   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `usageEventPrefix` **[string][1]** the usageEventPrefix of the target storage module
-*   `connectTimeout` **[number][2]?** the connect timeout of the mongo db client if client was not passed
 
 ### Examples
 
@@ -54,5 +52,3 @@ Closes the database client
 Returns **void**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
-
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

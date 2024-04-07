@@ -4,8 +4,7 @@
 
 ### Properties
 
-*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
-*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
+*   `client` **MongoClient** =null configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
@@ -13,9 +12,15 @@
 ### Examples
 
 ```javascript
+const { MongoClient } = require('mongodb')
 const { OneToFewRefstorage } = require('@discue/mongodb-resource-client')
-const onetoFewRefStorage = new OneToFewRefStorage({
-  url: 'mongodb://127.0.0.1:27017',
+
+const client = new MongoClient(url, {
+  serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
+})
+
+const oneToFewRefStorage = new OneToFewRefStorage({
+  client,
   collectionName: 'api_clients',
   resourceName: 'queues'
 })
