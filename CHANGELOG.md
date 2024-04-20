@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.33.0](https://github.com/discue/mongodb-resource-client/compare/v0.32.0...v0.33.0) (2024-04-20)
+
+
+### Features
+
+* create custom indexes too ([7c0901d](https://github.com/discue/mongodb-resource-client/commit/7c0901d7f1798f30665d5b886f406121caed79f9))
+
+
+### Chores
+
+* **docs:** update readme ([5a41c79](https://github.com/discue/mongodb-resource-client/commit/5a41c797b244993805f66fabeed0116a777c27ba))
+* remove url param from all docs and ctors ([9d52ce4](https://github.com/discue/mongodb-resource-client/commit/9d52ce40cc4c4e7cc6afb74f08a12d4574416cba))
+* **simple-resource:** use simple index spec ([88a8d0a](https://github.com/discue/mongodb-resource-client/commit/88a8d0a00d54711f74a1056b49910489237fbefa))
+* use new eslint version and config ([1a6fb3d](https://github.com/discue/mongodb-resource-client/commit/1a6fb3d4ebbeee5c10da955eda5c01c1e77e825d))
+
 ## [0.32.0](https://github.com/discue/mongodb-resource-client/compare/v0.31.0...v0.32.0) (2024-04-07)
 
 
