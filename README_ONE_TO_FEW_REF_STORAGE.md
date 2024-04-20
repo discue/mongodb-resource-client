@@ -4,7 +4,7 @@
 
 ### Properties
 
-*   `client` **MongoClient** =null configured mongo client to use. Can be null if url is set
+*   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments

@@ -4,7 +4,6 @@
 
 ### Properties
 
-*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
 *   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `connectTimeout` **[number][2]?** the connect timeout of the mongo db client if client was not passed

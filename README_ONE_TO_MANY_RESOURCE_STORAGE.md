@@ -6,6 +6,7 @@
 
 *   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
+*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
 *   `resourcePath` **[string][1]?** slash separated path describing the hierarchy e.g. universities/teachers/subjects/exams.
@@ -75,7 +76,7 @@ Returns true if a resource with given ids exists.
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
 
-Returns **[boolean][3]**&#x20;
+Returns **[boolean][4]**&#x20;
 
 ## get
 
@@ -86,7 +87,7 @@ Returns a resource by ids.
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **GetOptions**&#x20;
 
-Returns **[Object][4]**&#x20;
+Returns **[Object][3]**&#x20;
 
 ## find
 
@@ -97,7 +98,7 @@ Find a resource by via options.match query.
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **FindOptions**&#x20;
 
-Returns **[Object][4]**&#x20;
+Returns **[Object][3]**&#x20;
 
 ## getAll
 
@@ -115,7 +116,7 @@ Add a resource to a collection by ids.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][4]** the resource to be stored
+*   `resource` **[Object][3]** the resource to be stored
 
 ## update
 
@@ -124,7 +125,7 @@ Updates a resource by ids
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][4]** values that should be updated
+*   `update` **[Object][3]** values that should be updated
 
 ## delete
 
@@ -138,8 +139,8 @@ Deletes a resource by ids
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [5]: findReferences

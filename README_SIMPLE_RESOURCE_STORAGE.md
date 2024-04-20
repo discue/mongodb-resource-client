@@ -4,10 +4,10 @@
 
 ### Properties
 
-*   `url` **[String][1]?** url to mongo instance. Can be null if client is set
 *   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
+*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes
 
 ### Examples
 
@@ -32,7 +32,7 @@ get stored entities and documents.
 
 ## WithSessionCallback
 
-Type: [Function][2]
+Type: [Function][4]
 
 ## get
 
@@ -40,10 +40,10 @@ Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **GetOptions**&#x20;
 
-Returns **[Object][4]**&#x20;
+Returns **[Object][3]**&#x20;
 
 ## getAll
 
@@ -53,7 +53,7 @@ Returns all resources.
 
 *   `options` **GetOptions**&#x20;
 
-Returns **[Array][3]<[Object][4]>**&#x20;
+Returns **[Array][2]<[Object][3]>**&#x20;
 
 ## getAll
 
@@ -63,8 +63,8 @@ Currently only supports trees with three levels.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `childPath` **([String][1] | [Array][3]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `childPath` **([String][1] | [Array][2]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
 *   `options` **GetChildrenOptions?**&#x20;
 
 Returns **[Promise][5]\<ChildrenAndResourcePaths>**&#x20;
@@ -77,9 +77,9 @@ Returns all resources that pass the given aggregation stages.
 
 ### Parameters
 
-*   `aggregations` **[Array][3]<[Object][4]>** a list of valid aggregation objects (optional, default `[]`)
+*   `aggregations` **[Array][2]<[Object][3]>** a list of valid aggregation objects (optional, default `[]`)
 
-Returns **[Array][3]<[Object][4]>**&#x20;
+Returns **[Array][2]<[Object][3]>**&#x20;
 
 ## exists
 
@@ -87,7 +87,7 @@ Returns true if a resource with given ids exists.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)**&#x20;
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
 
 Returns **[boolean][7]**&#x20;
 
@@ -97,8 +97,8 @@ Adds a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][4]** the resource to be stored
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[Object][3]** the resource to be stored
 
 ## update
 
@@ -106,8 +106,8 @@ Updates a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][4]** values that should be updated
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[Object][3]** values that should be updated
 
 ## delete
 
@@ -115,7 +115,7 @@ Deletes a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][3]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 ## close
 
@@ -125,11 +125,11 @@ Returns **void**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
