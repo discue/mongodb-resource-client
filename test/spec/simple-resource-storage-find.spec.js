@@ -15,7 +15,10 @@ describe('SimpleResourceStorage Find', () => {
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-        storage = new Storage({ client: mongoDbClient, collectionName: 'users' })
+    })
+
+    beforeEach(() => {
+        storage = new Storage({ client: mongoDbClient, collectionName: 'users', indexes: [{ name: 1 }] })
     })
 
     beforeEach(() => {

@@ -18,6 +18,9 @@ describe('SimpleResourceStorage Events', () => {
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+    })
+
+    beforeEach(() => {
         storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter })
     })
 

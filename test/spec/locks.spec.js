@@ -27,6 +27,10 @@ describe('Locks', () => {
     })
 
     describe('.lock', () => {
+        before(() => {
+            // wait for index to be created
+            return new Promise((resolve) => setTimeout(resolve, 1000))
+        })
         it('creates a lock document', async () => {
             const ids = [uuid()]
             await locks.lock(ids)

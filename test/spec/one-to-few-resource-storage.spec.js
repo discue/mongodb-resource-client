@@ -182,6 +182,9 @@ describe('OneToFewResourceStorage', () => {
     })
 
     describe('.getAll', () => {
+        after(() => {
+            storage = new Storage({ client: mongoDbClient, collectionName: 'api_clients', resourceName: 'queues' })
+        })
         it('returns an existing document', async () => {
             const docs = await storage.getAll([insertedDocumentId])
             expect(docs).to.have.length(3)

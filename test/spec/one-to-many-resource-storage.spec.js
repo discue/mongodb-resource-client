@@ -150,6 +150,9 @@ describe('OnToManyResourceStorage', () => {
     })
 
     describe('.getAll', () => {
+        after(() => {
+            storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
+        })
         it('throws if too many resource ids are provided', () => {
             return new Promise((resolve, reject) => {
                 storage.getAll([resourceId, resourceId]).then(reject, resolve)
