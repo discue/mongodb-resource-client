@@ -26,6 +26,13 @@ const oneToFewResourceStorage = new OneToFewResourceStorage({
 })
 ```
 
+## GetOptions
+
+### Properties
+
+*   `withMetadata` **[boolean][2]** true if also meta data should be returned
+*   `projection` **[Object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
+
 ## OneToFewResourceStorage
 
 Allows to manage a list of documents in another document to e.g. store a list of
@@ -57,10 +64,10 @@ Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **GetOptions**&#x20;
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **[GetOptions][5]**&#x20;
 
-Returns **[Promise][3]<[Object][4]>**&#x20;
+Returns **[Promise][6]<[Object][3]>**&#x20;
 
 ## getAll
 
@@ -68,10 +75,10 @@ Returns all resources.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **GetOptions**&#x20;
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **[GetOptions][5]**&#x20;
 
-Returns **[Promise][3]<[Array][2]<[Object][4]>>**&#x20;
+Returns **[Promise][6]<[Array][4]<[Object][3]>>**&#x20;
 
 ## create
 
@@ -79,8 +86,8 @@ Add a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][4]** the resource to be stored
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[Object][3]** the resource to be stored
 
 Returns **ObjectId**&#x20;
 
@@ -90,8 +97,8 @@ Updates a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][4]** values that should be updated
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[Object][3]** values that should be updated
 
 Returns **void**&#x20;
 
@@ -101,14 +108,18 @@ Deletes a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 Returns **void**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+[5]: #getoptions
+
+[6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise

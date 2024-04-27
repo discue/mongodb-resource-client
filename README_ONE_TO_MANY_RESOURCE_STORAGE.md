@@ -31,6 +31,14 @@ const oneToManyResourceStorage = new OneToManyResourceStorage({
 })
 ```
 
+## GetOptions
+
+### Properties
+
+*   `withMetadata` **[boolean][4]** true if also meta data should be returned
+*   `addDocumentPath` **[boolean][4]** true if $path propety should be added to documents e.g. `$path=/countries/1/cities/2/companies`
+*   `projection` **[Object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
+
 ## OneToManyResourceStorage
 
 Manages relationships between entities in a more decoupled way by keep storing
@@ -85,7 +93,7 @@ Returns a resource by ids.
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **GetOptions**&#x20;
+*   `options` **[Object][3]**&#x20;
 
 Returns **[Object][3]**&#x20;
 
@@ -107,7 +115,7 @@ Returns resources based on return value of [findReferences][5].
 ### Parameters
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **GetOptions**&#x20;
+*   `options` **[GetOptions][6]**&#x20;
 
 ## create
 
@@ -144,3 +152,5 @@ Deletes a resource by ids
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
 [5]: findReferences
+
+[6]: #getoptions
