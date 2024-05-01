@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.34.0](https://github.com/discue/mongodb-resource-client/compare/v0.33.0...v0.34.0) (2024-05-01)
+
+
+### Features
+
+* allow index to be passed as index specification ([f2f7660](https://github.com/discue/mongodb-resource-client/commit/f2f766096862b695fa27631657990167b6821c48))
+
+
+### Chores
+
+* add method for indexstats stage ([b47d6c8](https://github.com/discue/mongodb-resource-client/commit/b47d6c829128be1316e3839816e434963c13e039))
+* **deps-dev:** bump @types/node from 20.12.2 to 20.12.7 ([2ac56da](https://github.com/discue/mongodb-resource-client/commit/2ac56dab31cb28d7a8faa92f5740d8fbe9b04cf7))
+* **deps-dev:** bump eslint from 9.0.0 to 9.1.1 ([23b5b06](https://github.com/discue/mongodb-resource-client/commit/23b5b067252d40ae889e6a0143d51f714dc69b90))
+* **deps-dev:** bump mongodb-memory-server from 9.1.8 to 9.2.0 ([4f62030](https://github.com/discue/mongodb-resource-client/commit/4f62030da238852c0e7adeebdcbe3e45a0581584))
+* **deps-dev:** bump typescript from 5.4.3 to 5.4.5 ([d5bcb22](https://github.com/discue/mongodb-resource-client/commit/d5bcb221a68fa37b484723db4121641224d6dc25))
+* **deps:** update telemetry tracing ([24482a3](https://github.com/discue/mongodb-resource-client/commit/24482a3b2d58a53cebfe228b20363efec79fed25))
+* **docs:** make sure all types are detected correctly ([4c457e8](https://github.com/discue/mongodb-resource-client/commit/4c457e8beb61908a014567f75ad965fcefd528d4))
+* **docs:** update readme ([bb56ee7](https://github.com/discue/mongodb-resource-client/commit/bb56ee7c645a8472abd676272f56125adc84c323))
+* **docs:** update readme ([ff3a51b](https://github.com/discue/mongodb-resource-client/commit/ff3a51b259b5cce1733cf478bd32dadaae87bfe6))
+
 ## [0.33.0](https://github.com/discue/mongodb-resource-client/compare/v0.32.0...v0.33.0) (2024-04-20)
 
 
