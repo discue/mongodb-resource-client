@@ -17,7 +17,7 @@ describe('SimpleResourceStorage Index', () => {
 
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-        storage = new Storage({ client: mongoDbClient, collectionName: 'users', indexes: [{ age: 1 }, { name: 1 }] })
+        storage = new Storage({ client: mongoDbClient, collectionName: 'users', indexes: [{ age: 1 }, { key: { name: 1 } }] })
     })
 
     before(() => {
