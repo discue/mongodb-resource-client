@@ -314,6 +314,10 @@ Returns **[Object][2]**&#x20;
 
 *   `fieldName` **[String][1]** the field to check for existence
 
+## INDEX\_STATS
+
+Returns **[Object][2]**&#x20;
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object

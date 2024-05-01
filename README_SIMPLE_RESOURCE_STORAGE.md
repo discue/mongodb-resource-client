@@ -7,7 +7,7 @@
 *   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
-*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes
+*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
 
 ### Examples
 
@@ -32,7 +32,7 @@ get stored entities and documents.
 
 ## WithSessionCallback
 
-Type: [Function][4]
+Type: [Function][5]
 
 ## get
 
@@ -67,11 +67,11 @@ Currently only supports trees with three levels.
 *   `childPath` **([String][1] | [Array][2]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
 *   `options` **GetChildrenOptions?**&#x20;
 
-Returns **[Promise][5]\<ChildrenAndResourcePaths>**&#x20;
+Returns **[Promise][6]\<ChildrenAndResourcePaths>**&#x20;
 
 ## find
 
-*   **See**: [README\_AGGREGATIONS.md][6]
+*   **See**: [README\_AGGREGATIONS.md][7]
 
 Returns all resources that pass the given aggregation stages.
 
@@ -89,7 +89,7 @@ Returns true if a resource with given ids exists.
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
 
-Returns **[boolean][7]**&#x20;
+Returns **[boolean][8]**&#x20;
 
 ## create
 
@@ -129,10 +129,12 @@ Returns **void**&#x20;
 
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[4]: https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields
 
-[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[6]: README_AGGREGATIONS.md
+[6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[7]: README_AGGREGATIONS.md
+
+[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
