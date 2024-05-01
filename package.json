@@ -59,7 +59,7 @@
     "@types/node": "^20.12.2",
     "chai": "4",
     "documentation": "^14.0.3",
-    "eslint": "^9.0.0",
+    "eslint": "^9.1.1",
     "mocha": "^10.4.0",
     "mongodb": "^6.5.0",
     "mongodb-memory-server": "^9.1.8",
