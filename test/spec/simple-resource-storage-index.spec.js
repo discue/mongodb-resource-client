@@ -16,42 +16,47 @@ describe('SimpleResourceStorage Index', () => {
     let ids = []
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
-        storage = new Storage({ client: mongoDbClient, collectionName: 'users', indexes: [{ age: 1 }, { key: { name: 1 } }] })
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
     })
 
-    before(() => {
-        const collection = mongoDbClient.db('test').collection('users')
+    beforeEach(async () => {
+        storage = new Storage({ client: mongoDbClient, databaseName: 'test', collectionName: 'users3', indexes: [{ age: 1 }, { key: { name: 1 } }, { age: 1, name: 1 }] })
+
+        const collection = mongoDbClient.db('test').collection('users3')
         const firstId = uuid()
         ids.push(firstId)
 
-        collection.insertOne({
+        await collection.insertOne({
             id: firstId,
             age: 22,
             name: 'Peter'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 44,
             name: 'Peter'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 32,
             name: 'Pan'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 32,
             name: 'Mike'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 42,
             name: 'Ksenia'
         })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+        return new Promise((resolve) => setTimeout(resolve, 250))
+    })
+
+    afterEach(() => {
+        return mongoDbClient.db('test').collection('users3').drop()
     })
 
     after(() => {
@@ -63,25 +68,22 @@ describe('SimpleResourceStorage Index', () => {
     })
 
     it('queries by id using an index', async () => {
-        const stats = await mongoDbClient.db('test').collection('users').find({ id: ids.at(0) }).explain('executionStats')
+        const stats = await mongoDbClient.db('test').collection('users3').find({ id: ids.at(0) }).explain('executionStats')
         expect(stats.executionStats.totalDocsExamined).to.equal(1)
     })
-
 
     it('queries by other fields using a custom single field index', async () => {
-        const indexes = await mongoDbClient.db('test').collection('users').listIndexes().toArray()
-        const stats = await mongoDbClient.db('test').collection('users').find({ age: 42 }).explain('executionStats')
+        const stats = await mongoDbClient.db('test').collection('users3').find({ age: 42 }).explain('executionStats')
         expect(stats.executionStats.totalDocsExamined).to.equal(1)
     })
 
     it('queries by other fields using a custom index', async () => {
-        const stats = await mongoDbClient.db('test').collection('users').find({ age: 32, name: 'Mike' }).explain('executionStats')
-        // console.log('stats', JSON.stringify(stats, null, 2))
+        const stats = await mongoDbClient.db('test').collection('users3').find({ age: 32, name: 'Mike' }).explain('executionStats')
         expect(stats.executionStats.totalDocsExamined).to.equal(1)
     })
 
     it('queries by other fields using a custom index', async () => {
-        const stats = await mongoDbClient.db('test').collection('users').aggregate([
+        const stats = await mongoDbClient.db('test').collection('users3').aggregate([
             EQUALS('age', 32),
             EQUALS('name', 'Mike')
         ]).explain('executionStats')

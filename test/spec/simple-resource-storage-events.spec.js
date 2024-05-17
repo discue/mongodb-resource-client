@@ -17,24 +17,24 @@ describe('SimpleResourceStorage Events', () => {
     let storage
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
     })
 
     beforeEach(() => {
         storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter })
     })
 
-    beforeEach(() => {
+    beforeEach(async () => {
         insertedDocumentId = uuid()
         const collection = mongoDbClient.db().collection('_subscriptions')
-        collection.insertOne({
+        await collection.insertOne({
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
             },
             id: insertedDocumentId,
             hello: 'world'
         })
-        collection.insertOne({
+        await collection.insertOne({
             _meta_data: {
                 created_at: Timestamp.fromNumber(Date.now())
             },
@@ -53,7 +53,7 @@ describe('SimpleResourceStorage Events', () => {
             //
         }
     })
-    
+
     after(() => {
         return storage.close()
     })

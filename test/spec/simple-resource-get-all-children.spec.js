@@ -23,11 +23,11 @@ describe('SimpleResourceStorage Get Children', () => {
     let apiClients
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
 
         listeners = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', resourcePath: 'api_clients/queues', enableTwoWayReferences: true })
         apiClients = new SimpleStorage({ client: mongoDbClient, collectionName: 'api_clients' })
-    
+
     })
 
     beforeEach(async () => {

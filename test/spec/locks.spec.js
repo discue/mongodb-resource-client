@@ -13,7 +13,7 @@ describe('Locks', () => {
     let locks
 
     before(() => {
-        const client = new MongoClient('mongodb://127.0.0.1:27021')
+        const client = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
         locks = new Locks({ client })
     })
 

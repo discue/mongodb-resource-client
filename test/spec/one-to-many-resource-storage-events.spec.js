@@ -18,7 +18,7 @@ describe('OnToManyResourceStorage Events', () => {
     let storage
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
         storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
     })
 

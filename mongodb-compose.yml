@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mongo1:
+    image: mongo:6.0
+    command:
+      ["--replSet", "rs0", "--bind_ip_all", "--port", "27021", --noscripting]
+    ports:
+      - 27021:27021
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27021'}]}) }" | mongosh --port 27021 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      retries: 30
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27021/

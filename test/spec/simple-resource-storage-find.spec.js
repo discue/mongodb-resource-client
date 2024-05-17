@@ -14,31 +14,31 @@ describe('SimpleResourceStorage Find', () => {
     let storage
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
     })
 
     beforeEach(() => {
-        storage = new Storage({ client: mongoDbClient, collectionName: 'users', indexes: [{ name: 1 }] })
+        storage = new Storage({ client: mongoDbClient, collectionName: 'users2', indexes: [{ name: 1 }] })
     })
 
-    beforeEach(() => {
-        const collection = mongoDbClient.db().collection('users')
-        collection.insertOne({
+    beforeEach(async () => {
+        const collection = mongoDbClient.db().collection('users2')
+        await collection.insertOne({
             id: uuid(),
             age: 22,
             name: 'Peter'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 44,
             name: 'Peter'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 32,
             name: 'Pan'
         })
-        collection.insertOne({
+        await collection.insertOne({
             id: uuid(),
             age: 42,
             name: 'Ksenia'
@@ -50,7 +50,7 @@ describe('SimpleResourceStorage Find', () => {
     afterEach(() => {
         return mongoDbClient
             .db()
-            .collection('users')
+            .collection('users2')
             .drop()
     })
 

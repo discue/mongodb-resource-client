@@ -19,7 +19,7 @@ describe('OnToManyResourceStorage Nested', () => {
     let listenersStorage
 
     before(() => {
-        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021')
+        mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
     })
 
     beforeEach(() => {
