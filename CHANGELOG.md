@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.36.0](https://github.com/discue/mongodb-resource-client/compare/v0.35.0...v0.36.0) (2024-05-17)
+
+
+### Chores
+
+* **base:** rename function to enable TS types ([4c1e14d](https://github.com/discue/mongodb-resource-client/commit/4c1e14dfd929168bb0dcb0de9450613bb1cc2ff8))
+* **docs:** ensure correct jsdoc ([41063cd](https://github.com/discue/mongodb-resource-client/commit/41063cd52a475b635b6de03b43c8685c6cd01246))
+* **timeseries:** catch error when creating collection ([e86b3df](https://github.com/discue/mongodb-resource-client/commit/e86b3dfa2327a2992dd669fbef3f52ae370774b8))
+
 ## [0.35.0](https://github.com/discue/mongodb-resource-client/compare/v0.34.0...v0.35.0) (2024-05-17)
 
 
