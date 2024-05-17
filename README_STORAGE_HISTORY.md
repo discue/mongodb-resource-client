@@ -14,7 +14,7 @@ Options for class constructor
 ### Examples
 
 ```javascript
-const { EventEmiter } from 'events'
+const { EventEmitter } = require('events')
 const { OneToFewResourceStorage, ResourceStorageHistory } = require('@discue/mongodb-resource-client')
 
 const eventEmitter = new EventEmitter()

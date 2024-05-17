@@ -4,7 +4,7 @@
 
 ### Properties
 
-*   `client` **MongoClient?** configured mongo client to use. Can be null if url is set
+*   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
@@ -108,6 +108,7 @@ Updates a resource by ids.
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `update` **[Object][3]** values that should be updated
+*   `options` **UpdateOptions**&#x20;
 
 ## delete
 
