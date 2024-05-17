@@ -46,6 +46,7 @@ npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing@npm:@discue
 - [ResourceStorageHistory](README_STORAGE_HISTORY.md)
 - [ResourceLock](README_STORAGE_LOCK.md)
 - [SimpleResourceStorage](README_SIMPLE_RESOURCE_STORAGE.md)
+- [SimpleTimeseriesStorage](README_SIMPLE_TIMESERIES_STORAGE.md)
 
 ## History / Auditing
 The module provides support for history / auditing tables to keep track of changes made to documents. The `ResourceStorageHistory` component can be used as an extension
