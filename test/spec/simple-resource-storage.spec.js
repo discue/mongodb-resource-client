@@ -198,6 +198,11 @@ describe('SimpleResourceStorage', () => {
                 storage.update('abc').then(reject, resolve)
             })
         })
+        it('adds new document if upsert is set to true', async () => {
+            await storage.update('abc', { name: 'Tim' }, { upsert: true })
+            const resource = await storage.get('abc')
+            expect(resource.name).to.equal('Tim')
+        })
     })
 
     describe('.deletes', () => {
