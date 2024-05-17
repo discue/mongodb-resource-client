@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.35.0](https://github.com/discue/mongodb-resource-client/compare/v0.34.0...v0.35.0) (2024-05-17)
+
+
+### Features
+
+* add timeseries storage class ([f82c23f](https://github.com/discue/mongodb-resource-client/commit/f82c23fb1089e486a4512768266be7fef23f63fd))
+* **simple-resource:** enable inserting resource with update fn ([b9beab6](https://github.com/discue/mongodb-resource-client/commit/b9beab68e217db6e3f3b22d40d64e5c81e550340))
+
+
+### Refactorings
+
+* move shared logic to base class ([b87071b](https://github.com/discue/mongodb-resource-client/commit/b87071b0909c1afd53f37999d84a52dcecc1f403))
+
+
+### Chores
+
+* **base:** add close method ([3b3f461](https://github.com/discue/mongodb-resource-client/commit/3b3f461cf7310c67c072ad97c9684f95e074bc75))
+* **deps:** update dependencies ([f13dfad](https://github.com/discue/mongodb-resource-client/commit/f13dfad7cbfcc35324cd2844b75d735ea075fac9))
+* **docs:** update js doc ([b3c82f5](https://github.com/discue/mongodb-resource-client/commit/b3c82f5857355ea1ec4f772d5c36c7e15b23f2ae))
+* **docs:** update readme ([967d401](https://github.com/discue/mongodb-resource-client/commit/967d40113b8f9721d0a0048d1aceec667fd8a5cb))
+* fix typo in readme ([9966b37](https://github.com/discue/mongodb-resource-client/commit/9966b37f35db6b8dceab07a2adff02e1894ec7aa))
+* mark mongoclient as required ([ce847c5](https://github.com/discue/mongodb-resource-client/commit/ce847c5ab46c3c3385b6db2a81f03f202256e2c5))
+* test against latest mongodb version ([69f4cec](https://github.com/discue/mongodb-resource-client/commit/69f4cec2170594ba6aed45db4d4389388e77e99b))
+* update docs ([d51af4b](https://github.com/discue/mongodb-resource-client/commit/d51af4bdeffbd6aa2e038cd4cffd69a1b1da04d9))
+
 ## [0.34.0](https://github.com/discue/mongodb-resource-client/compare/v0.33.0...v0.34.0) (2024-05-01)
 
 
