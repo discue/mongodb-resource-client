@@ -108,10 +108,6 @@ describe('SimpleResourceStorage Get Children', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return listeners.close()
     })
 

@@ -37,10 +37,6 @@ describe('SimpleResourceStorage WithConfiguredClient', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return storage.close()
     })
 

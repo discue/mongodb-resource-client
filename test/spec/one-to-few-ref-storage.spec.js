@@ -49,10 +49,6 @@ describe('OneToFewRefStorage', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return storage.close()
     })
 

@@ -21,11 +21,6 @@ describe('Locks', () => {
         return locks.close()
     })
 
-    after(async () => {
-        const client = await locks._resourceStorage._getConnectedClient()
-        return client.close(true)
-    })
-
     describe('.lock', () => {
         before(() => {
             // wait for index to be created

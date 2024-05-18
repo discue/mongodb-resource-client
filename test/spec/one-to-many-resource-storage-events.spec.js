@@ -66,10 +66,6 @@ describe('OnToManyResourceStorage Events', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return storage.close()
     })
 

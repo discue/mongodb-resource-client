@@ -67,7 +67,7 @@ describe('OnToManyResourceStorage Transactions', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
+        return storage.close()
     })
 
     describe('.create', () => {

@@ -132,10 +132,6 @@ describe('OneToFewResourceStorage Events', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return storage.close()
     })
 

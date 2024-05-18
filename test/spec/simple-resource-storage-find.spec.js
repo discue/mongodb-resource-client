@@ -61,10 +61,6 @@ describe('SimpleResourceStorage Find', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return storage.close()
     })
 

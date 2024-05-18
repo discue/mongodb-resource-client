@@ -105,10 +105,6 @@ describe('OneToManyResource', () => {
     })
 
     after(() => {
-        return mongoDbClient.close()
-    })
-
-    after(() => {
         return listeners.close()
     })
 
