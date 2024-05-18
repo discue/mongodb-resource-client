@@ -46,7 +46,7 @@ describe('SimpleResourceStorage', () => {
     afterEach(async () => {
         try {
             const collection = mongoDbClient.db().collection('_subscriptions')
-            await collection.drop()
+            await collection.deleteMany({})
         } catch (e) {
             //
         }
@@ -103,7 +103,7 @@ describe('SimpleResourceStorage', () => {
         })
         it('returns an empty list if collection is empty', async () => {
             const collection = await storage._getCollection()
-            await collection.drop()
+            await collection.deleteMany({})
 
             const docs = await storage.getAll()
             expect(docs).to.be.empty

@@ -48,7 +48,7 @@ describe('SimpleResourceStorage Events', () => {
     afterEach(async () => {
         try {
             const collection = mongoDbClient.db().collection('_subscriptions')
-            await collection.drop()
+            await collection.deleteMany({})
         } catch (e) {
             //
         }

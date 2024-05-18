@@ -56,7 +56,7 @@ describe('SimpleResourceStorage Index', () => {
     })
 
     afterEach(() => {
-        return mongoDbClient.db('test').collection('users3').drop()
+        return mongoDbClient.db('test').collection('users3').deleteMany({})
     })
 
     after(() => {

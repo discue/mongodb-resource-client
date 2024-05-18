@@ -242,7 +242,7 @@ describe('OneToFewResourceStorage', () => {
         })
         it('returns an empty list if collection is empty', async () => {
             const collection = await storage._getCollection()
-            await collection.drop()
+            await collection.deleteMany({})
 
             const docs = await storage.getAll([insertedDocumentId])
             expect(docs).to.be.empty

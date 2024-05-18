@@ -30,7 +30,7 @@ describe('SimpleTimeseriesStorage', () => {
 
     afterEach(async () => {
         try {
-            await collection.drop()
+            await collection.deleteMany({})
         } catch (e) {
             //
         }
@@ -47,7 +47,7 @@ describe('SimpleTimeseriesStorage', () => {
             expect(items).to.have.length(1)
         })
         it('adds the timestamp field if missing', async () => {
-            await collection.drop()
+            await collection.deleteMany({})
             await storage.create({ metadata: {}, value: 12 })
             await storage.create({ metadata: {}, value: 12 })
             const items = await collection.find().toArray()

@@ -51,7 +51,7 @@ describe('SimpleResourceStorage Find', () => {
         return mongoDbClient
             .db()
             .collection('users2')
-            .drop()
+            .deleteMany({})
     })
 
     after(() => {
