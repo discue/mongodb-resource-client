@@ -41,7 +41,7 @@ describe('Locks', () => {
             }).then(() => {
                 done('Expected second lock call to throw')
             }, (e) => {
-                expect(e.message).to.contain('already exists')
+                expect(e.errorResponse.errmsg).to.contain('duplicate key')
                 done()
             })
         })
