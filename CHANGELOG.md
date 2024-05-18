@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.38.0](https://github.com/discue/mongodb-resource-client/compare/v0.37.0...v0.38.0) (2024-05-18)
+
 ## [0.37.0](https://github.com/discue/mongodb-resource-client/compare/v0.36.0...v0.37.0) (2024-05-18)
 
 
