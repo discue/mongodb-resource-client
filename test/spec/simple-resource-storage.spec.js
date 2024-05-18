@@ -159,6 +159,16 @@ describe('SimpleResourceStorage', () => {
             const doc = await storage.get(id)
             expect(doc.my).to.equal('ghost')
         })
+        it('throws if document already exists', async () => {
+            const id = uuid()
+            try {
+                await storage.create(id, { my: 'ghost' })
+                await storage.create(id, { my: 'ghost' })
+                throw new Error('Must throw duplicate key error')
+            } catch (e) {
+                expect(e.errorResponse.errmsg).to.contain('duplicate key')
+            }
+        })
         it('ensures id is unique', async () => {
             const id = uuid()
             await storage.create(id, { my: 'ghost' })
