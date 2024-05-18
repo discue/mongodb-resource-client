@@ -5,6 +5,7 @@ const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const { EQUALS, EQUALS_ANY_OF, SORT_BY_DESC, LESS_THAN, LESS_THAN_OR_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUAL, LIMIT, SORT_BY_ASC, COUNT } = require('../../lib/aggregations.js')
+const retry = require('../retry.js')
 
 describe('SimpleResourceStorage Find', () => {
     /**
@@ -43,8 +44,13 @@ describe('SimpleResourceStorage Find', () => {
             age: 42,
             name: 'Ksenia'
         })
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('users2').listIndexes().toArray()
+            expect(indexes).to.have.length(3)
+        })
     })
 
     afterEach(() => {

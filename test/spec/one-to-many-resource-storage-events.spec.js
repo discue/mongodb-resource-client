@@ -5,6 +5,7 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid, randomUUID } = require('crypto')
 const EventEmitter = require('events')
+const retry = require('../retry.js')
 
 describe('OnToManyResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
@@ -55,8 +56,13 @@ describe('OnToManyResourceStorage Events', () => {
                 listenerIds.at(1)
             ]
         })
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('listeners').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
     })
 
     after(() => {

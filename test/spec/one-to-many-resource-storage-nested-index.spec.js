@@ -5,6 +5,7 @@ const OneToManyStorage = require('../../lib/one-to-many-resource-storage.js')
 const SimpleStorage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
+const retry = require('../retry.js')
 
 describe('OnToManyResourceStorage Nested', () => {
 
@@ -54,8 +55,13 @@ describe('OnToManyResourceStorage Nested', () => {
                 await listenersStorage.create([apiClientIds.at(0), queueIds.at(j), id], { i, j })
             }
         }
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('queues').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
     })
 
     after(() => {

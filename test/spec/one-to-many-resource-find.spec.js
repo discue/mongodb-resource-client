@@ -5,6 +5,7 @@ const Storage = require('../../lib/one-to-many-resource-storage.js')
 const SimpleStorage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
+const retry = require('../retry.js')
 
 describe('OneToManyResource', () => {
 
@@ -25,7 +26,6 @@ describe('OneToManyResource', () => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
         listeners = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', resourcePath: 'api_clients/queues', enableTwoWayReferences: true })
         apiClients = new SimpleStorage({ client: mongoDbClient, collectionName: 'api_clients' })
-
     })
 
     beforeEach(async () => {
@@ -95,8 +95,13 @@ describe('OneToManyResource', () => {
                 thirdQueueId
             ]
         })
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('listeners').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
     })
 
     after(() => {

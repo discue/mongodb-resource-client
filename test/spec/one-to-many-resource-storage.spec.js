@@ -4,6 +4,7 @@ const { MongoClient, Timestamp } = require('mongodb')
 const Storage = require('../../lib/one-to-many-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
+const retry = require('../retry.js')
 
 describe('OnToManyResourceStorage', () => {
     /**
@@ -53,15 +54,13 @@ describe('OnToManyResourceStorage', () => {
                 listenerIds.at(1)
             ]
         })
+    })
 
-        // await queuesCollection.insertOne({
-        //     id: unrelatedResourceId = uuid(),
-        //     listeners: [
-        //         listenerIds.at(2)
-        //     ]
-        // })
-
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('queues').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
     })
 
     after(() => {
@@ -346,7 +345,6 @@ describe('OnToManyResourceStorage', () => {
             expect(docs).to.have.length(1)
         })
         it('also deletes the document reference', async () => {
-            // await new Promise((resolve) => setTimeout(resolve, 30_000))
             await storage.delete([resourceId, listenerIds.at(1)])
             const queuesCollection = mongoDbClient.db().collection('queues')
             const { listeners } = await queuesCollection.findOne({

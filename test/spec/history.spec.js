@@ -6,6 +6,7 @@ const History = require('../../lib/history.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const { EventEmitter } = require('events')
+const retry = require('../retry.js')
 
 describe('History', () => {
 
@@ -25,6 +26,13 @@ describe('History', () => {
         before(() => {
             const history = new History({ client: mongoDbClient, collectionName: '_subscriptions11', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
             history.listenForStorageEvents()
+        })
+
+        before(async () => {
+            return retry(async () => {
+                const indexes = await mongoDbClient.db('test').collection('_subscriptions11').listIndexes().toArray()
+                expect(indexes).to.have.length(2)
+            })
         })
 
         describe('.create', () => {

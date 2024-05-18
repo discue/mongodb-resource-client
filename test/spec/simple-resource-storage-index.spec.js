@@ -5,6 +5,7 @@ const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const { EQUALS } = require('../../lib/aggregations.js')
+const retry = require('../retry.js')
 
 describe('SimpleResourceStorage Index', () => {
     /**
@@ -51,8 +52,13 @@ describe('SimpleResourceStorage Index', () => {
             age: 42,
             name: 'Ksenia'
         })
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 250))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('users3').listIndexes().toArray()
+            expect(indexes).to.have.length(5)
+        })
     })
 
     afterEach(() => {

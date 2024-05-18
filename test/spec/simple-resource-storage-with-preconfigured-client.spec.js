@@ -4,6 +4,7 @@ const { MongoClient } = require('mongodb')
 const Storage = require('../../lib/simple-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
+const retry = require('../retry.js')
 
 describe('SimpleResourceStorage WithConfiguredClient', () => {
 
@@ -26,8 +27,13 @@ describe('SimpleResourceStorage WithConfiguredClient', () => {
             id: insertedDocumentId,
             hello: 'world'
         })
+    })
 
-        return new Promise((resolve) => setTimeout(resolve, 50))
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('_subscriptions').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
     })
 
     after(() => {

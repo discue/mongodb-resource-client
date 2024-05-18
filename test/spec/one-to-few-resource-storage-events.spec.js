@@ -5,6 +5,7 @@ const Storage = require('../../lib/one-to-few-resource-storage.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const EventEmitter = require('events')
+const retry = require('../retry.js')
 
 describe('OneToFewResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
@@ -71,8 +72,6 @@ describe('OneToFewResourceStorage Events', () => {
                 }
             ]
         })
-
-        return new Promise((resolve) => setTimeout(resolve, 50))
     })
 
     beforeEach(async () => {
@@ -122,6 +121,13 @@ describe('OneToFewResourceStorage Events', () => {
                     name: '3'
                 }
             ]
+        })
+    })
+
+    beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('api_clients').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
         })
     })
 
