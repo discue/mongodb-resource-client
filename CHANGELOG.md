@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.37.0](https://github.com/discue/mongodb-resource-client/compare/v0.36.0...v0.37.0) (2024-05-18)
+
+
+### Bug Fixes
+
+* **one-to-many-resource:** fix error when calling close ([c10beea](https://github.com/discue/mongodb-resource-client/commit/c10beeabb58f759125b842f2b2e837a12edce943))
+
+
+### Chores
+
+* bind mongo express to port 8888 ([4ad4582](https://github.com/discue/mongodb-resource-client/commit/4ad4582362eb80594cd85290fc61432132a362eb))
+* check whether desired mongodb port is used before starting another one ([1eb6a96](https://github.com/discue/mongodb-resource-client/commit/1eb6a96cd26f46ff82d6fd0367884f1dc6efa6be))
+* delete unused compose file ([f6685e0](https://github.com/discue/mongodb-resource-client/commit/f6685e03ac9dc39cdb87c3e02e41b9da98b584f3))
+* **docs:** mark mongodb client as private ([df928d0](https://github.com/discue/mongodb-resource-client/commit/df928d0941dd56035ff13e6306e9cb7f7b2f4af5))
+* require all mongodb queries to use index ([8ea132e](https://github.com/discue/mongodb-resource-client/commit/8ea132e78e02ff863e4b8fd43298ffbc0c0e86ce))
+
 ## [0.36.0](https://github.com/discue/mongodb-resource-client/compare/v0.35.0...v0.36.0) (2024-05-17)
 
 
