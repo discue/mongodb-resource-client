@@ -6,7 +6,7 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const retry = require('../retry.js')
 
-describe('OnToManyResourceStorage Transactions', () => {
+describe('OneToManyResourceStorage Transactions', () => {
 
     /**
      * @type {import('mongodb').MongoClient}

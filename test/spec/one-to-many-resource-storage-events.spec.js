@@ -7,7 +7,7 @@ const { randomUUID: uuid, randomUUID } = require('crypto')
 const EventEmitter = require('events')
 const retry = require('../retry.js')
 
-describe('OnToManyResourceStorage Events', () => {
+describe('OneToManyResourceStorage Events', () => {
     const eventEmitter = new EventEmitter()
 
     /**

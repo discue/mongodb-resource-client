@@ -7,7 +7,7 @@ const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
 const retry = require('../retry.js')
 
-describe('OnToManyResourceStorage Nested', () => {
+describe('OneToManyResourceStorage Nested', () => {
 
     let mongoDbClient
 
