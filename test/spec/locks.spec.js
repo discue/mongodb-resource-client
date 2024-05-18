@@ -4,17 +4,25 @@ const { MongoClient } = require('mongodb')
 const Locks = require('../../lib/locks.js')
 const expect = require('chai').expect
 const { randomUUID: uuid } = require('crypto')
+const retry = require('../retry.js')
 
 describe('Locks', () => {
 
     /**
      * @type {Locks}
      */
-    let locks
+    let locks, client
 
     before(() => {
-        const client = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
+        client = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
         locks = new Locks({ client })
+    })
+
+    before(async () => {
+        return retry(async () => {
+            const indexes = await client.db('test').collection('_locks').listIndexes().toArray()
+            expect(indexes).to.have.length(3)
+        })
     })
 
     after(() => {
@@ -22,10 +30,6 @@ describe('Locks', () => {
     })
 
     describe('.lock', () => {
-        before(() => {
-            // wait for index to be created
-            return new Promise((resolve) => setTimeout(resolve, 1000))
-        })
         it('creates a lock document', async () => {
             const ids = [uuid()]
             await locks.lock(ids)
