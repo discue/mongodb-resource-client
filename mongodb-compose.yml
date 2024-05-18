@@ -3,7 +3,16 @@ services:
   mongo1:
     image: mongo
     command:
-      ["--replSet", "rs0", "--bind_ip_all", "--port", "27021", --noscripting]
+      [
+        "--replSet",
+        "rs0",
+        "--bind_ip_all",
+        "--port",
+        "27021",
+        --noscripting,
+        --setParameter,
+        notablescan=1,
+      ]
     ports:
       - 27021:27021
     healthcheck:
