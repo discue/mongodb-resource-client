@@ -69,9 +69,23 @@ Currently only supports trees with three levels.
 
 Returns **[Promise][6]\<ChildrenAndResourcePaths>**&#x20;
 
+## countAllChildren
+
+Returns the count of all children of a certain type/collection.
+
+Currently only supports trees with three levels.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `childPath` **([String][1] | [Array][2]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
+*   `options` **GetChildrenOptions?**&#x20;
+
+Returns **[Promise][6]<[number][7]>**&#x20;
+
 ## find
 
-*   **See**: [README\_AGGREGATIONS.md][7]
+*   **See**: [README\_AGGREGATIONS.md][8]
 
 Returns all resources that pass the given aggregation stages.
 
@@ -89,7 +103,7 @@ Returns true if a resource with given ids exists.
 
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
 
-Returns **[boolean][8]**&#x20;
+Returns **[boolean][9]**&#x20;
 
 ## create
 
@@ -136,6 +150,8 @@ Returns **void**&#x20;
 
 [6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[7]: README_AGGREGATIONS.md
+[7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[8]: README_AGGREGATIONS.md
+
+[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
