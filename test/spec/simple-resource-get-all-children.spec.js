@@ -14,11 +14,8 @@ describe('SimpleResourceStorage Get Children', () => {
      */
     let mongoDbClient
     let listenerIds
-    let firstQueueId
-    let secondQueueId
-    let thirdQueueId
-    let firstClientId
-    let secondClientId
+    let firstQueueId, secondQueueId, thirdQueueId, fourthQueueId
+    let firstClientId, secondClientId, thirdClientId
 
     let listeners
     let apiClients
@@ -83,6 +80,10 @@ describe('SimpleResourceStorage Get Children', () => {
                 listenerIds.at(3)
             ]
         })
+        await queuesCollection.insertOne({
+            id: fourthQueueId = uuid(),
+            listeners: []
+        })
 
         const clientsCollection = mongoDbClient.db().collection('api_clients')
         await clientsCollection.insertOne({
@@ -96,6 +97,12 @@ describe('SimpleResourceStorage Get Children', () => {
             id: secondClientId = uuid(),
             queues: [
                 thirdQueueId
+            ]
+        })
+        await clientsCollection.insertOne({
+            id: thirdClientId = uuid(),
+            queues: [
+                fourthQueueId
             ]
         })
     })
@@ -161,6 +168,10 @@ describe('SimpleResourceStorage Get Children', () => {
             storedListeners.forEach((listener) => {
                 expect(listener.name).to.be.undefined
             })
+        })
+        it('returns an empty list if no resources exist', async () => {
+            const { children: storedListeners } = await apiClients.getAllChildren([thirdClientId], 'queues/listeners')
+            expect(storedListeners).to.have.length(0)
         })
     })
 })
