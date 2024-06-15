@@ -1,6 +1,6 @@
 
 <p align="center">
-<a href="https://www.discue.io/" target="_blank" rel="noopener noreferrer"><img width="128" src="https://www.discue.io/icons-fire-no-badge-square/web/icon-192.png" alt="Vue logo">
+<a href="https://www.discue.io/" target="_blank" rel="noopener noreferrer"><img width="128" src="https://www.discue.io/icons-fire-no-badge-square/web/icon-192.png" alt="discue.io logo">
 </a>
 </p>
 
@@ -15,7 +15,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/@discue/mongodb-resource-client.svg)](https://www.npmjs.com/package/@discue/mongodb-resource-client)
 <br/>
 [![contributions - welcome](https://img.shields.io/badge/contributions-welcome-blue)](/CONTRIBUTING.md "Go to contributions doc")
-[![Made with Node.js](https://img.shields.io/badge/Node.js->=12-blue?logo=node.js&logoColor=white)](https://nodejs.org "Go to Node.js homepage")
+[![Made with Node.js](https://img.shields.io/badge/Node.js->=20-blue?logo=node.js&logoColor=white)](https://nodejs.org "Go to Node.js homepage")
 
 </div>
 
