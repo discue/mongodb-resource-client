@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.39.0](https://github.com/discue/mongodb-resource-client/compare/v0.38.0...v0.39.0) (2024-06-15)
+
+
+### Features
+
+* **simple-resource:** add method to count all children of a resource ([9891097](https://github.com/discue/mongodb-resource-client/commit/9891097837ade85d4836dc63f71c2d31c30d5f47))
+
+
+### Bug Fixes
+
+* **simple-storage:** get all children method returns undefined children of no children found ([6d0d703](https://github.com/discue/mongodb-resource-client/commit/6d0d703ace421db930262697c43b3cf1a61ede20))
+
+
+### Chores
+
+* **deps-dev:** bump @types/node from 20.12.12 to 20.13.0 ([d1e3da4](https://github.com/discue/mongodb-resource-client/commit/d1e3da47fd58cfaa5504a5ba9ee34fc9388e2c6b))
+* **deps-dev:** bump eslint from 9.2.0 to 9.4.0 ([a1d2f37](https://github.com/discue/mongodb-resource-client/commit/a1d2f37d1d0f67dc449bf3791c958a0a408b8387))
+* **deps-dev:** bump mongodb from 6.6.2 to 6.7.0 ([fa0728c](https://github.com/discue/mongodb-resource-client/commit/fa0728c46481ccdfd0e59e03b8e2e9e82778a031))
+* **deps-dev:** bump mongodb-memory-server from 9.2.0 to 9.3.0 ([143cd7a](https://github.com/discue/mongodb-resource-client/commit/143cd7a35b58ca6939bb5a6f2295344d1969b73a))
+* **deps-dev:** bump nodemon from 3.1.0 to 3.1.2 ([3c34271](https://github.com/discue/mongodb-resource-client/commit/3c34271ae802447428ba6f83427a4c04e0f30589))
+* **deps:** update dependencies ([745f4b4](https://github.com/discue/mongodb-resource-client/commit/745f4b47f0b72ce5d877836b9b45bc0630a6d6ec))
+* **docs:** update readme ([9d52a76](https://github.com/discue/mongodb-resource-client/commit/9d52a768c711e99f528b446aaa75e381f772d02e))
+* **release:** 0.38.1 ([08bf398](https://github.com/discue/mongodb-resource-client/commit/08bf398ca137cf151a65419fed2d8aac2bfb2350))
+
 ### [0.38.1](https://github.com/discue/mongodb-resource-client/compare/v0.38.0...v0.38.1) (2024-06-15)
 
 
