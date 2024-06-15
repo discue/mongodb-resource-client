@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.38.1](https://github.com/discue/mongodb-resource-client/compare/v0.38.0...v0.38.1) (2024-06-15)
+
+
+### Bug Fixes
+
+* **simple-storage:** get all children method returns undefined children of no children found ([8e8dbf0](https://github.com/discue/mongodb-resource-client/commit/8e8dbf09ffbd62ab75af2c2c2d38cd130b7f5440))
+
+
+### Chores
+
+* **deps-dev:** bump @types/node from 20.12.12 to 20.13.0 ([1e9baeb](https://github.com/discue/mongodb-resource-client/commit/1e9baeb39b9e75b2eea18ef3ee775d20d88f1b4b))
+* **deps-dev:** bump eslint from 9.2.0 to 9.4.0 ([a1d2f37](https://github.com/discue/mongodb-resource-client/commit/a1d2f37d1d0f67dc449bf3791c958a0a408b8387))
+* **deps-dev:** bump mongodb from 6.6.2 to 6.7.0 ([c90a5ae](https://github.com/discue/mongodb-resource-client/commit/c90a5ae2c3192bed84cdec609a76902fdf4b1be0))
+* **deps-dev:** bump mongodb-memory-server from 9.2.0 to 9.3.0 ([143cd7a](https://github.com/discue/mongodb-resource-client/commit/143cd7a35b58ca6939bb5a6f2295344d1969b73a))
+* **deps-dev:** bump nodemon from 3.1.0 to 3.1.2 ([fb155e2](https://github.com/discue/mongodb-resource-client/commit/fb155e23d949599d03bd532aa99c9acdecb2babe))
+* **deps:** update dependencies ([796e107](https://github.com/discue/mongodb-resource-client/commit/796e107d55416099fb822922c04e002ff71fbe86))
+
 ## [0.38.0](https://github.com/discue/mongodb-resource-client/compare/v0.37.0...v0.38.0) (2024-05-18)
 
 ## [0.37.0](https://github.com/discue/mongodb-resource-client/compare/v0.36.0...v0.37.0) (2024-05-18)
