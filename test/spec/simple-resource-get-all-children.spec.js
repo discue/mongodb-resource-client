@@ -174,4 +174,14 @@ describe('SimpleResourceStorage Get Children', () => {
             expect(storedListeners).to.have.length(0)
         })
     })
+    describe('countAllChildren', () => {
+        it('returns the count of resources', async () => {
+            const count = await apiClients.countAllChildren([firstClientId], 'queues/listeners')
+            expect(count).to.have.equal(3)
+        })
+        it('returns 0 no resources exist', async () => {
+            const count = await apiClients.countAllChildren([thirdClientId], 'queues/listeners')
+            expect(count).to.have.equal(0)
+        })
+    })
 })
