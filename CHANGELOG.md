@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.40.0](https://github.com/discue/mongodb-resource-client/compare/v0.39.0...v0.40.0) (2024-07-07)
+
+
+### Chores
+
+* **aggregations:** add date_trunc function ([b20024f](https://github.com/discue/mongodb-resource-client/commit/b20024f5cfe4f1dcd5c3614e12640b0bbfc1644e))
+* **aggregations:** add more options to DATE_TRUNC ([f27f446](https://github.com/discue/mongodb-resource-client/commit/f27f446e2143959057f4df5c36ab8d952e6b92f2))
+* **aggregrations:** add TO_LONG method ([c052680](https://github.com/discue/mongodb-resource-client/commit/c052680bd7922230d2ec05db1b1c52a8aa653bed))
+* **deps-dev:** bump @types/node from 20.14.2 to 20.14.9 ([3240df5](https://github.com/discue/mongodb-resource-client/commit/3240df53255b811dd90e6938446302db3565be6d))
+* **deps-dev:** bump eslint from 9.5.0 to 9.6.0 ([16e886c](https://github.com/discue/mongodb-resource-client/commit/16e886c3f9592c79ebaf4cf5a573621fa3777465))
+* **deps-dev:** bump mocha and @types/mocha ([da49371](https://github.com/discue/mongodb-resource-client/commit/da493718499b388e485a2d59fd6cda011f2d8fa5))
+* **deps-dev:** bump mongodb from 6.7.0 to 6.8.0 ([75fbcef](https://github.com/discue/mongodb-resource-client/commit/75fbceff8b90892a2fc35650e7b4d8c705593a5d))
+* **deps-dev:** bump typescript from 5.4.5 to 5.5.2 ([9af00e2](https://github.com/discue/mongodb-resource-client/commit/9af00e2e327dfc6d9905fd47378c544d64402133))
+* **deps:** update dependencies ([00b83b8](https://github.com/discue/mongodb-resource-client/commit/00b83b8ef2ce8103318f3988a802d835fe612165))
+* **docs:** update readme ([b2b3831](https://github.com/discue/mongodb-resource-client/commit/b2b3831708da946c671be0f820e9bc7c886623a9))
+
 ## [0.39.0](https://github.com/discue/mongodb-resource-client/compare/v0.38.0...v0.39.0) (2024-06-15)
 
 
