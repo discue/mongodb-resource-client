@@ -247,6 +247,8 @@ Returns **[Object][2]**&#x20;
     *   `options.vars` &#x20;
     *   `options.inExpression` &#x20;
 
+Returns **[Object][2]**&#x20;
+
 ## TO\_OBJECT
 
 ### Parameters
@@ -269,6 +271,8 @@ Returns **[Object][2]**&#x20;
 
     *   `options.key`   (optional, default `'$$this'`)
     *   `options.value` &#x20;
+
+Returns **[Object][2]**&#x20;
 
 ## CONCAT\_STRINGS
 
@@ -314,9 +318,48 @@ Returns **[Object][2]**&#x20;
 
 *   `fieldName` **[String][1]** the field to check for existence
 
+Returns **[Object][2]**&#x20;
+
+## TO\_LONG
+
+### Parameters
+
+*   `fieldname` **[string][1]**&#x20;
+
+Returns **[object][2]**&#x20;
+
+## DATE\_TRUNC
+
+*   **See**: [https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateTrunc/][5]
+
+### Parameters
+
+*   `fieldname` **[string][1]**&#x20;
+*   `$1` **[Object][2]**&#x20;
+
+    *   `$1.unit` &#x20;
+    *   `$1.timezone`   (optional, default `'Europe/Berlin'`)
+    *   `$1.binSize`   (optional, default `1`)
+    *   `$1.startOfWeek`   (optional, default `'monday'`)
+*   `options` **[string][1]**&#x20;
+*   `unit` **[string][1]** e.g. day, month, quarter, year.
+*   `binSize` **[number][4]** specifies the amount units (optional, default `1`)
+*   `timezone` **[string][1]**  (optional, default `Europe/Berlin`)
+*   `startOfWeek` **[string][1]**  (optional, default `monday`)
+
+Returns **[Object][2]**&#x20;
+
 ## INDEX\_STATS
 
 Returns **[Object][2]**&#x20;
+
+## withLeadingDollar
+
+### Parameters
+
+*   `string` **[string][1]**&#x20;
+
+Returns **[string][1]**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
@@ -325,3 +368,5 @@ Returns **[Object][2]**&#x20;
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[5]: https://www.mongodb.com/docs/manual/reference/operator/aggregation/dateTrunc/
