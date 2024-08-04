@@ -3,4 +3,4 @@
 set -e
 
 echo "Stopping MongoDB"
-docker-compose -f mongodb-compose.yml down
+docker compose -f mongodb-compose.yml down
