@@ -7,6 +7,7 @@ import retry from "../retry.js";
 
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
+
 describe('SimpleResourceStorage Index', () => {
     /**
      * @type {import('mongodb').MongoClient}

@@ -5,6 +5,7 @@ import Storage from "../../lib/simple-timeseries-storage.js";
 
 const { MongoClient, Timestamp } = mongodb;
 const expect = { expect: expect$0 }.expect;
+
 describe('SimpleTimeseriesStorage', () => {
     let storage;
     let collection;

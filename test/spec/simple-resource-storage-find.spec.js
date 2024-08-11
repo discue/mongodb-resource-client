@@ -7,6 +7,7 @@ import retry from "../retry.js";
 
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
+
 describe('SimpleResourceStorage Find', () => {
     /**
      * @type {import('mongodb').MongoClient}

@@ -7,6 +7,7 @@ import retry from "../retry.js";
 
 const { MongoClient, Timestamp } = mongodb;
 const expect = { expect: expect$0 }.expect;
+
 describe('OneToFewResourceStorage Events', () => {
     const eventEmitter = new EventEmitter();
     /**

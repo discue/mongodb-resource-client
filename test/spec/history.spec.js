@@ -9,6 +9,7 @@ import retry from "../retry.js";
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
 const { EventEmitter } = events;
+
 describe('History', () => {
     /**
      * @type {import('mongodb').MongoClient}
