@@ -1,8 +1,8 @@
-import * as mongodb from "mongodb";
-import Storage from "../../lib/simple-timeseries-storage.js";
-import { LESS_THAN, GREATER_THAN } from "../../lib/aggregations.js";
 import { expect as expect$0 } from "chai";
-'use strict';
+import * as mongodb from "mongodb";
+import { GREATER_THAN, LESS_THAN } from "../../lib/aggregations.js";
+import Storage from "../../lib/simple-timeseries-storage.js";
+
 const { MongoClient, Timestamp } = mongodb;
 const expect = { expect: expect$0 }.expect;
 describe('SimpleTimeseriesStorage', () => {

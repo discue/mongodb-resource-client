@@ -1,9 +1,9 @@
-import * as mongodb from "mongodb";
-import Locks from "../../lib/locks.js";
 import { expect as expect$0 } from "chai";
 import { randomUUID as uuid } from "crypto";
+import * as mongodb from "mongodb";
+import Locks from "../../lib/locks.js";
 import retry from "../retry.js";
-'use strict';
+
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
 describe('Locks', () => {
@@ -93,10 +93,10 @@ describe('Locks', () => {
                 return new Promise((resolve) => setTimeout(resolve, 1_000));
             }, { lockTimeout: 250 })
                 .then(() => { done('Should throw.'); }, (e) => {
-                expect(e.message).to.contain('interrupt');
-                // need to wait for other timeouts to finish
-                setTimeout(done, 1_000);
-            });
+                    expect(e.message).to.contain('interrupt');
+                    // need to wait for other timeouts to finish
+                    setTimeout(done, 1_000);
+                });
         });
         it('unlocks the document if a lock timeout occured', (done) => {
             const ids = [uuid()];
@@ -104,11 +104,11 @@ describe('Locks', () => {
                 return new Promise((resolve) => setTimeout(resolve, 1_000));
             }, { lockTimeout: 250 })
                 .then(() => { done('Should throw.'); }, (e) => {
-                locks.lock(ids);
-                expect(e.message).to.contain('interrupt');
-                // need to wait for other timeouts to finish
-                setTimeout(done, 1000);
-            });
+                    locks.lock(ids);
+                    expect(e.message).to.contain('interrupt');
+                    // need to wait for other timeouts to finish
+                    setTimeout(done, 1000);
+                });
         });
         it('unlocks the document if callback throws', (done) => {
             const ids = [uuid()];
@@ -126,13 +126,13 @@ describe('Locks', () => {
             });
             new Promise((resolve) => setTimeout(resolve, 100))
                 .then(() => {
-                return locks.doWhileLocked(ids, () => { }, { waitTimeout: 250 });
-            })
+                    return locks.doWhileLocked(ids, () => { }, { waitTimeout: 250 });
+                })
                 .then(() => { done('Should throw.'); }, async (e) => {
-                expect(e.message).to.contain('Unable to establish lock');
-                // need to wait for other timeouts to finish
-                setTimeout(done, 1_000);
-            });
+                    expect(e.message).to.contain('Unable to establish lock');
+                    // need to wait for other timeouts to finish
+                    setTimeout(done, 1_000);
+                });
         });
     });
 });

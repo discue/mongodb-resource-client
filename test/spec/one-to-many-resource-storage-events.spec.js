@@ -1,10 +1,10 @@
+import { expect as expect$0 } from "chai";
+import { randomUUID, randomUUID as uuid } from "crypto";
+import EventEmitter from "events";
 import * as mongodb from "mongodb";
 import Storage from "../../lib/one-to-many-resource-storage.js";
-import { expect as expect$0 } from "chai";
-import { randomUUID as uuid, randomUUID } from "crypto";
-import EventEmitter from "events";
 import retry from "../retry.js";
-'use strict';
+
 const { MongoClient, Timestamp } = mongodb;
 const expect = { expect: expect$0 }.expect;
 describe('OneToManyResourceStorage Events', () => {

@@ -1,9 +1,9 @@
-import * as mongodb from "mongodb";
-import Storage from "../../lib/one-to-few-ref-storage.js";
 import { expect as expect$0 } from "chai";
 import { randomUUID as uuid } from "crypto";
+import * as mongodb from "mongodb";
+import Storage from "../../lib/one-to-few-ref-storage.js";
 import retry from "../retry.js";
-'use strict';
+
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
 describe('OneToFewRefStorage', () => {

@@ -1,10 +1,10 @@
+import { expect as expect$0 } from "chai";
+import { randomUUID as uuid } from "crypto";
 import * as mongodb from "mongodb";
 import OneToManyStorage from "../../lib/one-to-many-resource-storage.js";
 import SimpleStorage from "../../lib/simple-resource-storage.js";
-import { expect as expect$0 } from "chai";
-import { randomUUID as uuid } from "crypto";
 import retry from "../retry.js";
-'use strict';
+
 const { MongoClient } = mongodb;
 const expect = { expect: expect$0 }.expect;
 describe('OneToManyResourceStorage Nested', () => {

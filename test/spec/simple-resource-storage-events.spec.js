@@ -1,10 +1,10 @@
-import * as mongodb from "mongodb";
-import Storage from "../../lib/simple-resource-storage.js";
 import { expect as expect$0 } from "chai";
 import { randomUUID as uuid } from "crypto";
-import retry from "../retry.js";
+import * as mongodb from "mongodb";
 import nodeevents from "node:events";
-'use strict';
+import Storage from "../../lib/simple-resource-storage.js";
+import retry from "../retry.js";
+
 const { MongoClient, Timestamp } = mongodb;
 const expect = { expect: expect$0 }.expect;
 const EventEmitter = nodeevents.EventEmitter;
