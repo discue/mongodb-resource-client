@@ -1,7 +1,8 @@
-const globals = require('globals')
-const js = require("@eslint/js")
+import js from "@eslint/js"
+import stylistic from '@stylistic/eslint-plugin'
+import globals from 'globals'
 
-module.exports = [
+export default [
     js.configs.recommended,
     {
         languageOptions: {
@@ -11,7 +12,16 @@ module.exports = [
                 ...globals.node
             }
         },
+        plugins: {
+            '@stylistic': stylistic
+        },
         rules: {
+            "@stylistic/no-extra-semi": "warn",
+            "@stylistic/array-element-newline": ["warn", "consistent"],
+            "@stylistic/semi": [
+                "error",
+                "never"
+            ],
             'no-unused-vars': [
                 'error',
                 {
@@ -19,10 +29,6 @@ module.exports = [
                     varsIgnorePattern: '^_',
                     caughtErrorsIgnorePattern: '^_',
                 }
-            ],
-            "semi": [
-                "error",
-                "never"
             ],
             "quotes": [
                 "error",
