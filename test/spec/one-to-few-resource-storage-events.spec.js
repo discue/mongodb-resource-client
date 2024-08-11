@@ -1,4 +1,4 @@
-import { expect as expect$0 } from "chai";
+import { expect } from "chai";
 import { randomUUID as uuid } from "crypto";
 import EventEmitter from "events";
 import * as mongodb from "mongodb";
@@ -6,7 +6,6 @@ import Storage from "../../lib/one-to-few-resource-storage.js";
 import retry from "../retry.js";
 
 const { MongoClient, Timestamp } = mongodb;
-const expect = { expect: expect$0 }.expect;
 
 describe('OneToFewResourceStorage Events', () => {
     const eventEmitter = new EventEmitter();

@@ -1,4 +1,4 @@
-import { expect as expect$0 } from "chai";
+import { expect } from "chai";
 import { randomUUID as uuid } from "crypto";
 import events from "events";
 import * as mongodb from "mongodb";
@@ -7,7 +7,6 @@ import Storage from "../../lib/simple-resource-storage.js";
 import retry from "../retry.js";
 
 const { MongoClient } = mongodb;
-const expect = { expect: expect$0 }.expect;
 const { EventEmitter } = events;
 
 describe('History', () => {

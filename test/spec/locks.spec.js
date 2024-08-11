@@ -1,11 +1,10 @@
-import { expect as expect$0 } from "chai";
+import { expect } from "chai";
 import { randomUUID as uuid } from "crypto";
 import * as mongodb from "mongodb";
 import Locks from "../../lib/locks.js";
 import retry from "../retry.js";
 
 const { MongoClient } = mongodb;
-const expect = { expect: expect$0 }.expect;
 
 describe('Locks', () => {
     /**

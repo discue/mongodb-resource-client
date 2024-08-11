@@ -1,4 +1,4 @@
-import { expect as expect$0 } from "chai";
+import { expect } from "chai";
 import { randomUUID as uuid } from "crypto";
 import * as mongodb from "mongodb";
 import { EQUALS } from "../../lib/aggregations.js";
@@ -6,7 +6,6 @@ import Storage from "../../lib/simple-resource-storage.js";
 import retry from "../retry.js";
 
 const { MongoClient } = mongodb;
-const expect = { expect: expect$0 }.expect;
 
 describe('SimpleResourceStorage Index', () => {
     /**
