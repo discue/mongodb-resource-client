@@ -53,7 +53,6 @@ The module provides support for history / auditing tables to keep track of chang
 
 ```javascript
 import { MongoClient } from ('mongodb')
-import { EventEmiter } from ('events')
 import { OneToFewResourceStorage, ResourceStorageHistory } from ('@discue/mongodb-resource-client')
 
 const collectionName = 'api_clients'
