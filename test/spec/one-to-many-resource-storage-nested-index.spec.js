@@ -27,6 +27,12 @@ describe('OneToManyResourceStorage Nested', () => {
         listenersStorage = new OneToManyStorage({ client: mongoDbClient, collectionName: 'queues', resourcePath: 'api_clients/queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
     beforeEach(async () => {
+        return retry(async () => {
+            const indexes = await mongoDbClient.db('test').collection('queues').listIndexes().toArray()
+            expect(indexes).to.have.length(2)
+        })
+    })
+    beforeEach(async () => {
         for (let i = 0, n = 5; i < n; i++) {
             const id = uuid()
             apiClientIds.push(id)
@@ -46,12 +52,6 @@ describe('OneToManyResourceStorage Nested', () => {
                 await listenersStorage.create([apiClientIds.at(0), queueIds.at(j), id], { i, j })
             }
         }
-    })
-    beforeEach(async () => {
-        return retry(async () => {
-            const indexes = await mongoDbClient.db('test').collection('queues').listIndexes().toArray()
-            expect(indexes).to.have.length(2)
-        })
     })
     after(() => {
         return Promise.all([

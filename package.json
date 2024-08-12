@@ -5,6 +5,7 @@
   "version": "0.40.0",
   "description": "Simple wrapper around mongodb client allowing easier managing of resources",
   "main": "lib/index",
+  "type": "module",
   "files": [
     "lib"
   ],

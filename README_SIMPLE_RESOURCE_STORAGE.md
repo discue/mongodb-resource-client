@@ -114,6 +114,15 @@ Adds a resource to a collection by ids.
 *   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `resource` **[Object][3]** the resource to be stored
 
+## create
+
+Adds a resource to a collection without any checks.
+
+### Parameters
+
+*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[Object][3]** the resource to be stored
+
 ## update
 
 Updates a resource by ids.

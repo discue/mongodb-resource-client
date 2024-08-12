@@ -240,6 +240,8 @@ describe('OneToManyResourceStorage', () => {
             const newId = uuid()
             await storage.create([resourceId, newId], { my: 'ghost' })
             const docs = await storage.getAll([resourceId])
+            const qs = mongoDbClient.db().collection('queues')
+            const q = await qs.findOne({ id: resourceId })
             expect(docs).to.have.length(3)
             const doc = await storage.get([resourceId, newId])
             expect(doc.my).to.equal('ghost')

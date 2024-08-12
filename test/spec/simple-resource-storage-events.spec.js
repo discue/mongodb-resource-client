@@ -1,15 +1,12 @@
 import { expect } from "chai";
 import { randomUUID as uuid } from "crypto";
 import * as mongodb from "mongodb";
-import nodeevents from "node:events";
 import Storage from "../../lib/simple-resource-storage.js";
 import retry from "../retry.js";
 
 const { MongoClient, Timestamp } = mongodb;
-const EventEmitter = nodeevents.EventEmitter;
 
 describe('SimpleResourceStorage Events', () => {
-    const eventEmitter = new EventEmitter();
     /**
      * @type {import('mongodb').MongoClient}
      */
@@ -20,7 +17,7 @@ describe('SimpleResourceStorage Events', () => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0');
     });
     beforeEach(() => {
-        storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions', eventEmitter });
+        storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions' });
     });
     beforeEach(async () => {
         insertedDocumentId = uuid();
@@ -62,14 +59,12 @@ describe('SimpleResourceStorage Events', () => {
         it('sends a create event', async () => {
             return new Promise((resolve, reject) => {
                 const id = uuid();
-                eventEmitter.once(`${storage.usageEventPrefix}.create`, async (event) => {
+                storage.on('create', (event) => {
                     expect(event.resourceIds).to.equal(id);
-                    expect(event.collectionName).to.equal('_subscriptions');
-                    expect(event.error).to.be.false;
                     expect(event.before).to.be.undefined;
                     expect(event.after.my).to.equal('ghost');
                     resolve();
-                });
+                })
                 storage.create(id, { my: 'ghost' }).catch(reject);
             });
         });
@@ -77,10 +72,8 @@ describe('SimpleResourceStorage Events', () => {
     describe('.updates', () => {
         it('creates an update event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.update`, async (event) => {
+                storage.on('update', (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId]);
-                    expect(event.collectionName).to.equal('_subscriptions');
-                    expect(event.error).to.be.false;
                     expect(event.before.hello).to.equal('world');
                     expect(event.after.hello).to.equal('peter');
                     resolve();
@@ -93,10 +86,8 @@ describe('SimpleResourceStorage Events', () => {
         it('creates a delete event', async () => {
             const resource = await storage.get([insertedDocumentId]);
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.delete`, (event) => {
+                storage.on('delete', (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId]);
-                    expect(event.collectionName).to.equal('_subscriptions');
-                    expect(event.error).to.be.false;
                     expect(event.before).to.deep.equal(resource);
                     expect(event.after).to.be.undefined;
                     resolve();

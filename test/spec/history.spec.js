@@ -1,13 +1,10 @@
 import { expect } from 'chai'
 import { randomUUID as uuid } from 'crypto'
-import events from 'events'
 import * as mongodb from 'mongodb'
-import History from '../../lib/history.js'
 import Storage from '../../lib/simple-resource-storage.js'
 import retry from '../retry.js'
 
 const { MongoClient } = mongodb
-const { EventEmitter } = events
 
 describe('History', () => {
     /**
@@ -18,75 +15,104 @@ describe('History', () => {
         return mongoDbClient.close()
     })
     describe('without dedicated collection', () => {
-        const eventEmitter = new EventEmitter()
-        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions11', eventEmitter })
-        before(() => {
-            const history = new History({ client: mongoDbClient, collectionName: '_subscriptions11', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-            history.listenForStorageEvents()
-        })
-        before(async () => {
-            return retry(async () => {
-                const indexes = await mongoDbClient.db('test').collection('_subscriptions11').listIndexes().toArray()
-                expect(indexes).to.have.length(2)
-            })
-        })
         describe('.create', () => {
+            let storage
+            before(async () => {
+                storage = new Storage({ client: mongoDbClient, collectionName: 'mobile_subscriptions' })
+                storage.enableHistory()
+                await new Promise((resolve) => setTimeout(resolve, 2000))
+            })
             it('events are handled and create a history element', async () => {
                 const id = uuid()
                 await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find().toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(1)
+                const history = mongoDbClient.db().collection('mobile_subscriptions_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(1)
+                })
             })
             it('events contain the created resource', async () => {
                 const id = uuid()
                 await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
                 await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find({ id }).toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(1)
-                const [create] = all.at(0).history
-                expect(create.resource.my).to.equal('ghost')
+                const history = mongoDbClient.db().collection('mobile_subscriptions_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(1)
+                    const [create] = all.at(0).history
+                    expect(create.resource.my).to.equal('ghost')
+                })
             })
             it('events contain correct action property', async () => {
                 const id = uuid()
                 await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
                 await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find({ id }).toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(1)
-                const [create] = all.at(0).history
-                expect(create.action).to.equal('create')
-            })
-            it('registers events for all resources', async () => {
-                const ids = [uuid(), uuid(), uuid()]
-                await Promise.all(ids.map((id) => {
-                    return storage.create(id, {})
-                }))
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const resources = await Promise.all(ids.map((id) => {
-                    return coll.findOne({ id })
-                }))
-                resources.forEach((resource) => {
-                    expect(resource.history).to.have.length(1)
-                    const [create] = resource.history
+                const history = mongoDbClient.db().collection('mobile_subscriptions_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(1)
+                    const [create] = all.at(0).history
                     expect(create.action).to.equal('create')
+                })
+            })
+        })
+        describe('.delete', () => {
+            let storage
+            before(async () => {
+                storage = new Storage({ client: mongoDbClient, collectionName: '_mobile_subscriptions4' })
+                storage.enableHistory()
+                await new Promise((resolve) => setTimeout(resolve, 2000))
+            })
+            it('events are handled and create a history element', async () => {
+                const id = uuid()
+                await storage.create(id, { my: 'ghost' })
+                await storage.delete(id, { my: 'ghost' })
+                const history = mongoDbClient.db().collection('_mobile_subscriptions4_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                })
+            })
+            it('events contain the deleted resource', async () => {
+                const id = uuid()
+                await storage.create(id, { my: 'ghost' })
+                await storage.delete(id, { my: 'ghost' })
+                const history = mongoDbClient.db().collection('_mobile_subscriptions4_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                    const [create] = all.at(-1).history
+                    expect(create.resource.my).to.equal('ghost')
+                })
+            })
+            it('events contain correct action property', async () => {
+                const id = uuid()
+                await storage.create(id, { my: 'ghost' })
+                await storage.delete(id, { my: 'ghost' })
+                const history = mongoDbClient.db().collection('_mobile_subscriptions4_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                    const [create, del] = all.at(0).history
+                    expect(create.action).to.equal('create')
+                    expect(del.action).to.equal('delete')
                 })
             })
         })
         describe('.update', () => {
             let id
+            let storage
+            before(async () => {
+                storage = new Storage({ client: mongoDbClient, collectionName: 'mobile_subscriptions2' })
+                storage.enableHistory()
+                await new Promise((resolve) => setTimeout(resolve, 2000))
+            })
             beforeEach(async () => {
                 id = uuid()
                 await storage.create(id, { my: 'ghost' })
@@ -96,310 +122,100 @@ describe('History', () => {
             it('events are handled and create a history element', async () => {
                 await storage.update([id], { hello: 'peter' })
                 await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find({ id }).toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(2)
+                const history = mongoDbClient.db().collection('mobile_subscriptions2_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                })
             })
             it('events contain correct action property', async () => {
                 await storage.update([id], { hello: 'peter' })
                 await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find({ id }).toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(2)
-                const [create, update] = all.at(0).history
-                expect(create.action).to.equal('create')
-                expect(update.action).to.equal('update')
+                const history = mongoDbClient.db().collection('mobile_subscriptions2_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                    const [create, update] = all.at(0).history
+                    expect(create.action).to.equal('create')
+                    expect(update.action).to.equal('update')
+                })
             })
             it('events contain the updated resource', async () => {
                 await storage.update([id], { hello: 'peter' })
                 await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions11')
-                const all = await coll.find({ id }).toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).history).to.have.length(2)
-                const [, update] = all.at(0).history
-                expect(update.resource.hello).to.equal('peter')
+                const history = mongoDbClient.db().collection('mobile_subscriptions2_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                    const [, update] = all.at(0).history
+                    expect(update.resource.hello).to.equal('peter')
+                })
             })
         })
     })
-    describe('configured via constructor', () => {
-        const eventEmitter = new EventEmitter()
-        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions1', eventEmitter })
-        before(() => {
-            const history = new History({ client: mongoDbClient, collectionName: '_subscriptions12_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-            history.listenForStorageEvents()
-        })
-        describe('.create', () => {
-            it('events are handled and create a history element', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).id).to.equal(id)
-            })
-            it('events contain the created resource', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(1)
-                const [create] = event.history
-                expect(create.resource.my).to.equal('ghost')
-            })
-            it('events contain correct action property', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(1)
-                const [create] = event.history
-                expect(create.action).to.equal('create')
-            })
-        })
-        describe('.update', () => {
-            let id
-            beforeEach(async () => {
-                id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-            })
-            it('events are handled and create a history element', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-            })
-            it('events contain correct action property', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                const [create, update] = event.history
-                expect(create.action).to.equal('create')
-                expect(update.action).to.equal('update')
-            })
-            it('events contain the updated resource', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-                const [, update] = event.history
-                expect(update.resource.hello).to.equal('peter')
-            })
-        })
-        describe('.delete', () => {
-            let id
-            beforeEach(async () => {
-                id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-            })
-            it('events are handled and create a history element', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-            })
-            it('events contain correct action property', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                const [create, update] = event.history
-                expect(create.action).to.equal('create')
-                expect(update.action).to.equal('delete')
-            })
-            it('events contain the updated resource', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions12_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-                const [, update] = event.history
-                expect(update.resource).to.be.null
-            })
-        })
-    })
-    describe('enabled at runtime', () => {
-        describe('.create', () => {
-            const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions14' })
-            before(() => {
-                const eventEmitter = new EventEmitter()
-                storage.enableEventing(eventEmitter)
-                const history = new History({ client: mongoDbClient, collectionName: '_subscriptions14_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-                history.listenForStorageEvents()
-            })
-            it('events are handled and create a history element', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions14_history')
-                const all = await coll.find().toArray()
-                expect(all).to.have.length(1)
-                expect(all.at(0).id).to.equal(id)
-            })
-            it('events contain the created resource', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions14_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(1)
-                const [create] = event.history
-                expect(create.resource.my).to.equal('ghost')
-            })
-            it('events contain correct action property', async () => {
-                const id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions14_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(1)
-                const [create] = event.history
-                expect(create.action).to.equal('create')
-            })
-        })
-        describe('.update', () => {
-            let id
-            const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions15' })
-            before(() => {
-                const eventEmitter = new EventEmitter()
-                storage.enableEventing(eventEmitter)
-                const history = new History({ client: mongoDbClient, collectionName: '_subscriptions15_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-                history.listenForStorageEvents()
-            })
-            beforeEach(async () => {
-                id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-            })
-            it('events are handled and create a history element', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions15_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-            })
-            it('events contain correct action property', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions15_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                const [create, update] = event.history
-                expect(create.action).to.equal('create')
-                expect(update.action).to.equal('update')
-            })
-            it('events contain the updated resource', async () => {
-                await storage.update([id], { hello: 'peter' })
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions15_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-                const [, update] = event.history
-                expect(update.resource.hello).to.equal('peter')
-            })
-        })
-        describe('.delete', () => {
-            let id
-            const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions16' })
-            before(() => {
-                const eventEmitter = new EventEmitter()
-                storage.enableEventing(eventEmitter)
-                const history = new History({ client: mongoDbClient, collectionName: '_subscriptions16_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-                history.listenForStorageEvents()
-            })
-            beforeEach(async () => {
-                id = uuid()
-                await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-            })
-            it('events are handled and create a history element', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions16_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-            })
-            it('events contain correct action property', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions16_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                const [create, update] = event.history
-                expect(create.action).to.equal('create')
-                expect(update.action).to.equal('delete')
-            })
-            it('events contain the updated resource', async () => {
-                await storage.delete([id])
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions16_history')
-                const all = await coll.find().toArray()
-                const event = all.find(event => event.id === id)
-                expect(event.history).to.have.length(2)
-                const [, update] = event.history
-                expect(update.resource).to.be.null
-            })
-        })
-    })
+
     describe('disabled at runtime', () => {
-        const storage = new Storage({ client: mongoDbClient, collectionName: '_subscriptions1' })
+        let storage
         before(() => {
-            const eventEmitter = new EventEmitter()
-            storage.enableEventing(eventEmitter)
-            const history = new History({ client: mongoDbClient, collectionName: '_subscriptions13_history', usageEventPrefix: storage.usageEventPrefix, eventEmitter })
-            history.listenForStorageEvents()
-            storage.disableEventing()
+            storage = new Storage({ client: mongoDbClient, collectionName: '_mobile_subscriptions13' })
+        })
+        beforeEach(() => {
+            storage.enableHistory()
         })
         describe('.create', () => {
-            it('events are handled and create a history element', async () => {
+            it('events are not sent anymore', async () => {
                 const id = uuid()
                 await storage.create(id, { my: 'ghost' })
-                const doc = await storage.get(id)
-                expect(doc.my).to.equal('ghost')
-                await new Promise((resolve) => setTimeout(resolve, 200))
-                const coll = mongoDbClient.db().collection('_subscriptions13_history')
-                const all = await coll.find().toArray()
-                expect(all).to.have.length(0)
+                const history = mongoDbClient.db().collection('_mobile_subscriptions13_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(1)
+                })
+                storage.disableHistory()
+                await storage.create(uuid(), { my: 'ghost' })
+                const all = await history.find({ id }).toArray()
+                expect(all).to.have.length(1)
+                expect(all.at(0).history).to.have.length(1)
+            })
+        })
+        describe('.update', () => {
+            it('events are not sent anymore', async () => {
+                const id = uuid()
+                await storage.create(id, { my: 'ghost' })
+                await storage.update([id], { hello: 'peter' })
+                const history = mongoDbClient.db().collection('_mobile_subscriptions13_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                })
+                storage.disableHistory()
+                await storage.update([id], { hello: 'friend' })
+                const all = await history.find({ id }).toArray()
+                expect(all).to.have.length(1)
+                expect(all.at(0).history).to.have.length(2)
+            })
+        })
+        describe('.delete', () => {
+            it('events are not sent anymore', async () => {
+                const id = uuid()
+                await storage.create(id, { my: 'ghost' })
+                await storage.update([id], { hello: 'peter' })
+                const history = mongoDbClient.db().collection('_mobile_subscriptions13_history')
+                await retry(async () => {
+                    const all = await history.find({ id }).toArray()
+                    expect(all).to.have.length(1)
+                    expect(all.at(0).history).to.have.length(2)
+                })
+                storage.disableHistory()
+                await storage.delete([id])
+                const all = await history.find({ id }).toArray()
+                expect(all).to.have.length(1)
+                expect(all.at(0).history).to.have.length(2)
             })
         })
     })

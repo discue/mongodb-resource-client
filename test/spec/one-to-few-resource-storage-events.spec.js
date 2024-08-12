@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 import { randomUUID as uuid } from 'crypto'
-import EventEmitter from 'events'
 import * as mongodb from 'mongodb'
 import Storage from '../../lib/one-to-few-resource-storage.js'
 import retry from '../retry.js'
@@ -8,7 +7,6 @@ import retry from '../retry.js'
 const { MongoClient, Timestamp } = mongodb
 
 describe('OneToFewResourceStorage Events', () => {
-    const eventEmitter = new EventEmitter()
     /**
      * @type {import('mongodb').MongoClient}
      */
@@ -18,7 +16,7 @@ describe('OneToFewResourceStorage Events', () => {
     let storage
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
-        storage = new Storage({ client: mongoDbClient, collectionName: 'api_clients', resourceName: 'queues', eventEmitter })
+        storage = new Storage({ client: mongoDbClient, collectionName: 'api_clients', resourceName: 'queues' })
     })
     beforeEach(async () => {
         insertedDocumentId = uuid()
@@ -132,10 +130,8 @@ describe('OneToFewResourceStorage Events', () => {
         it('creates a create event', async () => {
             const newId = uuid()
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {
+                storage.on('create', (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId, newId])
-                    expect(event.collectionName).to.equal('queues')
-                    expect(event.error).to.be.false
                     expect(event.before).to.be.undefined
                     expect(event.after).to.deep.equal({ my: 'ghost' })
                     resolve()
@@ -147,10 +143,8 @@ describe('OneToFewResourceStorage Events', () => {
     describe('.update', () => {
         it('creates an update event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.update`, (event) => {
+                storage.on('update', (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId, 999])
-                    expect(event.collectionName).to.equal('queues')
-                    expect(event.error).to.be.false
                     expect(event.before.id).to.equal(testDocOfChoice.id)
                     expect(event.before.name).to.equal(testDocOfChoice.name)
                     expect(event.after.id).to.equal(testDocOfChoice.id)
@@ -164,10 +158,8 @@ describe('OneToFewResourceStorage Events', () => {
     describe('.delete', () => {
         it('creates a delete event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.delete`, (event) => {
+                storage.on('delete', (event) => {
                     expect(event.resourceIds).to.deep.equal([insertedDocumentId, 999])
-                    expect(event.collectionName).to.equal('queues')
-                    expect(event.error).to.be.false
                     expect(event.before.id).to.equal(testDocOfChoice.id)
                     expect(event.before.name).to.equal(testDocOfChoice.name)
                     expect(event.after).to.be.undefined

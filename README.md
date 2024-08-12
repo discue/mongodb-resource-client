@@ -49,15 +49,13 @@ npm i @discue/mongodb-resource-client @discue/open-telemetry-tracing@npm:@discue
 - [SimpleTimeseriesStorage](README_SIMPLE_TIMESERIES_STORAGE.md)
 
 ## History / Auditing
-The module provides support for history / auditing tables to keep track of changes made to documents. The `ResourceStorageHistory` component can be used as an extension
-of a storage instance e.g. `SimpleResourceStorage`. An instance of `ResourceStorageHistory` can listen to storage events of another storage instance and populate a `${resourceName}_history` collection with timestamp, change type, and the full resource state.
+The module provides support for history / auditing tables to keep track of changes made to documents by calling the `enableHistory` method.
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { EventEmiter } = require('events')
-const { OneToFewResourceStorage, ResourceStorageHistory } = require('@discue/mongodb-resource-client')
+import { MongoClient } from ('mongodb')
+import { EventEmiter } from ('events')
+import { OneToFewResourceStorage, ResourceStorageHistory } from ('@discue/mongodb-resource-client')
 
-const eventEmitter = new EventEmitter()
 const collectionName = 'api_clients'
 const url = 'mongodb://127.0.0.1:27017'
 
@@ -71,13 +69,7 @@ const oneToFewResourceStorage = new OneToFewResourceStorage({
   eventEmitter
 })
 
-const history = new ResourceStorageHistory({
-  client,
-  collectionName,
-  usageEventPrefix: oneToFewResourceStorage.usageEventPrefix
-  eventEmitter
-})
-history.listenForStorageEvents()
+oneToFewResourceStorage.enableHistory()
 ```
 
 ## Transactions

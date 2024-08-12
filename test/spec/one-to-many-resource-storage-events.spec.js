@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 import { randomUUID, randomUUID as uuid } from 'crypto'
-import EventEmitter from 'events'
 import * as mongodb from 'mongodb'
 import Storage from '../../lib/one-to-many-resource-storage.js'
 import retry from '../retry.js'
@@ -8,7 +7,7 @@ import retry from '../retry.js'
 const { MongoClient, Timestamp } = mongodb
 
 describe('OneToManyResourceStorage Events', () => {
-    const eventEmitter = new EventEmitter()
+
     /**
      * @type {import('mongodb').MongoClient}
      */
@@ -18,7 +17,7 @@ describe('OneToManyResourceStorage Events', () => {
     let storage
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
-        storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true, eventEmitter })
+        storage = new Storage({ client: mongoDbClient, collectionName: 'queues', resourceName: 'listeners', enableTwoWayReferences: true })
     })
     beforeEach(async () => {
         listenerIds = [uuid(), uuid(), uuid()]
@@ -66,10 +65,8 @@ describe('OneToManyResourceStorage Events', () => {
         it('creates a new document', async () => {
             const newId = randomUUID()
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.create`, (event) => {
+                storage.on('create', (event) => {
                     expect(event.resourceIds).to.deep.equal([resourceId, newId])
-                    expect(event.collectionName).to.equal('listeners')
-                    expect(event.error).to.be.false
                     expect(event.before).to.be.undefined
                     expect(event.after.my).to.equal('ghost')
                     resolve()
@@ -81,10 +78,8 @@ describe('OneToManyResourceStorage Events', () => {
     describe('.update', () => {
         it('sends an update event', async () => {
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.update`, (event) => {
+                storage.on('update', (event) => {
                     expect(event.resourceIds).to.deep.equal([resourceId, listenerIds.at(1)])
-                    expect(event.collectionName).to.equal('listeners')
-                    expect(event.error).to.be.false
                     expect(event.before.name).to.equal('second')
                     expect(event.after.name).to.equal('peter')
                     resolve()
@@ -97,10 +92,8 @@ describe('OneToManyResourceStorage Events', () => {
         it('sends a delete event', async () => {
             const resource = await storage.get([resourceId, listenerIds.at(1)])
             return new Promise((resolve, reject) => {
-                eventEmitter.once(`${storage.usageEventPrefix}.delete`, (event) => {
+                storage.on('delete', (event) => {
                     expect(event.resourceIds).to.deep.equal([resourceId, listenerIds.at(1)])
-                    expect(event.collectionName).to.equal('listeners')
-                    expect(event.error).to.be.false
                     expect(event.before).to.deep.equal(resource)
                     expect(event.resource).to.be.undefined
                     resolve()
