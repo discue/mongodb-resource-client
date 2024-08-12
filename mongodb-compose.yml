@@ -28,4 +28,4 @@ services:
     ports:
       - 8888:8081
     environment:
-      ME_CONFIG_MONGODB_URL: mongodb://mongo:27021/
+      ME_CONFIG_MONGODB_URL: mongodb://mongo1:27021/
