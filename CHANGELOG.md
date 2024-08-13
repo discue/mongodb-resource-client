@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/discue/mongodb-resource-client/compare/v0.40.0...v1.0.0) (2024-08-13)
+
+
+### Features
+
+* use es6 imports and new event listener interface ([3c57fdf](https://github.com/discue/mongodb-resource-client/commit/3c57fdfd0fe70a33899e97648faaf01186048fe4))
+
+
+### Refactorings
+
+* add newline before each top-level describe ([3e81549](https://github.com/discue/mongodb-resource-client/commit/3e8154957ade3401e11dbbb7e133cf959902c411))
+* do not destructure chai.expect twice ([b85d32e](https://github.com/discue/mongodb-resource-client/commit/b85d32e931f81fd0b00b71d266e509e6f1604454))
+* move tracing related method to base class ([e4a311a](https://github.com/discue/mongodb-resource-client/commit/e4a311a16495d702e288bc1439f1b0ee67e0b7eb))
+* remove all use strict statements ([e5a0fce](https://github.com/discue/mongodb-resource-client/commit/e5a0fcea84c7e09f27b72026d4024c1f112da74b))
+* remove duplicate method ([b1a0095](https://github.com/discue/mongodb-resource-client/commit/b1a0095e188f5ce10cda4180a4a0ea601737d151))
+* send close event from base class ([598b24b](https://github.com/discue/mongodb-resource-client/commit/598b24bc4ee51b39cef8f80d966ae1674a0eecf8))
+
+
+### Chores
+
+* add eslint rules ([f6bbad3](https://github.com/discue/mongodb-resource-client/commit/f6bbad34b049a8ed0589d5d918322112b174cf46))
+* add jsdocs for history module ([7a06f1b](https://github.com/discue/mongodb-resource-client/commit/7a06f1b35842b84f2631c047fbab22da2b410a61))
+* convert to esm ([60450af](https://github.com/discue/mongodb-resource-client/commit/60450afa25224900a4ea30588e74498637ffaa47))
+* **deps-dev:** bump @types/node from 20.14.10 to 22.0.2 ([3ada0ca](https://github.com/discue/mongodb-resource-client/commit/3ada0ca4be3665cda1eee2a6b3e9aa44e79a8520))
+* **deps-dev:** bump eslint from 9.6.0 to 9.8.0 ([7ce0d82](https://github.com/discue/mongodb-resource-client/commit/7ce0d8284b8f2f24290f3636bcbf7925123cae1b))
+* **deps-dev:** bump mocha from 10.6.0 to 10.7.0 ([4fb1345](https://github.com/discue/mongodb-resource-client/commit/4fb134573dde73f04ff9e354a179f3e3df543c71))
+* **deps-dev:** bump typescript from 5.4.5 to 5.5.2 ([52c6183](https://github.com/discue/mongodb-resource-client/commit/52c618389b9776caabc19463eb85735c41068f2a))
+* **deps-dev:** bump typescript from 5.5.3 to 5.5.4 ([c8eff71](https://github.com/discue/mongodb-resource-client/commit/c8eff712636f96064043d6be1d41e55f547cca1f))
+* **deps:** install emitter supporting to await listeners ([4c18422](https://github.com/discue/mongodb-resource-client/commit/4c18422282b1bc7d5cdd07613dad31afc9721530))
+* **deps:** update open telemetry tracing ([64aa2d9](https://github.com/discue/mongodb-resource-client/commit/64aa2d94be8f8dc301059c2c2133e60f0171f028))
+* **docs:** add jsdoch for safe cursor methods ([0e7b039](https://github.com/discue/mongodb-resource-client/commit/0e7b0399d0e6c512c9405e9b43be1e5d04b6b2ab))
+* **docs:** mark private methods as private ([45d32d4](https://github.com/discue/mongodb-resource-client/commit/45d32d4c76138fcf5d878d8c9de17b20f7605506))
+* **docs:** update readme ([254b159](https://github.com/discue/mongodb-resource-client/commit/254b1596286cfed86cae7e9e5cc45188d81a5a74))
+* **docs:** use correct notation to specify options object for DATE_TRUNC ([389194b](https://github.com/discue/mongodb-resource-client/commit/389194bc777d9db1018a09625e33dcce956b1aa4))
+* fail on error, do not generate md for missing files ([7fa4b8e](https://github.com/discue/mongodb-resource-client/commit/7fa4b8e213d0a4936cbedeedc7f5aa669c81309d))
+* **lock:** update jsdoc to enable better docs ([355ee4d](https://github.com/discue/mongodb-resource-client/commit/355ee4d69cfc98e446417bc7979a4caf392a6cb8))
+* remove docs of deleted component ([3e83e58](https://github.com/discue/mongodb-resource-client/commit/3e83e5840353d4ca01c2fa3f984feae380c92456))
+* update mongodb hostname for express gui ([10caef5](https://github.com/discue/mongodb-resource-client/commit/10caef53a3be41562f7a36cbf359c542361f95a4))
+* use docker compose without hyphen to run compose commands ([1781bb4](https://github.com/discue/mongodb-resource-client/commit/1781bb490ad2e130ab7a49fb0f4f353f96e597ca))
+
 ## [0.40.0](https://github.com/discue/mongodb-resource-client/compare/v0.39.0...v0.40.0) (2024-07-07)
 
 
