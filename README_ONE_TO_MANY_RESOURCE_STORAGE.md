@@ -6,7 +6,7 @@
 
 *   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
-*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes
+*   `indexes` **[Array][2]<[object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
 *   `resourceName` **[string][1]** name of the resource e.g. users, customers, topics, shipments
 *   `resourcePath` **[string][1]?** slash separated path describing the hierarchy e.g. universities/teachers/subjects/exams.
@@ -16,8 +16,8 @@
 ### Examples
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { OneToManyResourceStorage } = require('@discue/mongodb-resource-client')
+import { MongoClient } from 'mongodb'
+import { OneToManyResourceStorage } from '@discue/mongodb-resource-client'
 
 const client = new MongoClient(url, {
   serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
@@ -37,7 +37,7 @@ const oneToManyResourceStorage = new OneToManyResourceStorage({
 
 *   `withMetadata` **[boolean][4]** true if also meta data should be returned
 *   `addDocumentPath` **[boolean][4]** true if $path propety should be added to documents e.g. `$path=/countries/1/cities/2/companies`
-*   `projection` **[Object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
+*   `projection` **[object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
 
 ## OneToManyResourceStorage
 
@@ -82,7 +82,7 @@ Returns true if a resource with given ids exists.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)**&#x20;
 
 Returns **[boolean][4]**&#x20;
 
@@ -92,10 +92,10 @@ Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **[Object][3]**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **[object][3]**&#x20;
 
-Returns **[Object][3]**&#x20;
+Returns **[object][3]**&#x20;
 
 ## find
 
@@ -103,19 +103,17 @@ Find a resource by via options.match query.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **FindOptions**&#x20;
 
-Returns **[Object][3]**&#x20;
+Returns **[object][3]**&#x20;
 
 ## getAll
 
-Returns resources based on return value of [findReferences][5].
-
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `options` **[GetOptions][6]**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `options` **[GetOptions][5]**&#x20;
 
 ## create
 
@@ -123,8 +121,8 @@ Add a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][3]** the resource to be stored
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[object][3]** the resource to be stored
 
 ## update
 
@@ -132,8 +130,8 @@ Updates a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][3]** values that should be updated
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[object][3]** values that should be updated
 
 ## delete
 
@@ -141,7 +139,7 @@ Deletes a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
@@ -151,6 +149,4 @@ Deletes a resource by ids
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[5]: findReferences
-
-[6]: #getoptions
+[5]: #getoptions

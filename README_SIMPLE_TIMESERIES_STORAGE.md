@@ -7,13 +7,13 @@
 *   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
-*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
+*   `indexes` **[Array][2]<[object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
 
 ### Examples
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { SimpleTimeseriesStorage } = require('@discue/mongodb-resource-client')
+import { MongoClient } from 'mongodb'
+import { SimpleTimeseriesStorage } from '@discue/mongodb-resource-client'
 
 const client = new MongoClient(url, {
   serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
@@ -37,9 +37,9 @@ Returns all resources that pass the given aggregation stages.
 
 ### Parameters
 
-*   `aggregations` **[Array][2]<[Object][3]>** a list of valid aggregation objects (optional, default `[]`)
+*   `aggregations` **[Array][2]<[object][3]>** a list of valid aggregation objects (optional, default `[]`)
 
-Returns **[Array][2]<[Object][3]>**&#x20;
+Returns **[Array][2]<[object][3]>**&#x20;
 
 ## create
 
@@ -47,7 +47,7 @@ Adds a resource to the timeseries.
 
 ### Parameters
 
-*   `resource` **[Object][3]** the resource to be stored. If timeField is missing, current timestamp will be added
+*   `resource` **[object][3]** the resource to be stored. If timeField is missing, current timestamp will be added
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 

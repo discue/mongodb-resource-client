@@ -12,8 +12,8 @@
 ### Examples
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { OneToFewResourceStorage } = require('@discue/mongodb-resource-client')
+import { MongoClient } from 'mongodb'
+import { OneToFewResourceStorage } from '@discue/mongodb-resource-client'
 
 const client = new MongoClient(url, {
   serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
@@ -31,7 +31,7 @@ const oneToFewResourceStorage = new OneToFewResourceStorage({
 ### Properties
 
 *   `withMetadata` **[boolean][2]** true if also meta data should be returned
-*   `projection` **[Object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
+*   `projection` **[object][3]** MongoDB projection object e.g. { id: 0, name: 0 }
 
 ## OneToFewResourceStorage
 
@@ -64,10 +64,10 @@ Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][4]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **[GetOptions][5]**&#x20;
 
-Returns **[Promise][6]<[Object][3]>**&#x20;
+Returns **[Promise][6]<[object][3]>**&#x20;
 
 ## getAll
 
@@ -75,10 +75,10 @@ Returns all resources.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][4]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **[GetOptions][5]**&#x20;
 
-Returns **[Promise][6]<[Array][4]<[Object][3]>>**&#x20;
+Returns **[Promise][6]<[Array][4]<[object][3]>>**&#x20;
 
 ## create
 
@@ -86,10 +86,10 @@ Add a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][3]** the resource to be stored
+*   `resourceIds` **([string][1] | [Array][4]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[object][3]** the resource to be stored
 
-Returns **ObjectId**&#x20;
+Returns **[string][1]** the id of the new object
 
 ## update
 
@@ -97,8 +97,8 @@ Updates a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][3]** values that should be updated
+*   `resourceIds` **([string][1] | [Array][4]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[object][3]** values that should be updated
 
 Returns **void**&#x20;
 
@@ -108,7 +108,7 @@ Deletes a resource by ids
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][4]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][4]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 Returns **void**&#x20;
 

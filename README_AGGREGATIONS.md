@@ -8,6 +8,13 @@
 
 Returns **[string][1]**&#x20;
 
+## reduce
+
+### Parameters
+
+*   `array` **[Array][2]<[string][1]>**&#x20;
+*   `value` **[string][1]**&#x20;
+
 ## EQUALS
 
 ### Parameters
@@ -17,7 +24,7 @@ Returns **[string][1]**&#x20;
 
 ### Properties
 
-*   `$match` **[object][2]**&#x20;
+*   `$match` **[object][3]**&#x20;
 
 ## EQUALS
 
@@ -32,11 +39,10 @@ Returns **Match**&#x20;
 
 ### Parameters
 
-*   `object` **[object][2]** an object containing they key value pairs to query for
-*   `options` **[object][2]?** options (optional, default `{}`)
+*   `object` **[object][3]** an object containing they key value pairs to query for
+*   `options` **[object][3]?** options (optional, default `{}`)
 
-    *   `options.target` **prefix** a prefix to add to all keys
-    *   `options.prefix` &#x20;
+    *   `options.prefix` **[string][1]** a prefix to add to all keys
 
 Returns **Match**&#x20;
 
@@ -45,7 +51,7 @@ Returns **Match**&#x20;
 ### Parameters
 
 *   `field` **[string][1]** the name of the field
-*   `targets` **[Array][3]** the target value
+*   `targets` **[Array][2]** the target value
 
 Returns **Match**&#x20;
 
@@ -97,7 +103,7 @@ Returns **Match**&#x20;
 
 ### Properties
 
-*   `$limit` **[object][2]**&#x20;
+*   `$limit` **[object][3]**&#x20;
 
 ## LIMIT
 
@@ -115,13 +121,13 @@ Returns **Limit**&#x20;
 
 ### Properties
 
-*   `$limit` **[object][2]**&#x20;
+*   `$limit` **[object][3]**&#x20;
 
 ## PROJECT
 
 ### Parameters
 
-*   `projection` **[object][2]** the projection object
+*   `projection` **[object][3]** the projection object
 
 Returns **Projection**&#x20;
 
@@ -133,7 +139,7 @@ Returns **Projection**&#x20;
 
 ### Properties
 
-*   `$sort` **[object][2]**&#x20;
+*   `$sort` **[object][3]**&#x20;
 
 ## SORT\_BY\_ASC
 
@@ -159,7 +165,7 @@ Returns **Sort**&#x20;
 
 ### Properties
 
-*   `$sortByCount` **[object][2]**&#x20;
+*   `$sortByCount` **[object][3]**&#x20;
 
 ## SORT\_BY\_COUNT
 
@@ -177,7 +183,7 @@ Returns **SortByCount**&#x20;
 
 ### Properties
 
-*   `$unwind` **[object][2]**&#x20;
+*   `$unwind` **[object][3]**&#x20;
 
 ## UNWIND
 
@@ -191,7 +197,7 @@ Returns **Unwind**&#x20;
 
 ### Properties
 
-*   `$count` **[object][2]**&#x20;
+*   `$count` **[object][3]**&#x20;
 
 ## COUNT
 
@@ -201,7 +207,7 @@ Returns **Count**&#x20;
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.from` &#x20;
     *   `$0.as` &#x20;
@@ -211,13 +217,13 @@ Returns **Count**&#x20;
 
 ### Properties
 
-*   `$lookup` **[object][2]**&#x20;
+*   `$lookup` **[object][3]**&#x20;
 
 ## LOOKUP
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.from` &#x20;
     *   `$0.as` &#x20;
@@ -231,7 +237,7 @@ Returns **Count**&#x20;
 *   `as` **[string][1]** name of the merged field
 *   `localField` **[string][1]** local field name
 *   `foreignField` **[string][1]** field name of the `from` collection
-*   `pipeline` **[Array][3]** pipeline for  of the lookup query
+*   `pipeline` **[Array][2]** pipeline for  of the lookup query
 
 ## LOOKUP
 
@@ -251,7 +257,7 @@ Returns **Lookup**&#x20;
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.input` &#x20;
     *   `$0.initialValue`   (optional, default `{}`)
@@ -259,13 +265,13 @@ Returns **Lookup**&#x20;
 
 ### Properties
 
-*   `$reduce` **[object][2]**&#x20;
+*   `$reduce` **[object][3]**&#x20;
 
 ## REDUCE
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.input` &#x20;
     *   `$0.initialValue`   (optional, default `{}`)
@@ -275,7 +281,7 @@ Returns **Lookup**&#x20;
 
 *   `input` **[string][1]** any expression resolving to an array
 *   `initialValue` **any** the initial value used for reduction
-*   `inExpression` **[object][2]** any expression applied to each element of the array
+*   `inExpression` **[object][3]** any expression applied to each element of the array
 
 ## REDUCE
 
@@ -297,7 +303,7 @@ Returns **Reduce**&#x20;
 
 ### Properties
 
-*   `mergeObjects` **[object][2]**&#x20;
+*   `mergeObjects` **[object][3]**&#x20;
 
 ## APPEND\_OBJECTS
 
@@ -313,28 +319,28 @@ Returns **AppendObjects**&#x20;
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.vars` &#x20;
     *   `$0.inExpression` &#x20;
 
 ### Properties
 
-*   `$let` **[object][2]**&#x20;
+*   `$let` **[object][3]**&#x20;
 
 ## LET
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.vars` &#x20;
     *   `$0.inExpression` &#x20;
 
 ### Properties
 
-*   `vars` **[object][2]** an object defining additional variables for the expression
-*   `inExpression` **[object][2]** any expression
+*   `vars` **[object][3]** an object defining additional variables for the expression
+*   `inExpression` **[object][3]** any expression
 
 ## LET
 
@@ -351,20 +357,20 @@ Returns **Let**&#x20;
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.key`   (optional, default `'$$this'`)
     *   `$0.value` &#x20;
 
 ### Properties
 
-*   `arrayToObject` **[object][2]**&#x20;
+*   `arrayToObject` **[object][3]**&#x20;
 
 ## TO\_OBJECT
 
 ### Parameters
 
-*   `$0` **[Object][2]**&#x20;
+*   `$0` **[Object][3]**&#x20;
 
     *   `$0.key`   (optional, default `'$$this'`)
     *   `$0.value` &#x20;
@@ -372,7 +378,7 @@ Returns **Let**&#x20;
 ### Properties
 
 *   `key` **[string][1]** the object key
-*   `expression` **[object][2]** any expression
+*   `expression` **[object][3]** any expression
 
 ## TO\_OBJECT
 
@@ -393,7 +399,7 @@ Returns **ToObject**&#x20;
 
 ### Properties
 
-*   `$concat` **[object][2]**&#x20;
+*   `$concat` **[object][3]**&#x20;
 
 ## CONCAT\_STRINGS
 
@@ -416,7 +422,7 @@ Returns **Concat**&#x20;
 
 ### Properties
 
-*   `$concatArrays` **[Array][3]<[string][1]>**&#x20;
+*   `$concatArrays` **[Array][2]<[string][1]>**&#x20;
 
 ## CONCAT\_ARRAYS
 
@@ -431,14 +437,14 @@ Returns **ConcatArray**&#x20;
 
 ### Properties
 
-*   `$arrayElemAt` **[Array][3]<[string][1]>**&#x20;
+*   `$arrayElemAt` **[Array][2]<[string][1]>**&#x20;
 
 ## ELEMENT\_AT
 
 ### Parameters
 
-*   `arrayName` **[String][1]** name of the array
-*   `index` **[Number][4]**&#x20;
+*   `arrayName` **[string][1]** name of the array
+*   `index` **[number][4]**&#x20;
 
 Returns **ArrayElementAt**&#x20;
 
@@ -450,7 +456,7 @@ Returns **ArrayElementAt**&#x20;
 
 ### Properties
 
-*   `$replaceRoot` **[object][2]**&#x20;
+*   `$replaceRoot` **[object][3]**&#x20;
 
     *   `$replaceRoot.newRoot` **[string][1]**&#x20;
 
@@ -458,7 +464,7 @@ Returns **ArrayElementAt**&#x20;
 
 ### Parameters
 
-*   `fieldName` **[String][1]** the field to return as root
+*   `fieldName` **[string][1]** the field to return as root
 
 Returns **ReplaceRoot**&#x20;
 
@@ -478,14 +484,13 @@ Returns **Match**&#x20;
 
 ### Properties
 
-*   `$set` **[object][2]**&#x20;
+*   `$set` **[object][3]**&#x20;
 
 ## TO\_LONG
 
 ### Parameters
 
-*   `fieldname` &#x20;
-*   `fieldName` **[string][1]** the target fieldname
+*   `fieldname` **[string][1]** the target fieldname
 
 Returns **[Set][5]**&#x20;
 
@@ -494,7 +499,7 @@ Returns **[Set][5]**&#x20;
 ### Parameters
 
 *   `fieldname` &#x20;
-*   `$1` **[Object][2]**&#x20;
+*   `$1` **[Object][3]**&#x20;
 
     *   `$1.unit` &#x20;
     *   `$1.timezone`   (optional, default `'Europe/Berlin'`)
@@ -503,7 +508,7 @@ Returns **[Set][5]**&#x20;
 
 ### Properties
 
-*   `$dateTrunc` **[object][2]**&#x20;
+*   `$dateTrunc` **[object][3]**&#x20;
 
 ## DATE\_TRUNC
 
@@ -512,7 +517,7 @@ Returns **[Set][5]**&#x20;
 ### Parameters
 
 *   `fieldname` **[string][1]**&#x20;
-*   `options` **[object][2]**&#x20;
+*   `options` **[object][3]**&#x20;
 
     *   `options.unit` **[string][1]** e.g. day, month, quarter, year.
     *   `options.timezone` **[string][1]**  (optional, default `Europe/Berlin`)
@@ -525,7 +530,7 @@ Returns **DateTrunc**&#x20;
 
 ### Properties
 
-*   `$indexStats` **[object][2]**&#x20;
+*   `$indexStats` **[object][3]**&#x20;
 
 ## INDEX\_STATS
 
@@ -533,9 +538,9 @@ Returns **IndexStats**&#x20;
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 

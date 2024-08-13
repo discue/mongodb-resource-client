@@ -12,8 +12,8 @@
 ### Examples
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { OneToFewRefstorage } = require('@discue/mongodb-resource-client')
+import { MongoClient } from 'mongodb'
+import { OneToFewRefstorage } from '@discue/mongodb-resource-client'
 
 const client = new MongoClient(url, {
   serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
@@ -51,7 +51,7 @@ Returns true if a resource with given ids exists.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)**&#x20;
 
 Returns **[boolean][3]**&#x20;
 
@@ -61,9 +61,9 @@ Returns all references.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
-Returns **[Array][2]<[Object][4]>**&#x20;
+Returns **[Array][2]<[object][4]>**&#x20;
 
 ## create
 
@@ -71,8 +71,8 @@ Add a reference to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `ref` **[Object][4]** the resource to be stored
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `ref` **[object][4]** the resource to be stored
 
 Returns **[Promise][5]\<ObjectId>**&#x20;
 
@@ -82,8 +82,8 @@ Delete a reference
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `references` **([String][1] | [Array][2]\<Objecft>)**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `references` **([string][1] | [Array][2]<[object][4]>)**&#x20;
 
 Returns **[Promise][5]\<void>**&#x20;
 
@@ -93,7 +93,7 @@ Delete a reference
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 Returns **[Promise][5]\<void>**&#x20;
 

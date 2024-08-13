@@ -7,13 +7,13 @@
 *   `client` **MongoClient** configured mongo client to use. Can be null if url is set
 *   `databaseName` **[string][1]?** name of the mongodb database
 *   `collectionName` **[string][1]** name of the mongodb collection used to store the resources
-*   `indexes` **[Array][2]<[Object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
+*   `indexes` **[Array][2]<[object][3]>?** indexes to be created on instantiation. Use format {key:1} for single indexes and {key1: 1, key:2} for compound indexes. See [https://www.mongodb.com/docs/manual/reference/command/createIndexes/#command-fields][4]
 
 ### Examples
 
 ```javascript
-const { MongoClient } = require('mongodb')
-const { SimpleResourceStorage } = require('@discue/mongodb-resource-client')
+import { MongoClient } from 'mongodb'
+import { SimpleResourceStorage } from '@discue/mongodb-resource-client'
 
 const client = new MongoClient(url, {
   serverApi: { version: '1', strict: true, deprecationErrors: true }, // https://www.mongodb.com/docs/manual/reference/stable-api/
@@ -40,10 +40,10 @@ Returns a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 *   `options` **GetOptions**&#x20;
 
-Returns **[Object][3]**&#x20;
+Returns **[object][3]**&#x20;
 
 ## getAll
 
@@ -53,7 +53,7 @@ Returns all resources.
 
 *   `options` **GetOptions**&#x20;
 
-Returns **[Array][2]<[Object][3]>**&#x20;
+Returns **[Array][2]<[object][3]>**&#x20;
 
 ## getAll
 
@@ -63,8 +63,8 @@ Currently only supports trees with three levels.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `childPath` **([String][1] | [Array][2]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `childPath` **([string][1] | [Array][2]<[string][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
 *   `options` **GetChildrenOptions?**&#x20;
 
 Returns **[Promise][6]\<ChildrenAndResourcePaths>**&#x20;
@@ -77,8 +77,8 @@ Currently only supports trees with three levels.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `childPath` **([String][1] | [Array][2]<[String][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `childPath` **([string][1] | [Array][2]<[string][1]>)** the path of the children to query e.g. /api\_clients/queues/messages
 *   `options` **GetChildrenOptions?**&#x20;
 
 Returns **[Promise][6]<[number][7]>**&#x20;
@@ -91,9 +91,9 @@ Returns all resources that pass the given aggregation stages.
 
 ### Parameters
 
-*   `aggregations` **[Array][2]<[Object][3]>** a list of valid aggregation objects (optional, default `[]`)
+*   `aggregations` **[Array][2]<[object][3]>** a list of valid aggregation objects (optional, default `[]`)
 
-Returns **[Array][2]<[Object][3]>**&#x20;
+Returns **[Array][2]<[object][3]>**&#x20;
 
 ## exists
 
@@ -101,7 +101,7 @@ Returns true if a resource with given ids exists.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)**&#x20;
 
 Returns **[boolean][9]**&#x20;
 
@@ -111,8 +111,8 @@ Adds a resource to a collection by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][3]** the resource to be stored
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[object][3]** the resource to be stored
 
 ## create
 
@@ -120,8 +120,10 @@ Adds a resource to a collection without any checks.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `resource` **[Object][3]** the resource to be stored
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `resource` **[object][3]** the resource to be stored
+
+Returns **any**&#x20;
 
 ## update
 
@@ -129,8 +131,8 @@ Updates a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-*   `update` **[Object][3]** values that should be updated
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
+*   `update` **[object][3]** values that should be updated
 *   `options` **UpdateOptions**&#x20;
 
 ## delete
@@ -139,13 +141,7 @@ Deletes a resource by ids.
 
 ### Parameters
 
-*   `resourceIds` **([String][1] | [Array][2]<[String][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
-
-## close
-
-Closes the database client
-
-Returns **void**&#x20;
+*   `resourceIds` **([string][1] | [Array][2]<[string][1]>)** resource ids that will added to the resource path i.e. /users/${id}/documents/${id}
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
