@@ -1,9 +1,11 @@
-import js from "@eslint/js"
-import stylistic from '@stylistic/eslint-plugin'
-import globals from 'globals'
+import js from "@eslint/js";
+import stylistic from '@stylistic/eslint-plugin';
+import jsdoc from 'eslint-plugin-jsdoc';
+import globals from 'globals';
 
 export default [
     js.configs.recommended,
+    jsdoc.configs['flat/recommended'],
     {
         languageOptions: {
             ecmaVersion: 2022,
@@ -22,6 +24,9 @@ export default [
                 "error",
                 "never"
             ],
+            'jsdoc/tag-lines': 'off',
+            'jsdoc/no-defaults': 'off',
+            "jsdoc/sort-tags": 1,
             'no-unused-vars': [
                 'error',
                 {
