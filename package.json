@@ -61,7 +61,7 @@
     "@types/node": "^22.7.4",
     "chai": "4",
     "documentation": "^14.0.3",
-    "eslint": "^9.9.1",
+    "eslint": "^9.13.0",
     "eslint-plugin-jsdoc": "^50.2.2",
     "mocha": "^10.7.3",
     "mongodb": "^6.9.0",
