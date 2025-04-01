@@ -57,7 +57,7 @@
     "@discue/open-telemetry-tracing": "^1.3.0",
     "@stylistic/eslint-plugin": "^4.1.0",
     "@types/chai": "^4.3.14",
-    "@types/mocha": "^10.0.9",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.8",
     "chai": "4",
     "documentation": "^14.0.3",
