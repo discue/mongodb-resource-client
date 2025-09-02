@@ -62,7 +62,7 @@
     "chai": "4",
     "documentation": "^14.0.3",
     "eslint": "^9.34.0",
-    "eslint-plugin-jsdoc": "^52.0.2",
+    "eslint-plugin-jsdoc": "^54.1.1",
     "mocha": "^11.7.1",
     "mongodb": "^6.19.0",
     "standard-version": "^9.5.0",
