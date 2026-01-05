@@ -63,7 +63,7 @@
     "documentation": "^14.0.3",
     "eslint": "^9.39.0",
     "eslint-plugin-jsdoc": "^61.5.0",
-    "mocha": "^11.7.4",
+    "mocha": "^11.7.5",
     "mongodb": "^7.0.0",
     "standard-version": "^9.5.0",
     "typescript": "^5.9.3"
