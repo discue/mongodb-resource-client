@@ -68,7 +68,7 @@
     "mocha": "^11.7.6",
     "mongodb": "^7.5.0",
     "standard-version": "^9.5.0",
-    "typescript": "^6.0.2"
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "emittery": "^2.0.0"
