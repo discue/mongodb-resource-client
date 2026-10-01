@@ -71,6 +71,6 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "emittery": "^2.0.0"
+    "emittery": "^2.1.0"
   }
 }
