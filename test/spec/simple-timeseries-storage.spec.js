@@ -16,22 +16,30 @@ describe('SimpleTimeseriesStorage', () => {
     before(() => {
         mongoDbClient = new MongoClient('mongodb://127.0.0.1:27021/?replicaSet=rs0')
     })
-    beforeEach(() => {
+    beforeEach(async () => {
+        try {
+            await collection?.drop()
+        } catch (e) {
+            //
+        }
         storage = new Storage({ client: mongoDbClient, collectionName: 'events', databaseName: 'test' })
         collection = mongoDbClient.db('test').collection('events')
-    })
-    beforeEach(() => {
-        return new Promise((resolve) => setTimeout(resolve, 500))
+        await new Promise((resolve) => setTimeout(resolve, 500))
     })
     afterEach(async () => {
         try {
-            await collection.deleteMany({})
+            await collection?.drop()
         }
         catch (e) {
             //
         }
     })
-    after(() => {
+    after(async () => {
+        try {
+            await collection?.drop()
+        } catch (e) {
+            //
+        }
         return storage.close()
     })
     describe('.create', () => {
@@ -41,7 +49,6 @@ describe('SimpleTimeseriesStorage', () => {
             expect(items).to.have.length(1)
         })
         it('adds the timestamp field if missing', async () => {
-            await collection.deleteMany({})
             await storage.create({ metadata: {}, value: 12 })
             await storage.create({ metadata: {}, value: 12 })
             const items = await collection.find().toArray()
