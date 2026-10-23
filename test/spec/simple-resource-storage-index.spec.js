@@ -54,8 +54,12 @@ describe('SimpleResourceStorage Index', () => {
             expect(indexes).to.have.length(5)
         })
     })
-    afterEach(() => {
-        return mongoDbClient.db('test').collection('users3').deleteMany({})
+    afterEach(async () => {
+        try {
+            await mongoDbClient.db('test').collection('users3').deleteMany({})
+        } catch (e) {
+            //
+        }
     })
     after(() => {
         return storage.close()

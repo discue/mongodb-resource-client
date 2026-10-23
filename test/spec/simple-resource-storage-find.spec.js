@@ -48,11 +48,15 @@ describe('SimpleResourceStorage Find', () => {
             expect(indexes).to.have.length(3)
         })
     })
-    afterEach(() => {
-        return mongoDbClient
-            .db()
-            .collection('users2')
-            .deleteMany({})
+    afterEach(async () => {
+        try {
+            await mongoDbClient
+                .db()
+                .collection('users2')
+                .deleteMany({})
+        } catch (e) {
+            //
+        }
     })
     after(() => {
         return storage.close()
